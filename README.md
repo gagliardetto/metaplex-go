@@ -1,3 +1,10 @@
+## auction
+
+README: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program
+Example use in Rust: https://github.com/metaplex-foundation/metaplex/blob/master/rust/auction/cli/src/main.rs
+Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program/src
+
+
 ## token-metadata program
 
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/program/README.md
