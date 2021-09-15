@@ -29,6 +29,28 @@ func (obj *CancelBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err 
 	return nil
 }
 
+type ClaimBidArgs struct {
+	Resource ag_solanago.PublicKey
+}
+
+func (obj ClaimBidArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Resource` param:
+	err = encoder.Encode(obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *ClaimBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Resource`:
+	err = decoder.Decode(&obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 type CreateAuctionArgs struct {
 	// How many winners are allowed for this auction. See AuctionData.
 	Winners WinnerLimit
@@ -240,6 +262,123 @@ func (obj *CreateAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (
 	return nil
 }
 
+type EndAuctionArgs struct {
+	// The resource being auctioned. See AuctionData.
+	Resource ag_solanago.PublicKey
+
+	// If the auction was blinded, a revealing price must be specified to release the auction
+	// winnings.
+	Reveal *Revealer `bin:"optional"`
+}
+
+func (obj EndAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Resource` param:
+	err = encoder.Encode(obj.Resource)
+	if err != nil {
+		return err
+	}
+	// Serialize `Reveal` param (optional):
+	{
+		if obj.Reveal == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.Reveal)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (obj *EndAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Resource`:
+	err = decoder.Decode(&obj.Resource)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Reveal` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.Reveal)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+type PlaceBidArgs struct {
+	// Size of the bid being placed. The user must have enough SOL to satisfy this amount.
+	Amount uint64
+
+	// Resource being bid on.
+	Resource ag_solanago.PublicKey
+}
+
+func (obj PlaceBidArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Amount` param:
+	err = encoder.Encode(obj.Amount)
+	if err != nil {
+		return err
+	}
+	// Serialize `Resource` param:
+	err = encoder.Encode(obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *PlaceBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Amount`:
+	err = decoder.Decode(&obj.Amount)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Resource`:
+	err = decoder.Decode(&obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type StartAuctionArgs struct {
+	// The resource being auctioned. See AuctionData.
+	Resource ag_solanago.PublicKey
+}
+
+func (obj StartAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Resource` param:
+	err = encoder.Encode(obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *StartAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Resource`:
+	err = decoder.Decode(&obj.Resource)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 type WinnerLimit interface {
 	isWinnerLimit()
 }
@@ -381,86 +520,6 @@ func (obj *BlindedPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 
 func (_ *BlindedPrice) isPriceFloor() {}
 
-type ClaimBidArgs struct {
-	Resource ag_solanago.PublicKey
-}
-
-func (obj ClaimBidArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Resource` param:
-	err = encoder.Encode(obj.Resource)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *ClaimBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Resource`:
-	err = decoder.Decode(&obj.Resource)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type EndAuctionArgs struct {
-	// The resource being auctioned. See AuctionData.
-	Resource ag_solanago.PublicKey
-
-	// If the auction was blinded, a revealing price must be specified to release the auction
-	// winnings.
-	Reveal *Revealer `bin:"optional"`
-}
-
-func (obj EndAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Resource` param:
-	err = encoder.Encode(obj.Resource)
-	if err != nil {
-		return err
-	}
-	// Serialize `Reveal` param (optional):
-	{
-		if obj.Reveal == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.Reveal)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *EndAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Resource`:
-	err = decoder.Decode(&obj.Resource)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Reveal` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.Reveal)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
 type Revealer struct {
 	Price uint64
 	Salt  uint64
@@ -488,65 +547,6 @@ func (obj *Revealer) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error
 	}
 	// Deserialize `Salt`:
 	err = decoder.Decode(&obj.Salt)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type StartAuctionArgs struct {
-	// The resource being auctioned. See AuctionData.
-	Resource ag_solanago.PublicKey
-}
-
-func (obj StartAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Resource` param:
-	err = encoder.Encode(obj.Resource)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *StartAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Resource`:
-	err = decoder.Decode(&obj.Resource)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type PlaceBidArgs struct {
-	// Size of the bid being placed. The user must have enough SOL to satisfy this amount.
-	Amount uint64
-
-	// Resource being bid on.
-	Resource ag_solanago.PublicKey
-}
-
-func (obj PlaceBidArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Amount` param:
-	err = encoder.Encode(obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Serialize `Resource` param:
-	err = encoder.Encode(obj.Resource)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *PlaceBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Amount`:
-	err = decoder.Decode(&obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Resource`:
-	err = decoder.Decode(&obj.Resource)
 	if err != nil {
 		return err
 	}
