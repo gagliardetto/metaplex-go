@@ -14,7 +14,7 @@ import (
 type StartAuction struct {
 	Args *StartAuctionArgs
 
-	// [0] = [SIGNER] creatorAuthorisedAccount
+	// [0] = [SIGNER] creatorAccount
 	// ··········· The creator/authorised account.
 	//
 	// [1] = [WRITE] initializedAuctionAccount
@@ -39,16 +39,16 @@ func (inst *StartAuction) SetArgs(args StartAuctionArgs) *StartAuction {
 	return inst
 }
 
-// SetCreatorAuthorisedAccount sets the "creatorAuthorisedAccount" account.
+// SetCreatorAccount sets the "creatorAccount" account.
 // The creator/authorised account.
-func (inst *StartAuction) SetCreatorAuthorisedAccount(creatorAuthorisedAccount ag_solanago.PublicKey) *StartAuction {
-	inst.AccountMetaSlice[0] = ag_solanago.Meta(creatorAuthorisedAccount).SIGNER()
+func (inst *StartAuction) SetCreatorAccount(creatorAccount ag_solanago.PublicKey) *StartAuction {
+	inst.AccountMetaSlice[0] = ag_solanago.Meta(creatorAccount).SIGNER()
 	return inst
 }
 
-// GetCreatorAuthorisedAccount gets the "creatorAuthorisedAccount" account.
+// GetCreatorAccount gets the "creatorAccount" account.
 // The creator/authorised account.
-func (inst *StartAuction) GetCreatorAuthorisedAccount() *ag_solanago.AccountMeta {
+func (inst *StartAuction) GetCreatorAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[0]
 }
 
@@ -106,7 +106,7 @@ func (inst *StartAuction) Validate() error {
 	// Check whether all (required) accounts are set:
 	{
 		if inst.AccountMetaSlice[0] == nil {
-			return errors.New("accounts.CreatorAuthorisedAccount is not set")
+			return errors.New("accounts.CreatorAccount is not set")
 		}
 		if inst.AccountMetaSlice[1] == nil {
 			return errors.New("accounts.InitializedAuctionAccount is not set")
@@ -133,7 +133,7 @@ func (inst *StartAuction) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta(" creatorAuthorised", inst.AccountMetaSlice[0]))
+						accountsBranch.Child(ag_format.Meta("           creator", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("initializedAuction", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("       clockSysvar", inst.AccountMetaSlice[2]))
 					})
@@ -163,12 +163,12 @@ func NewStartAuctionInstruction(
 	// Parameters:
 	args StartAuctionArgs,
 	// Accounts:
-	creatorAuthorisedAccount ag_solanago.PublicKey,
+	creatorAccount ag_solanago.PublicKey,
 	initializedAuctionAccount ag_solanago.PublicKey,
 	clockSysvar ag_solanago.PublicKey) *StartAuction {
 	return NewStartAuctionInstructionBuilder().
 		SetArgs(args).
-		SetCreatorAuthorisedAccount(creatorAuthorisedAccount).
+		SetCreatorAccount(creatorAccount).
 		SetInitializedAuctionAccount(initializedAuctionAccount).
 		SetClockSysvarAccount(clockSysvar)
 }

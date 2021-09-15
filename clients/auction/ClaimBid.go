@@ -20,10 +20,10 @@ type ClaimBid struct {
 	// [1] = [WRITE] bidderPotTokenAccount
 	// ··········· The bidder pot token account
 	//
-	// [2] = [] bidderPotPdaAccount
+	// [2] = [] bidderPotPDAAccount
 	// ··········· The bidder pot pda account [seed of ['auction', program_id, auction key, bidder key]]
 	//
-	// [3] = [SIGNER] authorityOnTheAuctionAccount
+	// [3] = [SIGNER] authorityOnTheAuction
 	// ··········· The authority on the auction
 	//
 	// [4] = [] auction
@@ -32,7 +32,7 @@ type ClaimBid struct {
 	// [5] = [] bidderWallet
 	// ··········· The bidder wallet
 	//
-	// [6] = [] tokenMintOfTheAuctionAccount
+	// [6] = [] tokenMintOfTheAuction
 	// ··········· Token mint of the auction
 	//
 	// [7] = [] clockSysvar
@@ -83,27 +83,27 @@ func (inst *ClaimBid) GetBidderPotTokenAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[1]
 }
 
-// SetBidderPotPdaAccount sets the "bidderPotPdaAccount" account.
+// SetBidderPotPDAAccount sets the "bidderPotPDAAccount" account.
 // The bidder pot pda account [seed of ['auction', program_id, auction key, bidder key]]
-func (inst *ClaimBid) SetBidderPotPdaAccount(bidderPotPdaAccount ag_solanago.PublicKey) *ClaimBid {
-	inst.AccountMetaSlice[2] = ag_solanago.Meta(bidderPotPdaAccount)
+func (inst *ClaimBid) SetBidderPotPDAAccount(bidderPotPDAAccount ag_solanago.PublicKey) *ClaimBid {
+	inst.AccountMetaSlice[2] = ag_solanago.Meta(bidderPotPDAAccount)
 	return inst
 }
 
-// GetBidderPotPdaAccount gets the "bidderPotPdaAccount" account.
+// GetBidderPotPDAAccount gets the "bidderPotPDAAccount" account.
 // The bidder pot pda account [seed of ['auction', program_id, auction key, bidder key]]
-func (inst *ClaimBid) GetBidderPotPdaAccount() *ag_solanago.AccountMeta {
+func (inst *ClaimBid) GetBidderPotPDAAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[2]
 }
 
-// SetAuthorityOnTheAuctionAccount sets the "authorityOnTheAuctionAccount" account.
+// SetAuthorityOnTheAuctionAccount sets the "authorityOnTheAuction" account.
 // The authority on the auction
-func (inst *ClaimBid) SetAuthorityOnTheAuctionAccount(authorityOnTheAuctionAccount ag_solanago.PublicKey) *ClaimBid {
-	inst.AccountMetaSlice[3] = ag_solanago.Meta(authorityOnTheAuctionAccount).SIGNER()
+func (inst *ClaimBid) SetAuthorityOnTheAuctionAccount(authorityOnTheAuction ag_solanago.PublicKey) *ClaimBid {
+	inst.AccountMetaSlice[3] = ag_solanago.Meta(authorityOnTheAuction).SIGNER()
 	return inst
 }
 
-// GetAuthorityOnTheAuctionAccount gets the "authorityOnTheAuctionAccount" account.
+// GetAuthorityOnTheAuctionAccount gets the "authorityOnTheAuction" account.
 // The authority on the auction
 func (inst *ClaimBid) GetAuthorityOnTheAuctionAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[3]
@@ -135,14 +135,14 @@ func (inst *ClaimBid) GetBidderWalletAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[5]
 }
 
-// SetTokenMintOfTheAuctionAccount sets the "tokenMintOfTheAuctionAccount" account.
+// SetTokenMintOfTheAuctionAccount sets the "tokenMintOfTheAuction" account.
 // Token mint of the auction
-func (inst *ClaimBid) SetTokenMintOfTheAuctionAccount(tokenMintOfTheAuctionAccount ag_solanago.PublicKey) *ClaimBid {
-	inst.AccountMetaSlice[6] = ag_solanago.Meta(tokenMintOfTheAuctionAccount)
+func (inst *ClaimBid) SetTokenMintOfTheAuctionAccount(tokenMintOfTheAuction ag_solanago.PublicKey) *ClaimBid {
+	inst.AccountMetaSlice[6] = ag_solanago.Meta(tokenMintOfTheAuction)
 	return inst
 }
 
-// GetTokenMintOfTheAuctionAccount gets the "tokenMintOfTheAuctionAccount" account.
+// GetTokenMintOfTheAuctionAccount gets the "tokenMintOfTheAuction" account.
 // Token mint of the auction
 func (inst *ClaimBid) GetTokenMintOfTheAuctionAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[6]
@@ -208,10 +208,10 @@ func (inst *ClaimBid) Validate() error {
 			return errors.New("accounts.BidderPotTokenAccount is not set")
 		}
 		if inst.AccountMetaSlice[2] == nil {
-			return errors.New("accounts.BidderPotPdaAccount is not set")
+			return errors.New("accounts.BidderPotPDAAccount is not set")
 		}
 		if inst.AccountMetaSlice[3] == nil {
-			return errors.New("accounts.AuthorityOnTheAuctionAccount is not set")
+			return errors.New("accounts.AuthorityOnTheAuction is not set")
 		}
 		if inst.AccountMetaSlice[4] == nil {
 			return errors.New("accounts.Auction is not set")
@@ -220,7 +220,7 @@ func (inst *ClaimBid) Validate() error {
 			return errors.New("accounts.BidderWallet is not set")
 		}
 		if inst.AccountMetaSlice[6] == nil {
-			return errors.New("accounts.TokenMintOfTheAuctionAccount is not set")
+			return errors.New("accounts.TokenMintOfTheAuction is not set")
 		}
 		if inst.AccountMetaSlice[7] == nil {
 			return errors.New("accounts.ClockSysvar is not set")
@@ -249,7 +249,7 @@ func (inst *ClaimBid) EncodeToTree(parent ag_treeout.Branches) {
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("          destination", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("       bidderPotToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("         bidderPotPda", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("         bidderPotPDA", inst.AccountMetaSlice[2]))
 						accountsBranch.Child(ag_format.Meta("authorityOnTheAuction", inst.AccountMetaSlice[3]))
 						accountsBranch.Child(ag_format.Meta("              auction", inst.AccountMetaSlice[4]))
 						accountsBranch.Child(ag_format.Meta("         bidderWallet", inst.AccountMetaSlice[5]))
@@ -285,22 +285,22 @@ func NewClaimBidInstruction(
 	// Accounts:
 	destinationAccount ag_solanago.PublicKey,
 	bidderPotTokenAccount ag_solanago.PublicKey,
-	bidderPotPdaAccount ag_solanago.PublicKey,
-	authorityOnTheAuctionAccount ag_solanago.PublicKey,
+	bidderPotPDAAccount ag_solanago.PublicKey,
+	authorityOnTheAuction ag_solanago.PublicKey,
 	auction ag_solanago.PublicKey,
 	bidderWallet ag_solanago.PublicKey,
-	tokenMintOfTheAuctionAccount ag_solanago.PublicKey,
+	tokenMintOfTheAuction ag_solanago.PublicKey,
 	clockSysvar ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey) *ClaimBid {
 	return NewClaimBidInstructionBuilder().
 		SetArgs(args).
 		SetDestinationAccount(destinationAccount).
 		SetBidderPotTokenAccount(bidderPotTokenAccount).
-		SetBidderPotPdaAccount(bidderPotPdaAccount).
-		SetAuthorityOnTheAuctionAccount(authorityOnTheAuctionAccount).
+		SetBidderPotPDAAccount(bidderPotPDAAccount).
+		SetAuthorityOnTheAuctionAccount(authorityOnTheAuction).
 		SetAuctionAccount(auction).
 		SetBidderWalletAccount(bidderWallet).
-		SetTokenMintOfTheAuctionAccount(tokenMintOfTheAuctionAccount).
+		SetTokenMintOfTheAuctionAccount(tokenMintOfTheAuction).
 		SetClockSysvarAccount(clockSysvar).
 		SetTokenProgramAccount(tokenProgram)
 }

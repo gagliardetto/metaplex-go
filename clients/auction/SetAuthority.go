@@ -3,6 +3,7 @@
 package auction
 
 import (
+	"errors"
 	ag_binary "github.com/gagliardetto/binary"
 	ag_solanago "github.com/gagliardetto/solana-go"
 	ag_format "github.com/gagliardetto/solana-go/text/format"
@@ -10,16 +11,56 @@ import (
 )
 
 // Update the authority for an auction account.
+// https://github.com/metaplex-foundation/metaplex/blob/4a1b7d2f674013bc8bd3149294c66b03b27120d0/rust/auction/program/src/instruction.rs#L115
 type SetAuthority struct {
+
+	// [0] = [WRITE] auction
+	//
+	// [1] = [SIGNER] authority
+	//
+	// [2] = [] newAuthority
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewSetAuthorityInstructionBuilder creates a new `SetAuthority` instruction builder.
 func NewSetAuthorityInstructionBuilder() *SetAuthority {
 	nd := &SetAuthority{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 0),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 3),
 	}
 	return nd
+}
+
+// SetAuctionAccount sets the "auction" account.
+func (inst *SetAuthority) SetAuctionAccount(auction ag_solanago.PublicKey) *SetAuthority {
+	inst.AccountMetaSlice[0] = ag_solanago.Meta(auction).WRITE()
+	return inst
+}
+
+// GetAuctionAccount gets the "auction" account.
+func (inst *SetAuthority) GetAuctionAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[0]
+}
+
+// SetAuthorityAccount sets the "authority" account.
+func (inst *SetAuthority) SetAuthorityAccount(authority ag_solanago.PublicKey) *SetAuthority {
+	inst.AccountMetaSlice[1] = ag_solanago.Meta(authority).SIGNER()
+	return inst
+}
+
+// GetAuthorityAccount gets the "authority" account.
+func (inst *SetAuthority) GetAuthorityAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[1]
+}
+
+// SetNewAuthorityAccount sets the "newAuthority" account.
+func (inst *SetAuthority) SetNewAuthorityAccount(newAuthority ag_solanago.PublicKey) *SetAuthority {
+	inst.AccountMetaSlice[2] = ag_solanago.Meta(newAuthority)
+	return inst
+}
+
+// GetNewAuthorityAccount gets the "newAuthority" account.
+func (inst *SetAuthority) GetNewAuthorityAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[2]
 }
 
 func (inst SetAuthority) Build() *Instruction {
@@ -42,6 +83,15 @@ func (inst SetAuthority) ValidateAndBuild() (*Instruction, error) {
 func (inst *SetAuthority) Validate() error {
 	// Check whether all (required) accounts are set:
 	{
+		if inst.AccountMetaSlice[0] == nil {
+			return errors.New("accounts.Auction is not set")
+		}
+		if inst.AccountMetaSlice[1] == nil {
+			return errors.New("accounts.Authority is not set")
+		}
+		if inst.AccountMetaSlice[2] == nil {
+			return errors.New("accounts.NewAuthority is not set")
+		}
 	}
 	return nil
 }
@@ -58,7 +108,11 @@ func (inst *SetAuthority) EncodeToTree(parent ag_treeout.Branches) {
 					instructionBranch.Child("Params[len=0]").ParentFunc(func(paramsBranch ag_treeout.Branches) {})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=0]").ParentFunc(func(accountsBranch ag_treeout.Branches) {})
+					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+						accountsBranch.Child(ag_format.Meta("     auction", inst.AccountMetaSlice[0]))
+						accountsBranch.Child(ag_format.Meta("   authority", inst.AccountMetaSlice[1]))
+						accountsBranch.Child(ag_format.Meta("newAuthority", inst.AccountMetaSlice[2]))
+					})
 				})
 		})
 }
@@ -71,6 +125,13 @@ func (obj *SetAuthority) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 }
 
 // NewSetAuthorityInstruction declares a new SetAuthority instruction with the provided parameters and accounts.
-func NewSetAuthorityInstruction() *SetAuthority {
-	return NewSetAuthorityInstructionBuilder()
+func NewSetAuthorityInstruction(
+	// Accounts:
+	auction ag_solanago.PublicKey,
+	authority ag_solanago.PublicKey,
+	newAuthority ag_solanago.PublicKey) *SetAuthority {
+	return NewSetAuthorityInstructionBuilder().
+		SetAuctionAccount(auction).
+		SetAuthorityAccount(authority).
+		SetNewAuthorityAccount(newAuthority)
 }

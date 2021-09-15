@@ -20,10 +20,10 @@ type CancelBid struct {
 	// [1] = [WRITE] biddersTokenAccount
 	// ··········· The bidders token account they'll receive refund with
 	//
-	// [2] = [WRITE] potAccount
+	// [2] = [WRITE] pot
 	// ··········· The pot, containing a reference to the stored SPL token account.
 	//
-	// [3] = [WRITE] potSplAccount
+	// [3] = [WRITE] potSPLAccount
 	// ··········· The pot SPL account, where the tokens will be deposited.
 	//
 	// [4] = [WRITE] metadataAccount
@@ -32,7 +32,7 @@ type CancelBid struct {
 	// [5] = [WRITE] auctionAccount
 	// ··········· Auction account, containing data about the auction and item being bid on.
 	//
-	// [6] = [WRITE] tokenMintAccount
+	// [6] = [WRITE] tokenMint
 	// ··········· Token mint, for transfer instructions and verification.
 	//
 	// [7] = [] clockSysvar
@@ -44,7 +44,7 @@ type CancelBid struct {
 	// [9] = [] systemProgram
 	// ··········· System program
 	//
-	// [10] = [] splTokenProgramAccount
+	// [10] = [] splTokenProgram
 	// ··········· SPL Token Program
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -89,29 +89,29 @@ func (inst *CancelBid) GetBiddersTokenAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[1]
 }
 
-// SetPotAccount sets the "potAccount" account.
+// SetPotAccount sets the "pot" account.
 // The pot, containing a reference to the stored SPL token account.
-func (inst *CancelBid) SetPotAccount(potAccount ag_solanago.PublicKey) *CancelBid {
-	inst.AccountMetaSlice[2] = ag_solanago.Meta(potAccount).WRITE()
+func (inst *CancelBid) SetPotAccount(pot ag_solanago.PublicKey) *CancelBid {
+	inst.AccountMetaSlice[2] = ag_solanago.Meta(pot).WRITE()
 	return inst
 }
 
-// GetPotAccount gets the "potAccount" account.
+// GetPotAccount gets the "pot" account.
 // The pot, containing a reference to the stored SPL token account.
 func (inst *CancelBid) GetPotAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[2]
 }
 
-// SetPotSplAccount sets the "potSplAccount" account.
+// SetPotSPLAccount sets the "potSPLAccount" account.
 // The pot SPL account, where the tokens will be deposited.
-func (inst *CancelBid) SetPotSplAccount(potSplAccount ag_solanago.PublicKey) *CancelBid {
-	inst.AccountMetaSlice[3] = ag_solanago.Meta(potSplAccount).WRITE()
+func (inst *CancelBid) SetPotSPLAccount(potSPLAccount ag_solanago.PublicKey) *CancelBid {
+	inst.AccountMetaSlice[3] = ag_solanago.Meta(potSPLAccount).WRITE()
 	return inst
 }
 
-// GetPotSplAccount gets the "potSplAccount" account.
+// GetPotSPLAccount gets the "potSPLAccount" account.
 // The pot SPL account, where the tokens will be deposited.
-func (inst *CancelBid) GetPotSplAccount() *ag_solanago.AccountMeta {
+func (inst *CancelBid) GetPotSPLAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[3]
 }
 
@@ -141,14 +141,14 @@ func (inst *CancelBid) GetAuctionAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[5]
 }
 
-// SetTokenMintAccount sets the "tokenMintAccount" account.
+// SetTokenMintAccount sets the "tokenMint" account.
 // Token mint, for transfer instructions and verification.
-func (inst *CancelBid) SetTokenMintAccount(tokenMintAccount ag_solanago.PublicKey) *CancelBid {
-	inst.AccountMetaSlice[6] = ag_solanago.Meta(tokenMintAccount).WRITE()
+func (inst *CancelBid) SetTokenMintAccount(tokenMint ag_solanago.PublicKey) *CancelBid {
+	inst.AccountMetaSlice[6] = ag_solanago.Meta(tokenMint).WRITE()
 	return inst
 }
 
-// GetTokenMintAccount gets the "tokenMintAccount" account.
+// GetTokenMintAccount gets the "tokenMint" account.
 // Token mint, for transfer instructions and verification.
 func (inst *CancelBid) GetTokenMintAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[6]
@@ -193,14 +193,14 @@ func (inst *CancelBid) GetSystemProgramAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[9]
 }
 
-// SetSplTokenProgramAccount sets the "splTokenProgramAccount" account.
+// SetSplTokenProgramAccount sets the "splTokenProgram" account.
 // SPL Token Program
-func (inst *CancelBid) SetSplTokenProgramAccount(splTokenProgramAccount ag_solanago.PublicKey) *CancelBid {
-	inst.AccountMetaSlice[10] = ag_solanago.Meta(splTokenProgramAccount)
+func (inst *CancelBid) SetSplTokenProgramAccount(splTokenProgram ag_solanago.PublicKey) *CancelBid {
+	inst.AccountMetaSlice[10] = ag_solanago.Meta(splTokenProgram)
 	return inst
 }
 
-// GetSplTokenProgramAccount gets the "splTokenProgramAccount" account.
+// GetSplTokenProgramAccount gets the "splTokenProgram" account.
 // SPL Token Program
 func (inst *CancelBid) GetSplTokenProgramAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[10]
@@ -240,10 +240,10 @@ func (inst *CancelBid) Validate() error {
 			return errors.New("accounts.BiddersTokenAccount is not set")
 		}
 		if inst.AccountMetaSlice[2] == nil {
-			return errors.New("accounts.PotAccount is not set")
+			return errors.New("accounts.Pot is not set")
 		}
 		if inst.AccountMetaSlice[3] == nil {
-			return errors.New("accounts.PotSplAccount is not set")
+			return errors.New("accounts.PotSPLAccount is not set")
 		}
 		if inst.AccountMetaSlice[4] == nil {
 			return errors.New("accounts.MetadataAccount is not set")
@@ -252,7 +252,7 @@ func (inst *CancelBid) Validate() error {
 			return errors.New("accounts.AuctionAccount is not set")
 		}
 		if inst.AccountMetaSlice[6] == nil {
-			return errors.New("accounts.TokenMintAccount is not set")
+			return errors.New("accounts.TokenMint is not set")
 		}
 		if inst.AccountMetaSlice[7] == nil {
 			return errors.New("accounts.ClockSysvar is not set")
@@ -264,7 +264,7 @@ func (inst *CancelBid) Validate() error {
 			return errors.New("accounts.SystemProgram is not set")
 		}
 		if inst.AccountMetaSlice[10] == nil {
-			return errors.New("accounts.SplTokenProgramAccount is not set")
+			return errors.New("accounts.SplTokenProgram is not set")
 		}
 	}
 	return nil
@@ -288,7 +288,7 @@ func (inst *CancelBid) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta(" biddersPrimary", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("   biddersToken", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("            pot", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("         potSpl", inst.AccountMetaSlice[3]))
+						accountsBranch.Child(ag_format.Meta("         potSPL", inst.AccountMetaSlice[3]))
 						accountsBranch.Child(ag_format.Meta("       metadata", inst.AccountMetaSlice[4]))
 						accountsBranch.Child(ag_format.Meta("        auction", inst.AccountMetaSlice[5]))
 						accountsBranch.Child(ag_format.Meta("      tokenMint", inst.AccountMetaSlice[6]))
@@ -325,26 +325,26 @@ func NewCancelBidInstruction(
 	// Accounts:
 	biddersPrimaryAccount ag_solanago.PublicKey,
 	biddersTokenAccount ag_solanago.PublicKey,
-	potAccount ag_solanago.PublicKey,
-	potSplAccount ag_solanago.PublicKey,
+	pot ag_solanago.PublicKey,
+	potSPLAccount ag_solanago.PublicKey,
 	metadataAccount ag_solanago.PublicKey,
 	auctionAccount ag_solanago.PublicKey,
-	tokenMintAccount ag_solanago.PublicKey,
+	tokenMint ag_solanago.PublicKey,
 	clockSysvar ag_solanago.PublicKey,
 	rentSysvar ag_solanago.PublicKey,
 	systemProgram ag_solanago.PublicKey,
-	splTokenProgramAccount ag_solanago.PublicKey) *CancelBid {
+	splTokenProgram ag_solanago.PublicKey) *CancelBid {
 	return NewCancelBidInstructionBuilder().
 		SetArgs(args).
 		SetBiddersPrimaryAccount(biddersPrimaryAccount).
 		SetBiddersTokenAccount(biddersTokenAccount).
-		SetPotAccount(potAccount).
-		SetPotSplAccount(potSplAccount).
+		SetPotAccount(pot).
+		SetPotSPLAccount(potSPLAccount).
 		SetMetadataAccount(metadataAccount).
 		SetAuctionAccount(auctionAccount).
-		SetTokenMintAccount(tokenMintAccount).
+		SetTokenMintAccount(tokenMint).
 		SetClockSysvarAccount(clockSysvar).
 		SetRentSysvarAccount(rentSysvar).
 		SetSystemProgramAccount(systemProgram).
-		SetSplTokenProgramAccount(splTokenProgramAccount)
+		SetSplTokenProgramAccount(splTokenProgram)
 }

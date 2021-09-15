@@ -44,6 +44,7 @@ const (
 	Instruction_StartAuction
 
 	// Update the authority for an auction account.
+	// https://github.com/metaplex-foundation/metaplex/blob/4a1b7d2f674013bc8bd3149294c66b03b27120d0/rust/auction/program/src/instruction.rs#L115
 	Instruction_SetAuthority
 
 	// Place a bid on a running auction.
