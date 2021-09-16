@@ -13,3 +13,9 @@ Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/program/README.md
 See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/test/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-metadata/program/src
+
+## token-vault
+
+README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/program/README.md
+See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/test/src/main.rs
+Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-vault/program/src
