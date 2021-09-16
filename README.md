@@ -1,5 +1,10 @@
+# metaplex-go
 
-reference: https://github.com/metaplex-foundation/metaplex/tree/e9841d4bb121fbea784ff60c83ddd3bb1a26d220
+A suite of Go clients for the 5 metaplex contracts.
+
+This is an `alpha` version.
+
+For usage examples, you can get inspired by their Rust/Typescript counterparts (noted in the below list).
 
 ## auction ([Go client](/clients/auction)) ([Go docs](https://pkg.go.dev/github.com/gagliardetto/metaplex-go/clients/auction))
 
@@ -32,3 +37,5 @@ reference: https://github.com/metaplex-foundation/metaplex/tree/e9841d4bb121fbea
 - Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/nft-candy-machine/src
 - Example usage (typescript): https://github.com/metaplex-foundation/metaplex/blob/master/rust/test/nft-candy-machine.ts
 - Usage (go): [draft](/examples/candy)
+
+Clients are build around this version of metaplex programs: https://github.com/metaplex-foundation/metaplex/tree/e9841d4bb121fbea784ff60c83ddd3bb1a26d220
