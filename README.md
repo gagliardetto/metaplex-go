@@ -4,27 +4,31 @@ reference: https://github.com/metaplex-foundation/metaplex/tree/e9841d4bb121fbea
 ## auction
 
 README: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program
-See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/auction/cli/src/main.rs
+Example usage (rust): https://github.com/metaplex-foundation/metaplex/blob/master/rust/auction/cli/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program/src
 
 
 ## token-metadata
 
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/program/README.md
-See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/test/src/main.rs
+Example usage (rust): https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-metadata/test/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-metadata/program/src
 
 ## token-vault
 
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/program/README.md
-See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/test/src/main.rs
+Example usage (rust): https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/test/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-vault/program/src
 
 
 ## metaplex
 
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/metaplex/program/README.md
-See it in action: https://github.com/metaplex-foundation/metaplex/tree/master/rust/metaplex/test/src
+Example usage (rust): https://github.com/metaplex-foundation/metaplex/tree/master/rust/metaplex/test/src
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/metaplex/program/src
 
 ## nft-candy-machine
+
+Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/nft-candy-machine/src
+Example usage (typescript): https://github.com/metaplex-foundation/metaplex/blob/master/rust/test/nft-candy-machine.ts
+Usage (go): [draft](/examples/candy)
