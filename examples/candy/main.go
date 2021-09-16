@@ -135,6 +135,7 @@ func main() {
 	// }
 
 	{
+		// Create candy machine config, and load candy inside the machine:
 		txInstr, err := createConfig(this, false, 10)
 		if err != nil {
 			panic(err)
@@ -218,8 +219,9 @@ func main() {
 				signers,
 			)
 		}
+
 		{
-			// Mint:
+			// Mint candy:
 
 			// mint, err := solana.PrivateKeyFromSolanaKeygenFile("/path/to/candy-mint-1.json")
 			// if err != nil {
