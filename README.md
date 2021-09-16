@@ -4,7 +4,7 @@ reference: https://github.com/metaplex-foundation/metaplex/tree/e9841d4bb121fbea
 ## auction
 
 README: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program
-Example use in Rust: https://github.com/metaplex-foundation/metaplex/blob/master/rust/auction/cli/src/main.rs
+See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/auction/cli/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program/src
 
 
@@ -19,3 +19,12 @@ Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-m
 README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/program/README.md
 See it in action: https://github.com/metaplex-foundation/metaplex/blob/master/rust/token-vault/test/src/main.rs
 Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/token-vault/program/src
+
+
+## metaplex
+
+README: https://github.com/metaplex-foundation/metaplex/blob/master/rust/metaplex/program/README.md
+See it in action: https://github.com/metaplex-foundation/metaplex/tree/master/rust/metaplex/test/src
+Source: https://github.com/metaplex-foundation/metaplex/tree/master/rust/metaplex/program/src
+
+## nft-candy-machine
