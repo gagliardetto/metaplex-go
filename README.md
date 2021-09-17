@@ -6,6 +6,21 @@ This is an `alpha` version.
 
 For usage examples, you can get inspired by their Rust/Typescript counterparts (noted in the below list).
 
+## Requirements
+
+`metaplex-go` requires `go1.16` or later.
+
+## Installation
+
+```bash
+cd my-project
+go get github.com/gagliardetto/metaplex-go
+```
+
+If you encounter `missing go.sum entry for module providing package ...` errors, it means that you need to run `go mod tidy`.
+
+---
+
 ## auction ([Go client](/clients/auction)) ([Go docs](https://pkg.go.dev/github.com/gagliardetto/metaplex-go/clients/auction))
 
 - README: https://github.com/metaplex-foundation/metaplex/tree/master/rust/auction/program
