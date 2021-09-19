@@ -527,14 +527,26 @@ type keyContainer struct {
 	EditionMarker     EditionMarker
 }
 
-type Uninitialized struct {
-	Uninitialized *uint8
+type Uninitialized uint8
+
+func (obj Uninitialized) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	return nil
+}
+
+func (obj *Uninitialized) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	return nil
 }
 
 func (_ *Uninitialized) isKey() {}
 
-type EditionV1 struct {
-	EditionV1 *uint8
+type EditionV1 uint8
+
+func (obj EditionV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	return nil
+}
+
+func (obj *EditionV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	return nil
 }
 
 func (_ *EditionV1) isKey() {}
@@ -628,15 +640,15 @@ func (obj *MasterEditionV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (er
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -763,15 +775,15 @@ func (obj *ReservationListV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -810,8 +822,14 @@ func (obj *ReservationListV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (
 
 func (_ *ReservationListV1) isKey() {}
 
-type MetadataV1 struct {
-	MetadataV1 *uint8
+type MetadataV1 uint8
+
+func (obj MetadataV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	return nil
+}
+
+func (obj *MetadataV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	return nil
 }
 
 func (_ *MetadataV1) isKey() {}
@@ -911,15 +929,15 @@ func (obj *ReservationListV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -1045,15 +1063,15 @@ func (obj *MasterEditionV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (er
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -1145,15 +1163,15 @@ func (obj *EditionMarker) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err 
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -1325,15 +1343,15 @@ func (obj *Metadata) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
@@ -1453,15 +1471,15 @@ func (obj *Edition) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error)
 		}
 		switch tmp.Enum {
 		case 0:
-			obj.Key = &tmp.Uninitialized
+			obj.Key = (*Uninitialized)(&tmp.Enum)
 		case 1:
-			obj.Key = &tmp.EditionV1
+			obj.Key = (*EditionV1)(&tmp.Enum)
 		case 2:
 			obj.Key = &tmp.MasterEditionV1
 		case 3:
 			obj.Key = &tmp.ReservationListV1
 		case 4:
-			obj.Key = &tmp.MetadataV1
+			obj.Key = (*MetadataV1)(&tmp.Enum)
 		case 5:
 			obj.Key = &tmp.ReservationListV2
 		case 6:
