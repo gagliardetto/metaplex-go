@@ -21,6 +21,31 @@ const (
 	U64_TupleNumericType
 )
 
+func (value TupleNumericType) String() string {
+	switch value {
+	case Padding0_TupleNumericType:
+		return "Padding0"
+	case U8_TupleNumericType:
+		return "U8"
+	case U16_TupleNumericType:
+		return "U16"
+	case Padding1_TupleNumericType:
+		return "Padding1"
+	case U32_TupleNumericType:
+		return "U32"
+	case Padding2_TupleNumericType:
+		return "Padding2"
+	case Padding3_TupleNumericType:
+		return "Padding3"
+	case Padding4_TupleNumericType:
+		return "Padding4"
+	case U64_TupleNumericType:
+		return "U64"
+	default:
+		return ""
+	}
+}
+
 type AuctionManagerStatus ag_binary.BorshEnum
 
 const (
@@ -30,6 +55,23 @@ const (
 	Disbursing_AuctionManagerStatus
 	Finished_AuctionManagerStatus
 )
+
+func (value AuctionManagerStatus) String() string {
+	switch value {
+	case Initialized_AuctionManagerStatus:
+		return "Initialized"
+	case Validated_AuctionManagerStatus:
+		return "Validated"
+	case Running_AuctionManagerStatus:
+		return "Running"
+	case Disbursing_AuctionManagerStatus:
+		return "Disbursing"
+	case Finished_AuctionManagerStatus:
+		return "Finished"
+	default:
+		return ""
+	}
+}
 
 type Key ag_binary.BorshEnum
 
@@ -48,6 +90,39 @@ const (
 	BidRedemptionTicketV2_Key
 	AuctionWinnerTokenTypeTrackerV1_Key
 )
+
+func (value Key) String() string {
+	switch value {
+	case Uninitialized_Key:
+		return "Uninitialized"
+	case OriginalAuthorityLookupV1_Key:
+		return "OriginalAuthorityLookupV1"
+	case BidRedemptionTicketV1_Key:
+		return "BidRedemptionTicketV1"
+	case StoreV1_Key:
+		return "StoreV1"
+	case WhitelistedCreatorV1_Key:
+		return "WhitelistedCreatorV1"
+	case PayoutTicketV1_Key:
+		return "PayoutTicketV1"
+	case SafetyDepositValidationTicketV1_Key:
+		return "SafetyDepositValidationTicketV1"
+	case AuctionManagerV1_Key:
+		return "AuctionManagerV1"
+	case PrizeTrackingTicketV1_Key:
+		return "PrizeTrackingTicketV1"
+	case SafetyDepositConfigV1_Key:
+		return "SafetyDepositConfigV1"
+	case AuctionManagerV2_Key:
+		return "AuctionManagerV2"
+	case BidRedemptionTicketV2_Key:
+		return "BidRedemptionTicketV2"
+	case AuctionWinnerTokenTypeTrackerV1_Key:
+		return "AuctionWinnerTokenTypeTrackerV1"
+	default:
+		return ""
+	}
+}
 
 type AmountCumulativeReturn struct {
 	Amount           uint64
@@ -1677,6 +1752,23 @@ const (
 	Participation_WinningConfigType
 )
 
+func (value WinningConfigType) String() string {
+	switch value {
+	case TokenOnlyTransfer_WinningConfigType:
+		return "TokenOnlyTransfer"
+	case FullRightsTransfer_WinningConfigType:
+		return "FullRightsTransfer"
+	case PrintingV1_WinningConfigType:
+		return "PrintingV1"
+	case PrintingV2_WinningConfigType:
+		return "PrintingV2"
+	case Participation_WinningConfigType:
+		return "Participation"
+	default:
+		return ""
+	}
+}
+
 type ParticipationConfig struct {
 	// Setups:
 	// 1. Winners get participation + not charged extra
@@ -1773,6 +1865,17 @@ const (
 	ParticipationPrizeGiven_WinningConstraint
 )
 
+func (value WinningConstraint) String() string {
+	switch value {
+	case NoParticipationPrize_WinningConstraint:
+		return "NoParticipationPrize"
+	case ParticipationPrizeGiven_WinningConstraint:
+		return "ParticipationPrizeGiven"
+	default:
+		return ""
+	}
+}
+
 type NonWinningConstraint ag_binary.BorshEnum
 
 const (
@@ -1780,6 +1883,19 @@ const (
 	GivenForFixedPrice_NonWinningConstraint
 	GivenForBidPrice_NonWinningConstraint
 )
+
+func (value NonWinningConstraint) String() string {
+	switch value {
+	case NoParticipationPrize_NonWinningConstraint:
+		return "NoParticipationPrize"
+	case GivenForFixedPrice_NonWinningConstraint:
+		return "GivenForFixedPrice"
+	case GivenForBidPrice_NonWinningConstraint:
+		return "GivenForBidPrice"
+	default:
+		return ""
+	}
+}
 
 type EmptyPaymentAccountArgs struct {
 	// If not redeeming a participation NFT's contributions, need to provide
@@ -1977,6 +2093,17 @@ const (
 	RedeemBid_ProxyCallAddress ProxyCallAddress = iota
 	RedeemFullRightsTransferBid_ProxyCallAddress
 )
+
+func (value ProxyCallAddress) String() string {
+	switch value {
+	case RedeemBid_ProxyCallAddress:
+		return "RedeemBid"
+	case RedeemFullRightsTransferBid_ProxyCallAddress:
+		return "RedeemFullRightsTransferBid"
+	default:
+		return ""
+	}
+}
 
 type RedeemPrintingV2BidArgs struct {
 	EditionOffset uint64

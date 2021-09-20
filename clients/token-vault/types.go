@@ -164,6 +164,21 @@ const (
 	VaultV1_Key
 )
 
+func (value Key) String() string {
+	switch value {
+	case Uninitialized_Key:
+		return "Uninitialized"
+	case SafetyDepositBoxV1_Key:
+		return "SafetyDepositBoxV1"
+	case ExternalAccountKeyV1_Key:
+		return "ExternalAccountKeyV1"
+	case VaultV1_Key:
+		return "VaultV1"
+	default:
+		return ""
+	}
+}
+
 type VaultState ag_binary.BorshEnum
 
 const (
@@ -172,3 +187,18 @@ const (
 	Combined_VaultState
 	Deactivated_VaultState
 )
+
+func (value VaultState) String() string {
+	switch value {
+	case Inactive_VaultState:
+		return "Inactive"
+	case Active_VaultState:
+		return "Active"
+	case Combined_VaultState:
+		return "Combined"
+	case Deactivated_VaultState:
+		return "Deactivated"
+	default:
+		return ""
+	}
+}

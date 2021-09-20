@@ -561,6 +561,19 @@ const (
 	Ended_AuctionState
 )
 
+func (value AuctionState) String() string {
+	switch value {
+	case Created_AuctionState:
+		return "Created"
+	case Started_AuctionState:
+		return "Started"
+	case Ended_AuctionState:
+		return "Ended"
+	default:
+		return ""
+	}
+}
+
 type BidState interface {
 	isBidState()
 }
