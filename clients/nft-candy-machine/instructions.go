@@ -37,6 +37,10 @@ var (
 	Instruction_AddConfigLines = ag_binary.TypeID([8]byte{223, 50, 224, 227, 151, 8, 115, 106})
 
 	Instruction_InitializeCandyMachine = ag_binary.TypeID([8]byte{142, 137, 167, 107, 47, 39, 240, 124})
+
+	Instruction_UpdateAuthority = ag_binary.TypeID([8]byte{32, 46, 64, 28, 149, 75, 243, 88})
+
+	Instruction_WithdrawFunds = ag_binary.TypeID([8]byte{241, 36, 29, 111, 208, 31, 104, 217})
 )
 
 // InstructionIDToName returns the name of the instruction given its ID.
@@ -52,6 +56,10 @@ func InstructionIDToName(id ag_binary.TypeID) string {
 		return "AddConfigLines"
 	case Instruction_InitializeCandyMachine:
 		return "InitializeCandyMachine"
+	case Instruction_UpdateAuthority:
+		return "UpdateAuthority"
+	case Instruction_WithdrawFunds:
+		return "WithdrawFunds"
 	default:
 		return ""
 	}
@@ -86,6 +94,12 @@ var InstructionImplDef = ag_binary.NewVariantDefinition(
 		},
 		{
 			"initialize_candy_machine", (*InitializeCandyMachine)(nil),
+		},
+		{
+			"update_authority", (*UpdateAuthority)(nil),
+		},
+		{
+			"withdraw_funds", (*WithdrawFunds)(nil),
 		},
 	},
 )
