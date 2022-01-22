@@ -4,10 +4,11 @@ package auction
 
 import (
 	"bytes"
-	ag_gofuzz "github.com/gagliardetto/gofuzz"
-	ag_require "github.com/stretchr/testify/require"
 	"strconv"
 	"testing"
+
+	ag_gofuzz "github.com/gagliardetto/gofuzz"
+	ag_require "github.com/stretchr/testify/require"
 )
 
 func TestEncodeDecode_CreateAuction(t *testing.T) {
@@ -17,6 +18,9 @@ func TestEncodeDecode_CreateAuction(t *testing.T) {
 			{
 				params := new(CreateAuction)
 				fu.Fuzz(params)
+				params.Args.Winners = &WinnerLimitCapped{
+					Limit: 33,
+				}
 				params.AccountMetaSlice = nil
 				buf := new(bytes.Buffer)
 				err := encodeT(*params, buf)

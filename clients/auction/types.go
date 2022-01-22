@@ -3,6 +3,7 @@
 package auction
 
 import (
+	"fmt"
 	ag_binary "github.com/gagliardetto/binary"
 	ag_solanago "github.com/gagliardetto/solana-go"
 )
@@ -51,6 +52,64 @@ func (obj *ClaimBidArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 	return nil
 }
 
+type WinnerLimit interface {
+	isWinnerLimit()
+}
+
+type winnerLimitContainer struct {
+	Enum      ag_binary.BorshEnum `borsh_enum:"true"`
+	Unlimited WinnerLimitUnlimited
+	Capped    WinnerLimitCapped
+}
+
+type WinnerLimitUnlimited struct {
+	N uint64
+}
+
+func (obj WinnerLimitUnlimited) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `N` param:
+	err = encoder.Encode(obj.N)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *WinnerLimitUnlimited) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `N`:
+	err = decoder.Decode(&obj.N)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (_ *WinnerLimitUnlimited) isWinnerLimit() {}
+
+type WinnerLimitCapped struct {
+	Limit uint64
+}
+
+func (obj WinnerLimitCapped) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Limit` param:
+	err = encoder.Encode(obj.Limit)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *WinnerLimitCapped) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Limit`:
+	err = decoder.Decode(&obj.Limit)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (_ *WinnerLimitCapped) isWinnerLimit() {}
+
 type CreateAuctionArgs struct {
 	// How many winners are allowed for this auction. See AuctionData.
 	Winners WinnerLimit
@@ -82,9 +141,20 @@ type CreateAuctionArgs struct {
 
 func (obj CreateAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `Winners` param:
-	err = encoder.Encode(obj.Winners)
-	if err != nil {
-		return err
+	{
+		tmp := winnerLimitContainer{}
+		switch realvalue := obj.Winners.(type) {
+		case *WinnerLimitUnlimited:
+			tmp.Enum = 0
+			tmp.Unlimited = *realvalue
+		case *WinnerLimitCapped:
+			tmp.Enum = 1
+			tmp.Capped = *realvalue
+		}
+		err := encoder.Encode(tmp)
+		if err != nil {
+			return err
+		}
 	}
 	// Serialize `EndAuctionAt` param (optional):
 	{
@@ -183,9 +253,20 @@ func (obj CreateAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err
 
 func (obj *CreateAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `Winners`:
-	err = decoder.Decode(&obj.Winners)
-	if err != nil {
-		return err
+	{
+		tmp := new(winnerLimitContainer)
+		err := decoder.Decode(tmp)
+		if err != nil {
+			return err
+		}
+		switch tmp.Enum {
+		case 0:
+			obj.Winners = &tmp.Unlimited
+		case 1:
+			obj.Winners = &tmp.Capped
+		default:
+			return fmt.Errorf("unknown enum index: %v", tmp.Enum)
+		}
 	}
 	// Deserialize `EndAuctionAt` (optional):
 	{
@@ -299,9 +380,20 @@ type CreateAuctionArgsV2 struct {
 
 func (obj CreateAuctionArgsV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `Winners` param:
-	err = encoder.Encode(obj.Winners)
-	if err != nil {
-		return err
+	{
+		tmp := winnerLimitContainer{}
+		switch realvalue := obj.Winners.(type) {
+		case *WinnerLimitUnlimited:
+			tmp.Enum = 0
+			tmp.Unlimited = *realvalue
+		case *WinnerLimitCapped:
+			tmp.Enum = 1
+			tmp.Capped = *realvalue
+		}
+		err := encoder.Encode(tmp)
+		if err != nil {
+			return err
+		}
 	}
 	// Serialize `EndAuctionAt` param (optional):
 	{
@@ -436,9 +528,20 @@ func (obj CreateAuctionArgsV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (e
 
 func (obj *CreateAuctionArgsV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `Winners`:
-	err = decoder.Decode(&obj.Winners)
-	if err != nil {
-		return err
+	{
+		tmp := new(winnerLimitContainer)
+		err := decoder.Decode(tmp)
+		if err != nil {
+			return err
+		}
+		switch tmp.Enum {
+		case 0:
+			obj.Winners = &tmp.Unlimited
+		case 1:
+			obj.Winners = &tmp.Capped
+		default:
+			return fmt.Errorf("unknown enum index: %v", tmp.Enum)
+		}
 	}
 	// Deserialize `EndAuctionAt` (optional):
 	{
@@ -657,64 +760,6 @@ func (obj *StartAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (e
 	}
 	return nil
 }
-
-type WinnerLimit interface {
-	isWinnerLimit()
-}
-
-type winnerLimitContainer struct {
-	Enum      ag_binary.BorshEnum `borsh_enum:"true"`
-	Unlimited WinnerLimitUnlimited
-	Capped    WinnerLimitCapped
-}
-
-type WinnerLimitUnlimited struct {
-	N uint64
-}
-
-func (obj WinnerLimitUnlimited) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `N` param:
-	err = encoder.Encode(obj.N)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinnerLimitUnlimited) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `N`:
-	err = decoder.Decode(&obj.N)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (_ *WinnerLimitUnlimited) isWinnerLimit() {}
-
-type WinnerLimitCapped struct {
-	Limit uint64
-}
-
-func (obj WinnerLimitCapped) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Limit` param:
-	err = encoder.Encode(obj.Limit)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinnerLimitCapped) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Limit`:
-	err = decoder.Decode(&obj.Limit)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (_ *WinnerLimitCapped) isWinnerLimit() {}
 
 type PriceFloor interface {
 	isPriceFloor()
