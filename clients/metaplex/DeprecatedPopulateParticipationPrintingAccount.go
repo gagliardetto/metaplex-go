@@ -69,7 +69,7 @@ type DeprecatedPopulateParticipationPrintingAccount struct {
 	//
 	// [17] = [] rent
 	// ··········· Rent
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedPopulateParticipationPrintingAccountInstructionBuilder creates a new `DeprecatedPopulateParticipationPrintingAccount` instruction builder.

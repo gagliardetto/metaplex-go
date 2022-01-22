@@ -18,7 +18,7 @@ type SignMetadata struct {
 	//
 	// [1] = [SIGNER] creator
 	// ··········· Creator
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSignMetadataInstructionBuilder creates a new `SignMetadata` instruction builder.

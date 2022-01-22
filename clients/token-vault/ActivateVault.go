@@ -32,7 +32,7 @@ type ActivateVault struct {
 	//
 	// [5] = [] tokenProgram
 	// ··········· Token program
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewActivateVaultInstructionBuilder creates a new `ActivateVault` instruction builder.

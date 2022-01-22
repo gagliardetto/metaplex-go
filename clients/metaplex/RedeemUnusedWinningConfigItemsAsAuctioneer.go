@@ -24,7 +24,7 @@ import (
 type RedeemUnusedWinningConfigItemsAsAuctioneer struct {
 	Args *RedeemUnusedWinningConfigItemsAsAuctioneerArgs
 
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRedeemUnusedWinningConfigItemsAsAuctioneerInstructionBuilder creates a new `RedeemUnusedWinningConfigItemsAsAuctioneer` instruction builder.

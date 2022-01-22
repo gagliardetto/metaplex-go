@@ -57,7 +57,7 @@ type MintNewEditionFromMasterEditionViaToken struct {
 	//
 	// [13] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewMintNewEditionFromMasterEditionViaTokenInstructionBuilder creates a new `MintNewEditionFromMasterEditionViaToken` instruction builder.

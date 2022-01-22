@@ -18,7 +18,7 @@ type UpdateExternalPriceAccount struct {
 
 	// [0] = [WRITE] externalPrice
 	// ··········· External price account
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUpdateExternalPriceAccountInstructionBuilder creates a new `UpdateExternalPriceAccount` instruction builder.

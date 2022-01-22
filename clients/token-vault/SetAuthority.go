@@ -21,7 +21,7 @@ type SetAuthority struct {
 	//
 	// [2] = [] newAuthority
 	// ··········· New authority
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetAuthorityInstructionBuilder creates a new `SetAuthority` instruction builder.

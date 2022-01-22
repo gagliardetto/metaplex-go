@@ -44,7 +44,7 @@ type SetStoreV2 struct {
 	//
 	// [9] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetStoreV2InstructionBuilder creates a new `SetStoreV2` instruction builder.

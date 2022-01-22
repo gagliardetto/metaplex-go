@@ -47,7 +47,7 @@ type Utilize struct {
 	//
 	// [10] = [WRITE] useAuthorityRecord
 	// ··········· Use Authority Record PDA If present the program Assumes a delegated use authority
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUtilizeInstructionBuilder creates a new `Utilize` instruction builder.

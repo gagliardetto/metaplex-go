@@ -19,7 +19,7 @@ type UpdateAuthority struct {
 	// [1] = [SIGNER] authority
 	//
 	// [2] = [] wallet
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUpdateAuthorityInstructionBuilder creates a new `UpdateAuthority` instruction builder.

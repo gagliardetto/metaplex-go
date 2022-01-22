@@ -38,7 +38,7 @@ type DeprecatedCreateReservationList struct {
 	//
 	// [7] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedCreateReservationListInstructionBuilder creates a new `DeprecatedCreateReservationList` instruction builder.

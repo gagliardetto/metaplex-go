@@ -19,7 +19,7 @@ type UpdateCandyMachine struct {
 	// [1] = [SIGNER] authority
 	//
 	// [2] = [] wallet
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUpdateCandyMachineInstructionBuilder creates a new `UpdateCandyMachine` instruction builder.

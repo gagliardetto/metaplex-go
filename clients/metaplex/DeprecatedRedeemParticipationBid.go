@@ -91,7 +91,7 @@ type DeprecatedRedeemParticipationBid struct {
 	//
 	// [21] = [] auctionExtendedPDA
 	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedRedeemParticipationBidInstructionBuilder creates a new `DeprecatedRedeemParticipationBid` instruction builder.

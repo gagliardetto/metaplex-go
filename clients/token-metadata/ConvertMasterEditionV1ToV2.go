@@ -23,7 +23,7 @@ type ConvertMasterEditionV1ToV2 struct {
 	//
 	// [2] = [WRITE] printingMint
 	// ··········· Printing mint
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewConvertMasterEditionV1ToV2InstructionBuilder creates a new `ConvertMasterEditionV1ToV2` instruction builder.

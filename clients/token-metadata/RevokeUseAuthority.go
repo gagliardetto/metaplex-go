@@ -42,7 +42,7 @@ type RevokeUseAuthority struct {
 	//
 	// [9] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRevokeUseAuthorityInstructionBuilder creates a new `RevokeUseAuthority` instruction builder.

@@ -22,7 +22,7 @@ type StartAuction struct {
 	//
 	// [2] = [] clockSysvar
 	// ··········· Clock sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewStartAuctionInstructionBuilder creates a new `StartAuction` instruction builder.

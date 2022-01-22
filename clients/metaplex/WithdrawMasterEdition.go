@@ -60,7 +60,7 @@ type WithdrawMasterEdition struct {
 	// [14] = [] safetyDepositConfig
 	// ··········· Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 	// ··········· This account will only get used in the event this is an AuctionManagerV2
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewWithdrawMasterEditionInstructionBuilder creates a new `WithdrawMasterEdition` instruction builder.

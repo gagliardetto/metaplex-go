@@ -41,7 +41,7 @@ type WithdrawTokenFromSafetyDepositBox struct {
 	//
 	// [8] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewWithdrawTokenFromSafetyDepositBoxInstructionBuilder creates a new `WithdrawTokenFromSafetyDepositBox` instruction builder.

@@ -41,7 +41,7 @@ type SetStore struct {
 	//
 	// [8] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetStoreInstructionBuilder creates a new `SetStore` instruction builder.

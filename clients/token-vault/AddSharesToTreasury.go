@@ -31,7 +31,7 @@ type AddSharesToTreasury struct {
 	//
 	// [5] = [] tokenProgram
 	// ··········· Token program
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewAddSharesToTreasuryInstructionBuilder creates a new `AddSharesToTreasury` instruction builder.

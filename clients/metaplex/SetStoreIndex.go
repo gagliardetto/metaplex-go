@@ -38,7 +38,7 @@ type SetStoreIndex struct {
 	//
 	// [7] = [] auctionCacheBelow
 	// ··········· Auction cache below current (pda of ['metaplex', program id, store key, auction key, 'cache'])
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetStoreIndexInstructionBuilder creates a new `SetStoreIndex` instruction builder.

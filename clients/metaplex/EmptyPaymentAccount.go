@@ -79,7 +79,7 @@ type EmptyPaymentAccount struct {
 	//
 	// [15] = [] safetyDepositConfig
 	// ··········· Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewEmptyPaymentAccountInstructionBuilder creates a new `EmptyPaymentAccount` instruction builder.

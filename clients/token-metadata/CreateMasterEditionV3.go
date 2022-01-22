@@ -42,7 +42,7 @@ type CreateMasterEditionV3 struct {
 	//
 	// [8] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewCreateMasterEditionV3InstructionBuilder creates a new `CreateMasterEditionV3` instruction builder.

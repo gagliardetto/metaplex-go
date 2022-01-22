@@ -46,7 +46,7 @@ type InitAuctionManagerV2 struct {
 	//
 	// [9] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewInitAuctionManagerV2InstructionBuilder creates a new `InitAuctionManagerV2` instruction builder.

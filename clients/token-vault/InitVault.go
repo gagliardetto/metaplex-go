@@ -37,7 +37,7 @@ type InitVault struct {
 	//
 	// [7] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewInitVaultInstructionBuilder creates a new `InitVault` instruction builder.

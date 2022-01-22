@@ -41,7 +41,7 @@ type DeprecatedMintPrintingTokensViaToken struct {
 	//
 	// [8] = [] rent
 	// ··········· Rent
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedMintPrintingTokensViaTokenInstructionBuilder creates a new `DeprecatedMintPrintingTokensViaToken` instruction builder.

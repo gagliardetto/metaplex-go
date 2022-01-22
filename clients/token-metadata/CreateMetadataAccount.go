@@ -34,7 +34,7 @@ type CreateMetadataAccount struct {
 	//
 	// [6] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewCreateMetadataAccountInstructionBuilder creates a new `CreateMetadataAccount` instruction builder.

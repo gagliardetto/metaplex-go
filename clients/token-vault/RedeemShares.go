@@ -40,7 +40,7 @@ type RedeemShares struct {
 	//
 	// [8] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRedeemSharesInstructionBuilder creates a new `RedeemShares` instruction builder.

@@ -75,7 +75,7 @@ type DeprecatedValidateSafetyDepositBoxV1 struct {
 	// [18] = [SIGNER] limitedEditionPrintingMintAuthority
 	// ··········· Limited edition Printing mint Authority account, this will TEMPORARILY TRANSFER MINTING AUTHORITY to the auction manager
 	// ··········· until all limited editions have been redeemed for authority tokens.
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedValidateSafetyDepositBoxV1InstructionBuilder creates a new `DeprecatedValidateSafetyDepositBoxV1` instruction builder.

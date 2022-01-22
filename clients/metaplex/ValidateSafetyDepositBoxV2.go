@@ -74,7 +74,7 @@ type ValidateSafetyDepositBoxV2 struct {
 	//
 	// [17] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewValidateSafetyDepositBoxV2InstructionBuilder creates a new `ValidateSafetyDepositBoxV2` instruction builder.

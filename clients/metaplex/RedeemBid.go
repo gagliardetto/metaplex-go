@@ -90,7 +90,7 @@ type RedeemBid struct {
 	//
 	// [21] = [] auctionExtendedPDA
 	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRedeemBidInstructionBuilder creates a new `RedeemBid` instruction builder.

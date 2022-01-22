@@ -50,7 +50,7 @@ type DeprecatedValidateParticipation struct {
 	//
 	// [10] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedValidateParticipationInstructionBuilder creates a new `DeprecatedValidateParticipation` instruction builder.

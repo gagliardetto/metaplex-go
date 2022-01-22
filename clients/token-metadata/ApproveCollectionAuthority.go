@@ -39,7 +39,7 @@ type ApproveCollectionAuthority struct {
 	//
 	// [8] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewApproveCollectionAuthorityInstructionBuilder creates a new `ApproveCollectionAuthority` instruction builder.

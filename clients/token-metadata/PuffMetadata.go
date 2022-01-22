@@ -16,7 +16,7 @@ type PuffMetadata struct {
 
 	// [0] = [WRITE] metadata
 	// ··········· Metadata account
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewPuffMetadataInstructionBuilder creates a new `PuffMetadata` instruction builder.

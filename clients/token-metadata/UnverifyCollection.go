@@ -30,7 +30,7 @@ type UnverifyCollection struct {
 	//
 	// [5] = [] masterEditionV2
 	// ··········· MasterEdition2 Account of the Collection Token
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUnverifyCollectionInstructionBuilder creates a new `UnverifyCollection` instruction builder.

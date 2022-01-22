@@ -35,7 +35,7 @@ type SetWhitelistedCreator struct {
 	//
 	// [6] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetWhitelistedCreatorInstructionBuilder creates a new `SetWhitelistedCreator` instruction builder.

@@ -50,7 +50,7 @@ type CombineVault struct {
 	//
 	// [11] = [] tokenProgram
 	// ··········· Token program
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewCombineVaultInstructionBuilder creates a new `CombineVault` instruction builder.

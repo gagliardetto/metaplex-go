@@ -102,7 +102,7 @@ type RedeemPrintingV2Bid struct {
 	//
 	// [25] = [] auctionExtendedPDA
 	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRedeemPrintingV2BidInstructionBuilder creates a new `RedeemPrintingV2Bid` instruction builder.

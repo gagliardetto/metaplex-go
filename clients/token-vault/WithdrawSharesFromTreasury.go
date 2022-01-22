@@ -34,7 +34,7 @@ type WithdrawSharesFromTreasury struct {
 	//
 	// [6] = [] rentSysvar
 	// ··········· Rent sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewWithdrawSharesFromTreasuryInstructionBuilder creates a new `WithdrawSharesFromTreasury` instruction builder.

@@ -45,7 +45,7 @@ type MintNft struct {
 	// [14] = [] recentBlockhashes
 	//
 	// [15] = [] instructionSysvarAccount
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewMintNftInstructionBuilder creates a new `MintNft` instruction builder.

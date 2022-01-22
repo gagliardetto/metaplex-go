@@ -34,7 +34,7 @@ type EndAuction struct {
 	//
 	// [6] = [] clockSysvar
 	// ··········· Clock sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewEndAuctionInstructionBuilder creates a new `EndAuction` instruction builder.

@@ -62,7 +62,7 @@ type DeprecatedMintNewEditionFromMasterEditionViaPrintingToken struct {
 	// [15] = [WRITE] reservationList
 	// ··········· [optional] Reservation List - If present, and you are on this list, you can get
 	// ··········· an edition number given by your position on the list.
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenInstructionBuilder creates a new `DeprecatedMintNewEditionFromMasterEditionViaPrintingToken` instruction builder.

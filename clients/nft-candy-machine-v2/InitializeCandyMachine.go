@@ -25,7 +25,7 @@ type InitializeCandyMachine struct {
 	// [4] = [] systemProgram
 	//
 	// [5] = [] rent
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewInitializeCandyMachineInstructionBuilder creates a new `InitializeCandyMachine` instruction builder.

@@ -33,7 +33,7 @@ type DeprecatedSetReservationList struct {
 	//
 	// [2] = [SIGNER] resource
 	// ··········· The resource you tied the reservation list too
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedSetReservationListInstructionBuilder creates a new `DeprecatedSetReservationList` instruction builder.

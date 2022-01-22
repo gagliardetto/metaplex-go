@@ -16,7 +16,7 @@ type WithdrawFunds struct {
 	// [0] = [WRITE] candyMachine
 	//
 	// [1] = [SIGNER] authority
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewWithdrawFundsInstructionBuilder creates a new `WithdrawFunds` instruction builder.

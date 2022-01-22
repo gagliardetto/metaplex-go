@@ -46,7 +46,7 @@ type CancelBid struct {
 	//
 	// [10] = [] splTokenProgram
 	// ··········· SPL Token Program
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewCancelBidInstructionBuilder creates a new `CancelBid` instruction builder.

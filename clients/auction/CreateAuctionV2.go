@@ -29,7 +29,7 @@ type CreateAuctionV2 struct {
 	//
 	// [4] = [] system
 	// ··········· System account
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewCreateAuctionV2InstructionBuilder creates a new `CreateAuctionV2` instruction builder.

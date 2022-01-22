@@ -56,7 +56,7 @@ type DeprecatedCreateMasterEdition struct {
 	//
 	// [12] = [SIGNER] oneTimeAuthorizationPrintingMintAuthority
 	// ··········· One time authorization printing mint authority - must be provided if using max supply. THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY.
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDeprecatedCreateMasterEditionInstructionBuilder creates a new `DeprecatedCreateMasterEdition` instruction builder.

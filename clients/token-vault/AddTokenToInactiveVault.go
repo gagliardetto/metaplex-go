@@ -44,7 +44,7 @@ type AddTokenToInactiveVault struct {
 	//
 	// [9] = [] systemAccountSysvar
 	// ··········· System account sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewAddTokenToInactiveVaultInstructionBuilder creates a new `AddTokenToInactiveVault` instruction builder.

@@ -46,7 +46,7 @@ type ApproveUseAuthority struct {
 	//
 	// [10] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewApproveUseAuthorityInstructionBuilder creates a new `ApproveUseAuthority` instruction builder.

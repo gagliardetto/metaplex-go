@@ -18,7 +18,7 @@ type AddConfigLines struct {
 	// [0] = [WRITE] candyMachine
 	//
 	// [1] = [SIGNER] authority
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewAddConfigLinesInstructionBuilder creates a new `AddConfigLines` instruction builder.

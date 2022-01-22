@@ -39,7 +39,7 @@ type SetAuctionCache struct {
 	//
 	// [8] = [] clockSysvar
 	// ··········· Clock sysvar
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewSetAuctionCacheInstructionBuilder creates a new `SetAuctionCache` instruction builder.

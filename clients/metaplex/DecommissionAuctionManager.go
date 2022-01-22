@@ -49,7 +49,7 @@ type DecommissionAuctionManager struct {
 	//
 	// [7] = [] vaultProgram
 	// ··········· Vault program (Optional)
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewDecommissionAuctionManagerInstructionBuilder creates a new `DecommissionAuctionManager` instruction builder.

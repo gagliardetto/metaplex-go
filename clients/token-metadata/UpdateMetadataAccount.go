@@ -19,7 +19,7 @@ type UpdateMetadataAccount struct {
 	//
 	// [1] = [SIGNER] updateAuthorityKey
 	// ··········· Update authority key
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUpdateMetadataAccountInstructionBuilder creates a new `UpdateMetadataAccount` instruction builder.

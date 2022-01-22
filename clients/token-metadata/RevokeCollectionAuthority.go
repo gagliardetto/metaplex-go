@@ -24,7 +24,7 @@ type RevokeCollectionAuthority struct {
 	//
 	// [3] = [] metadataMint
 	// ··········· Mint of Metadata
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewRevokeCollectionAuthorityInstructionBuilder creates a new `RevokeCollectionAuthority` instruction builder.

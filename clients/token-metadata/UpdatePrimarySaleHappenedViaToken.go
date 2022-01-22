@@ -24,7 +24,7 @@ type UpdatePrimarySaleHappenedViaToken struct {
 	//
 	// [2] = [] container
 	// ··········· Account containing tokens from the metadata's mint
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewUpdatePrimarySaleHappenedViaTokenInstructionBuilder creates a new `UpdatePrimarySaleHappenedViaToken` instruction builder.

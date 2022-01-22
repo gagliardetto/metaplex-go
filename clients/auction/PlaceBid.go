@@ -52,7 +52,7 @@ type PlaceBid struct {
 	//
 	// [12] = [] splTokenProgram
 	// ··········· SPL Token Program
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewPlaceBidInstructionBuilder creates a new `PlaceBid` instruction builder.

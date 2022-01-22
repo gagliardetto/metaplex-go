@@ -65,7 +65,7 @@ type MintNewEditionFromMasterEditionViaVaultProxy struct {
 	//
 	// [16] = [] rent
 	// ··········· Rent info
-	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
+	ag_solanago.AccountMetaSlice `bin:"-"`
 }
 
 // NewMintNewEditionFromMasterEditionViaVaultProxyInstructionBuilder creates a new `MintNewEditionFromMasterEditionViaVaultProxy` instruction builder.
