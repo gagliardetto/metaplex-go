@@ -99,13 +99,16 @@ type RedeemPrintingV2Bid struct {
 	//
 	// [24] = [] metadataAccount
 	// ··········· Metadata account of token in vault
+	//
+	// [25] = [] auctionExtendedPDA
+	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewRedeemPrintingV2BidInstructionBuilder creates a new `RedeemPrintingV2Bid` instruction builder.
 func NewRedeemPrintingV2BidInstructionBuilder() *RedeemPrintingV2Bid {
 	nd := &RedeemPrintingV2Bid{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 25),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 26),
 	}
 	return nd
 }
@@ -449,6 +452,19 @@ func (inst *RedeemPrintingV2Bid) GetMetadataAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[24]
 }
 
+// SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemPrintingV2Bid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanago.PublicKey) *RedeemPrintingV2Bid {
+	inst.AccountMetaSlice[25] = ag_solanago.Meta(auctionExtendedPDA)
+	return inst
+}
+
+// GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemPrintingV2Bid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[25]
+}
+
 func (inst RedeemPrintingV2Bid) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -551,6 +567,9 @@ func (inst *RedeemPrintingV2Bid) Validate() error {
 		if inst.AccountMetaSlice[24] == nil {
 			return errors.New("accounts.MetadataAccount is not set")
 		}
+		if inst.AccountMetaSlice[25] == nil {
+			return errors.New("accounts.AuctionExtendedPDA is not set")
+		}
 	}
 	return nil
 }
@@ -569,7 +588,7 @@ func (inst *RedeemPrintingV2Bid) EncodeToTree(parent ag_treeout.Branches) {
 					})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=25]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=26]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("               singleItem", inst.AccountMetaSlice[2]))
@@ -595,6 +614,7 @@ func (inst *RedeemPrintingV2Bid) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("               editionPDA", inst.AccountMetaSlice[22]))
 						accountsBranch.Child(ag_format.Meta("            mintAuthority", inst.AccountMetaSlice[23]))
 						accountsBranch.Child(ag_format.Meta("                 metadata", inst.AccountMetaSlice[24]))
+						accountsBranch.Child(ag_format.Meta("       auctionExtendedPDA", inst.AccountMetaSlice[25]))
 					})
 				})
 		})
@@ -646,7 +666,8 @@ func NewRedeemPrintingV2BidInstruction(
 	newTokenMint ag_solanago.PublicKey,
 	editionPDA ag_solanago.PublicKey,
 	mintAuthority ag_solanago.PublicKey,
-	metadataAccount ag_solanago.PublicKey) *RedeemPrintingV2Bid {
+	metadataAccount ag_solanago.PublicKey,
+	auctionExtendedPDA ag_solanago.PublicKey) *RedeemPrintingV2Bid {
 	return NewRedeemPrintingV2BidInstructionBuilder().
 		SetArgs(args).
 		SetAuctionManagerAccount(auctionManager).
@@ -673,5 +694,6 @@ func NewRedeemPrintingV2BidInstruction(
 		SetNewTokenMintAccount(newTokenMint).
 		SetEditionPDAAccount(editionPDA).
 		SetMintAuthorityAccount(mintAuthority).
-		SetMetadataAccount(metadataAccount)
+		SetMetadataAccount(metadataAccount).
+		SetAuctionExtendedPDAAccount(auctionExtendedPDA)
 }

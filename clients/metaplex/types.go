@@ -2,412 +2,7 @@
 
 package metaplex
 
-import (
-	ag_binary "github.com/gagliardetto/binary"
-	ag_solanago "github.com/gagliardetto/solana-go"
-)
-
-type TupleNumericType ag_binary.BorshEnum
-
-const (
-	Padding0_TupleNumericType TupleNumericType = iota
-	U8_TupleNumericType
-	U16_TupleNumericType
-	Padding1_TupleNumericType
-	U32_TupleNumericType
-	Padding2_TupleNumericType
-	Padding3_TupleNumericType
-	Padding4_TupleNumericType
-	U64_TupleNumericType
-)
-
-func (value TupleNumericType) String() string {
-	switch value {
-	case Padding0_TupleNumericType:
-		return "Padding0"
-	case U8_TupleNumericType:
-		return "U8"
-	case U16_TupleNumericType:
-		return "U16"
-	case Padding1_TupleNumericType:
-		return "Padding1"
-	case U32_TupleNumericType:
-		return "U32"
-	case Padding2_TupleNumericType:
-		return "Padding2"
-	case Padding3_TupleNumericType:
-		return "Padding3"
-	case Padding4_TupleNumericType:
-		return "Padding4"
-	case U64_TupleNumericType:
-		return "U64"
-	default:
-		return ""
-	}
-}
-
-type AuctionManagerStatus ag_binary.BorshEnum
-
-const (
-	Initialized_AuctionManagerStatus AuctionManagerStatus = iota
-	Validated_AuctionManagerStatus
-	Running_AuctionManagerStatus
-	Disbursing_AuctionManagerStatus
-	Finished_AuctionManagerStatus
-)
-
-func (value AuctionManagerStatus) String() string {
-	switch value {
-	case Initialized_AuctionManagerStatus:
-		return "Initialized"
-	case Validated_AuctionManagerStatus:
-		return "Validated"
-	case Running_AuctionManagerStatus:
-		return "Running"
-	case Disbursing_AuctionManagerStatus:
-		return "Disbursing"
-	case Finished_AuctionManagerStatus:
-		return "Finished"
-	default:
-		return ""
-	}
-}
-
-type Key ag_binary.BorshEnum
-
-const (
-	Uninitialized_Key Key = iota
-	OriginalAuthorityLookupV1_Key
-	BidRedemptionTicketV1_Key
-	StoreV1_Key
-	WhitelistedCreatorV1_Key
-	PayoutTicketV1_Key
-	SafetyDepositValidationTicketV1_Key
-	AuctionManagerV1_Key
-	PrizeTrackingTicketV1_Key
-	SafetyDepositConfigV1_Key
-	AuctionManagerV2_Key
-	BidRedemptionTicketV2_Key
-	AuctionWinnerTokenTypeTrackerV1_Key
-)
-
-func (value Key) String() string {
-	switch value {
-	case Uninitialized_Key:
-		return "Uninitialized"
-	case OriginalAuthorityLookupV1_Key:
-		return "OriginalAuthorityLookupV1"
-	case BidRedemptionTicketV1_Key:
-		return "BidRedemptionTicketV1"
-	case StoreV1_Key:
-		return "StoreV1"
-	case WhitelistedCreatorV1_Key:
-		return "WhitelistedCreatorV1"
-	case PayoutTicketV1_Key:
-		return "PayoutTicketV1"
-	case SafetyDepositValidationTicketV1_Key:
-		return "SafetyDepositValidationTicketV1"
-	case AuctionManagerV1_Key:
-		return "AuctionManagerV1"
-	case PrizeTrackingTicketV1_Key:
-		return "PrizeTrackingTicketV1"
-	case SafetyDepositConfigV1_Key:
-		return "SafetyDepositConfigV1"
-	case AuctionManagerV2_Key:
-		return "AuctionManagerV2"
-	case BidRedemptionTicketV2_Key:
-		return "BidRedemptionTicketV2"
-	case AuctionWinnerTokenTypeTrackerV1_Key:
-		return "AuctionWinnerTokenTypeTrackerV1"
-	default:
-		return ""
-	}
-}
-
-type AmountCumulativeReturn struct {
-	Amount           uint64
-	CumulativeAmount uint64
-	TotalAmount      uint64
-}
-
-func (obj AmountCumulativeReturn) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Amount` param:
-	err = encoder.Encode(obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Serialize `CumulativeAmount` param:
-	err = encoder.Encode(obj.CumulativeAmount)
-	if err != nil {
-		return err
-	}
-	// Serialize `TotalAmount` param:
-	err = encoder.Encode(obj.TotalAmount)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *AmountCumulativeReturn) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Amount`:
-	err = decoder.Decode(&obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Deserialize `CumulativeAmount`:
-	err = decoder.Decode(&obj.CumulativeAmount)
-	if err != nil {
-		return err
-	}
-	// Deserialize `TotalAmount`:
-	err = decoder.Decode(&obj.TotalAmount)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type AuctionWinnerTokenTypeTracker struct {
-	Key        Key
-	AmountType TupleNumericType
-	LengthType TupleNumericType
-
-	// Tuple is (amount of editions or tokens given to people in this range, length of range)
-	AmountRanges []AmountRange
-}
-
-func (obj AuctionWinnerTokenTypeTracker) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `AmountType` param:
-	err = encoder.Encode(obj.AmountType)
-	if err != nil {
-		return err
-	}
-	// Serialize `LengthType` param:
-	err = encoder.Encode(obj.LengthType)
-	if err != nil {
-		return err
-	}
-	// Serialize `AmountRanges` param:
-	err = encoder.Encode(obj.AmountRanges)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *AuctionWinnerTokenTypeTracker) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AmountType`:
-	err = decoder.Decode(&obj.AmountType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `LengthType`:
-	err = decoder.Decode(&obj.LengthType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AmountRanges`:
-	err = decoder.Decode(&obj.AmountRanges)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type BidRedemptionTicket struct {
-	Key Key
-}
-
-func (obj BidRedemptionTicket) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *BidRedemptionTicket) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type SafetyDepositConfig struct {
-	Key Key
-
-	// reverse lookup
-	AuctionManager ag_solanago.PublicKey
-
-	// safety deposit order
-	Order             uint64
-	WinningConfigType WinningConfigType
-	AmountType        TupleNumericType
-	LengthType        TupleNumericType
-
-	// Tuple is (amount of editions or tokens given to people in this range, length of range)
-	AmountRanges []AmountRange
-
-	// if winning config type is "Participation" then you use this to parameterize it.
-	ParticipationConfig *ParticipationConfigV2 `bin:"optional"`
-
-	// if winning config type is "Participation" then you use this to keep track of it.
-	ParticipationState *ParticipationStateV2 `bin:"optional"`
-}
-
-func (obj SafetyDepositConfig) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `AuctionManager` param:
-	err = encoder.Encode(obj.AuctionManager)
-	if err != nil {
-		return err
-	}
-	// Serialize `Order` param:
-	err = encoder.Encode(obj.Order)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigType` param:
-	err = encoder.Encode(obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Serialize `AmountType` param:
-	err = encoder.Encode(obj.AmountType)
-	if err != nil {
-		return err
-	}
-	// Serialize `LengthType` param:
-	err = encoder.Encode(obj.LengthType)
-	if err != nil {
-		return err
-	}
-	// Serialize `AmountRanges` param:
-	err = encoder.Encode(obj.AmountRanges)
-	if err != nil {
-		return err
-	}
-	// Serialize `ParticipationConfig` param (optional):
-	{
-		if obj.ParticipationConfig == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.ParticipationConfig)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	// Serialize `ParticipationState` param (optional):
-	{
-		if obj.ParticipationState == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.ParticipationState)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *SafetyDepositConfig) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AuctionManager`:
-	err = decoder.Decode(&obj.AuctionManager)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Order`:
-	err = decoder.Decode(&obj.Order)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigType`:
-	err = decoder.Decode(&obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AmountType`:
-	err = decoder.Decode(&obj.AmountType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `LengthType`:
-	err = decoder.Decode(&obj.LengthType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AmountRanges`:
-	err = decoder.Decode(&obj.AmountRanges)
-	if err != nil {
-		return err
-	}
-	// Deserialize `ParticipationConfig` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.ParticipationConfig)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	// Deserialize `ParticipationState` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.ParticipationState)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
+import ag_binary "github.com/gagliardetto/binary"
 
 type AmountRange struct {
 	F0 uint64
@@ -438,651 +33,6 @@ func (obj *AmountRange) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err er
 	err = decoder.Decode(&obj.F1)
 	if err != nil {
 		return err
-	}
-	return nil
-}
-
-type PrizeTrackingTicket struct {
-	Key                 Key
-	Metadata            ag_solanago.PublicKey
-	SupplySnapshot      uint64
-	ExpectedRedemptions uint64
-	Redemptions         uint64
-}
-
-func (obj PrizeTrackingTicket) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Metadata` param:
-	err = encoder.Encode(obj.Metadata)
-	if err != nil {
-		return err
-	}
-	// Serialize `SupplySnapshot` param:
-	err = encoder.Encode(obj.SupplySnapshot)
-	if err != nil {
-		return err
-	}
-	// Serialize `ExpectedRedemptions` param:
-	err = encoder.Encode(obj.ExpectedRedemptions)
-	if err != nil {
-		return err
-	}
-	// Serialize `Redemptions` param:
-	err = encoder.Encode(obj.Redemptions)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *PrizeTrackingTicket) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Metadata`:
-	err = decoder.Decode(&obj.Metadata)
-	if err != nil {
-		return err
-	}
-	// Deserialize `SupplySnapshot`:
-	err = decoder.Decode(&obj.SupplySnapshot)
-	if err != nil {
-		return err
-	}
-	// Deserialize `ExpectedRedemptions`:
-	err = decoder.Decode(&obj.ExpectedRedemptions)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Redemptions`:
-	err = decoder.Decode(&obj.Redemptions)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type PayoutTicket struct {
-	Key        Key
-	Recipient  ag_solanago.PublicKey
-	AmountPaid uint64
-}
-
-func (obj PayoutTicket) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Recipient` param:
-	err = encoder.Encode(obj.Recipient)
-	if err != nil {
-		return err
-	}
-	// Serialize `AmountPaid` param:
-	err = encoder.Encode(obj.AmountPaid)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *PayoutTicket) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Recipient`:
-	err = decoder.Decode(&obj.Recipient)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AmountPaid`:
-	err = decoder.Decode(&obj.AmountPaid)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type Store struct {
-	Key                  Key
-	Public               bool
-	AuctionProgram       ag_solanago.PublicKey
-	TokenVaultProgram    ag_solanago.PublicKey
-	TokenMetadataProgram ag_solanago.PublicKey
-	TokenProgram         ag_solanago.PublicKey
-}
-
-func (obj Store) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Public` param:
-	err = encoder.Encode(obj.Public)
-	if err != nil {
-		return err
-	}
-	// Serialize `AuctionProgram` param:
-	err = encoder.Encode(obj.AuctionProgram)
-	if err != nil {
-		return err
-	}
-	// Serialize `TokenVaultProgram` param:
-	err = encoder.Encode(obj.TokenVaultProgram)
-	if err != nil {
-		return err
-	}
-	// Serialize `TokenMetadataProgram` param:
-	err = encoder.Encode(obj.TokenMetadataProgram)
-	if err != nil {
-		return err
-	}
-	// Serialize `TokenProgram` param:
-	err = encoder.Encode(obj.TokenProgram)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *Store) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Public`:
-	err = decoder.Decode(&obj.Public)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AuctionProgram`:
-	err = decoder.Decode(&obj.AuctionProgram)
-	if err != nil {
-		return err
-	}
-	// Deserialize `TokenVaultProgram`:
-	err = decoder.Decode(&obj.TokenVaultProgram)
-	if err != nil {
-		return err
-	}
-	// Deserialize `TokenMetadataProgram`:
-	err = decoder.Decode(&obj.TokenMetadataProgram)
-	if err != nil {
-		return err
-	}
-	// Deserialize `TokenProgram`:
-	err = decoder.Decode(&obj.TokenProgram)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type WhitelistedCreator struct {
-	Key       Key
-	Address   ag_solanago.PublicKey
-	Activated bool
-}
-
-func (obj WhitelistedCreator) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Address` param:
-	err = encoder.Encode(obj.Address)
-	if err != nil {
-		return err
-	}
-	// Serialize `Activated` param:
-	err = encoder.Encode(obj.Activated)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WhitelistedCreator) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Address`:
-	err = decoder.Decode(&obj.Address)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Activated`:
-	err = decoder.Decode(&obj.Activated)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type ParticipationStateV2 struct {
-	// We have this variable below to keep track in the case of the participation NFTs, whose
-	// income will trickle in over time, how much the artists have in the escrow account and
-	// how much would/should be owed to them if they try to claim it relative to the winning bids.
-	// It's  abit tougher than a straightforward bid which has a price attached to it, because
-	// there are many bids of differing amounts (in the case of GivenForBidPrice) and they dont all
-	// come in at one time, so this little ledger here keeps track.
-	CollectedToAcceptPayment uint64
-}
-
-func (obj ParticipationStateV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `CollectedToAcceptPayment` param:
-	err = encoder.Encode(obj.CollectedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *ParticipationStateV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `CollectedToAcceptPayment`:
-	err = decoder.Decode(&obj.CollectedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type ParticipationConfigV2 struct {
-	// Setups:
-	// 1. Winners get participation + not charged extra
-	// 2. Winners dont get participation prize
-	WinnerConstraint WinningConstraint
-
-	// Setups:
-	// 1. Losers get prize for free
-	// 2. Losers get prize but pay fixed price
-	// 3. Losers get prize but pay bid price
-	NonWinningConstraint NonWinningConstraint
-
-	// Setting this field disconnects the participation prizes price from the bid. Any bid you submit, regardless
-	// of amount, charges you the same fixed price.
-	FixedPrice *uint64 `bin:"optional"`
-}
-
-func (obj ParticipationConfigV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `WinnerConstraint` param:
-	err = encoder.Encode(obj.WinnerConstraint)
-	if err != nil {
-		return err
-	}
-	// Serialize `NonWinningConstraint` param:
-	err = encoder.Encode(obj.NonWinningConstraint)
-	if err != nil {
-		return err
-	}
-	// Serialize `FixedPrice` param (optional):
-	{
-		if obj.FixedPrice == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.FixedPrice)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *ParticipationConfigV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `WinnerConstraint`:
-	err = decoder.Decode(&obj.WinnerConstraint)
-	if err != nil {
-		return err
-	}
-	// Deserialize `NonWinningConstraint`:
-	err = decoder.Decode(&obj.NonWinningConstraint)
-	if err != nil {
-		return err
-	}
-	// Deserialize `FixedPrice` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.FixedPrice)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-type OriginalAuthorityLookup struct {
-	Key               Key
-	OriginalAuthority ag_solanago.PublicKey
-}
-
-func (obj OriginalAuthorityLookup) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `OriginalAuthority` param:
-	err = encoder.Encode(obj.OriginalAuthority)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *OriginalAuthorityLookup) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `OriginalAuthority`:
-	err = decoder.Decode(&obj.OriginalAuthority)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type PrintingV2CalculationCheckReturn struct {
-	ExpectedRedemptions    uint64
-	WinningConfigType      WinningConfigType
-	WinningConfigItemIndex *uint8 `bin:"optional"`
-}
-
-func (obj PrintingV2CalculationCheckReturn) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `ExpectedRedemptions` param:
-	err = encoder.Encode(obj.ExpectedRedemptions)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigType` param:
-	err = encoder.Encode(obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigItemIndex` param (optional):
-	{
-		if obj.WinningConfigItemIndex == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.WinningConfigItemIndex)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *PrintingV2CalculationCheckReturn) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `ExpectedRedemptions`:
-	err = decoder.Decode(&obj.ExpectedRedemptions)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigType`:
-	err = decoder.Decode(&obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigItemIndex` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.WinningConfigItemIndex)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-type AuctionManagerV2 struct {
-	Key           Key
-	Store         ag_solanago.PublicKey
-	Authority     ag_solanago.PublicKey
-	Auction       ag_solanago.PublicKey
-	Vault         ag_solanago.PublicKey
-	AcceptPayment ag_solanago.PublicKey
-	State         AuctionManagerStateV2
-}
-
-func (obj AuctionManagerV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Store` param:
-	err = encoder.Encode(obj.Store)
-	if err != nil {
-		return err
-	}
-	// Serialize `Authority` param:
-	err = encoder.Encode(obj.Authority)
-	if err != nil {
-		return err
-	}
-	// Serialize `Auction` param:
-	err = encoder.Encode(obj.Auction)
-	if err != nil {
-		return err
-	}
-	// Serialize `Vault` param:
-	err = encoder.Encode(obj.Vault)
-	if err != nil {
-		return err
-	}
-	// Serialize `AcceptPayment` param:
-	err = encoder.Encode(obj.AcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Serialize `State` param:
-	err = encoder.Encode(obj.State)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *AuctionManagerV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Store`:
-	err = decoder.Decode(&obj.Store)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Authority`:
-	err = decoder.Decode(&obj.Authority)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Auction`:
-	err = decoder.Decode(&obj.Auction)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Vault`:
-	err = decoder.Decode(&obj.Vault)
-	if err != nil {
-		return err
-	}
-	// Deserialize `AcceptPayment`:
-	err = decoder.Decode(&obj.AcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Deserialize `State`:
-	err = decoder.Decode(&obj.State)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type AuctionManagerStateV2 struct {
-	Status AuctionManagerStatus
-
-	// When all configs are validated the auction is started and auction manager moves to Running
-	SafetyConfigItemsValidated uint64
-
-	// how many bids have been pushed to accept payment
-	BidsPushedToAcceptPayment uint64
-	HasParticipation          bool
-}
-
-func (obj AuctionManagerStateV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Status` param:
-	err = encoder.Encode(obj.Status)
-	if err != nil {
-		return err
-	}
-	// Serialize `SafetyConfigItemsValidated` param:
-	err = encoder.Encode(obj.SafetyConfigItemsValidated)
-	if err != nil {
-		return err
-	}
-	// Serialize `BidsPushedToAcceptPayment` param:
-	err = encoder.Encode(obj.BidsPushedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Serialize `HasParticipation` param:
-	err = encoder.Encode(obj.HasParticipation)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *AuctionManagerStateV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Status`:
-	err = decoder.Decode(&obj.Status)
-	if err != nil {
-		return err
-	}
-	// Deserialize `SafetyConfigItemsValidated`:
-	err = decoder.Decode(&obj.SafetyConfigItemsValidated)
-	if err != nil {
-		return err
-	}
-	// Deserialize `BidsPushedToAcceptPayment`:
-	err = decoder.Decode(&obj.BidsPushedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Deserialize `HasParticipation`:
-	err = decoder.Decode(&obj.HasParticipation)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type CommonWinningIndexReturn struct {
-	Amount                 uint64
-	WinningConfigType      WinningConfigType
-	WinningConfigItemIndex *uint8 `bin:"optional"`
-}
-
-func (obj CommonWinningIndexReturn) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Amount` param:
-	err = encoder.Encode(obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigType` param:
-	err = encoder.Encode(obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigItemIndex` param (optional):
-	{
-		if obj.WinningConfigItemIndex == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.WinningConfigItemIndex)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *CommonWinningIndexReturn) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Amount`:
-	err = decoder.Decode(&obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigType`:
-	err = decoder.Decode(&obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigItemIndex` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.WinningConfigItemIndex)
-			if err != nil {
-				return err
-			}
-		}
 	}
 	return nil
 }
@@ -1174,424 +124,6 @@ func (obj *RedeemParticipationBidV3Args) UnmarshalWithDecoder(decoder *ag_binary
 	return nil
 }
 
-type SafetyDepositValidationTicket struct {
-	Key     Key
-	Address ag_solanago.PublicKey
-}
-
-func (obj SafetyDepositValidationTicket) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Key` param:
-	err = encoder.Encode(obj.Key)
-	if err != nil {
-		return err
-	}
-	// Serialize `Address` param:
-	err = encoder.Encode(obj.Address)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *SafetyDepositValidationTicket) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Key`:
-	err = decoder.Decode(&obj.Key)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Address`:
-	err = decoder.Decode(&obj.Address)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type WinningConfigStateItem struct {
-	// Record of primary sale or not at time of auction creation, set during validation step
-	PrimarySaleHappened bool
-
-	// Ticked to true when a prize is claimed by person who won it
-	Claimed bool
-}
-
-func (obj WinningConfigStateItem) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `PrimarySaleHappened` param:
-	err = encoder.Encode(obj.PrimarySaleHappened)
-	if err != nil {
-		return err
-	}
-	// Serialize `Claimed` param:
-	err = encoder.Encode(obj.Claimed)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinningConfigStateItem) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `PrimarySaleHappened`:
-	err = decoder.Decode(&obj.PrimarySaleHappened)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Claimed`:
-	err = decoder.Decode(&obj.Claimed)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type WinningConfigState struct {
-	Items []WinningConfigStateItem
-
-	// Ticked to true when money is pushed to accept_payment account from auction bidding pot
-	MoneyPushedToAcceptPayment bool
-}
-
-func (obj WinningConfigState) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Items` param:
-	err = encoder.Encode(obj.Items)
-	if err != nil {
-		return err
-	}
-	// Serialize `MoneyPushedToAcceptPayment` param:
-	err = encoder.Encode(obj.MoneyPushedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinningConfigState) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Items`:
-	err = decoder.Decode(&obj.Items)
-	if err != nil {
-		return err
-	}
-	// Deserialize `MoneyPushedToAcceptPayment`:
-	err = decoder.Decode(&obj.MoneyPushedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type ParticipationStateV1 struct {
-	// We have this variable below to keep track in the case of the participation NFTs, whose
-	// income will trickle in over time, how much the artists have in the escrow account and
-	// how much would/should be owed to them if they try to claim it relative to the winning bids.
-	// It's  abit tougher than a straightforward bid which has a price attached to it, because
-	// there are many bids of differing amounts (in the case of GivenForBidPrice) and they dont all
-	// come in at one time, so this little ledger here keeps track.
-	CollectedToAcceptPayment uint64
-
-	// Record of primary sale or not at time of auction creation, set during validation step
-	PrimarySaleHappened bool
-	Validated           bool
-
-	// NOTE: DEPRECATED.
-	// An account for printing authorization tokens that are made with the one time use token
-	// after the auction ends. Provided during validation step.
-	PrintingAuthorizationTokenAccount *ag_solanago.PublicKey `bin:"optional"`
-}
-
-func (obj ParticipationStateV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `CollectedToAcceptPayment` param:
-	err = encoder.Encode(obj.CollectedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Serialize `PrimarySaleHappened` param:
-	err = encoder.Encode(obj.PrimarySaleHappened)
-	if err != nil {
-		return err
-	}
-	// Serialize `Validated` param:
-	err = encoder.Encode(obj.Validated)
-	if err != nil {
-		return err
-	}
-	// Serialize `PrintingAuthorizationTokenAccount` param (optional):
-	{
-		if obj.PrintingAuthorizationTokenAccount == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.PrintingAuthorizationTokenAccount)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *ParticipationStateV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `CollectedToAcceptPayment`:
-	err = decoder.Decode(&obj.CollectedToAcceptPayment)
-	if err != nil {
-		return err
-	}
-	// Deserialize `PrimarySaleHappened`:
-	err = decoder.Decode(&obj.PrimarySaleHappened)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Validated`:
-	err = decoder.Decode(&obj.Validated)
-	if err != nil {
-		return err
-	}
-	// Deserialize `PrintingAuthorizationTokenAccount` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.PrintingAuthorizationTokenAccount)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-type ParticipationConfigV1 struct {
-	// Setups:
-	// 1. Winners get participation + not charged extra
-	// 2. Winners dont get participation prize
-	WinnerConstraint WinningConstraint
-
-	// Setups:
-	// 1. Losers get prize for free
-	// 2. Losers get prize but pay fixed price
-	// 3. Losers get prize but pay bid price
-	NonWinningConstraint NonWinningConstraint
-
-	// The safety deposit box index in the vault containing the template for the participation prize
-	SafetyDepositBoxIndex uint8
-
-	// Setting this field disconnects the participation prizes price from the bid. Any bid you submit, regardless
-	// of amount, charges you the same fixed price.
-	FixedPrice *uint64 `bin:"optional"`
-}
-
-func (obj ParticipationConfigV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `WinnerConstraint` param:
-	err = encoder.Encode(obj.WinnerConstraint)
-	if err != nil {
-		return err
-	}
-	// Serialize `NonWinningConstraint` param:
-	err = encoder.Encode(obj.NonWinningConstraint)
-	if err != nil {
-		return err
-	}
-	// Serialize `SafetyDepositBoxIndex` param:
-	err = encoder.Encode(obj.SafetyDepositBoxIndex)
-	if err != nil {
-		return err
-	}
-	// Serialize `FixedPrice` param (optional):
-	{
-		if obj.FixedPrice == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.FixedPrice)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *ParticipationConfigV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `WinnerConstraint`:
-	err = decoder.Decode(&obj.WinnerConstraint)
-	if err != nil {
-		return err
-	}
-	// Deserialize `NonWinningConstraint`:
-	err = decoder.Decode(&obj.NonWinningConstraint)
-	if err != nil {
-		return err
-	}
-	// Deserialize `SafetyDepositBoxIndex`:
-	err = decoder.Decode(&obj.SafetyDepositBoxIndex)
-	if err != nil {
-		return err
-	}
-	// Deserialize `FixedPrice` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.FixedPrice)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-type AuctionManagerStateV1 struct {
-	Status AuctionManagerStatus
-
-	// When all configs are validated the auction is started and auction manager moves to Running
-	WinningConfigItemsValidated uint8
-	WinningConfigStates         []WinningConfigState
-	ParticipationState          *ParticipationStateV1 `bin:"optional"`
-}
-
-func (obj AuctionManagerStateV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Status` param:
-	err = encoder.Encode(obj.Status)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigItemsValidated` param:
-	err = encoder.Encode(obj.WinningConfigItemsValidated)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigStates` param:
-	err = encoder.Encode(obj.WinningConfigStates)
-	if err != nil {
-		return err
-	}
-	// Serialize `ParticipationState` param (optional):
-	{
-		if obj.ParticipationState == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.ParticipationState)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *AuctionManagerStateV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Status`:
-	err = decoder.Decode(&obj.Status)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigItemsValidated`:
-	err = decoder.Decode(&obj.WinningConfigItemsValidated)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigStates`:
-	err = decoder.Decode(&obj.WinningConfigStates)
-	if err != nil {
-		return err
-	}
-	// Deserialize `ParticipationState` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.ParticipationState)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-type AuctionManagerSettingsV1 struct {
-	// The safety deposit box index in the vault containing the winning items, in order of place
-	// The same index can appear multiple times if that index contains n tokens for n appearances (this will be checked)
-	WinningConfigs []WinningConfig
-
-	// The participation config is separated because it is structurally a bit different,
-	// having different options and also because it has no real "winning place" in the array.
-	ParticipationConfig *ParticipationConfigV1 `bin:"optional"`
-}
-
-func (obj AuctionManagerSettingsV1) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `WinningConfigs` param:
-	err = encoder.Encode(obj.WinningConfigs)
-	if err != nil {
-		return err
-	}
-	// Serialize `ParticipationConfig` param (optional):
-	{
-		if obj.ParticipationConfig == nil {
-			err = encoder.WriteBool(false)
-			if err != nil {
-				return err
-			}
-		} else {
-			err = encoder.WriteBool(true)
-			if err != nil {
-				return err
-			}
-			err = encoder.Encode(obj.ParticipationConfig)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func (obj *AuctionManagerSettingsV1) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `WinningConfigs`:
-	err = decoder.Decode(&obj.WinningConfigs)
-	if err != nil {
-		return err
-	}
-	// Deserialize `ParticipationConfig` (optional):
-	{
-		ok, err := decoder.ReadBool()
-		if err != nil {
-			return err
-		}
-		if ok {
-			err = decoder.Decode(&obj.ParticipationConfig)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
 type AuctionManagerSettings struct {
 	// The safety deposit box index in the vault containing the winning items, in order of place
 	// The same index can appear multiple times if that index contains n tokens for n appearances (this will be checked)
@@ -1649,124 +181,6 @@ func (obj *AuctionManagerSettings) UnmarshalWithDecoder(decoder *ag_binary.Decod
 		}
 	}
 	return nil
-}
-
-type WinningConfig struct {
-	// For now these are just array-of-array proxies but wanted to make them first class
-	// structs in case we want to attach other top level metadata someday.
-	Items []WinningConfigItem
-}
-
-func (obj WinningConfig) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `Items` param:
-	err = encoder.Encode(obj.Items)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinningConfig) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `Items`:
-	err = decoder.Decode(&obj.Items)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type WinningConfigItem struct {
-	SafetyDepositBoxIndex uint8
-	Amount                uint8
-	WinningConfigType     WinningConfigType
-}
-
-func (obj WinningConfigItem) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
-	// Serialize `SafetyDepositBoxIndex` param:
-	err = encoder.Encode(obj.SafetyDepositBoxIndex)
-	if err != nil {
-		return err
-	}
-	// Serialize `Amount` param:
-	err = encoder.Encode(obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Serialize `WinningConfigType` param:
-	err = encoder.Encode(obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (obj *WinningConfigItem) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
-	// Deserialize `SafetyDepositBoxIndex`:
-	err = decoder.Decode(&obj.SafetyDepositBoxIndex)
-	if err != nil {
-		return err
-	}
-	// Deserialize `Amount`:
-	err = decoder.Decode(&obj.Amount)
-	if err != nil {
-		return err
-	}
-	// Deserialize `WinningConfigType`:
-	err = decoder.Decode(&obj.WinningConfigType)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-type WinningConfigType ag_binary.BorshEnum
-
-const (
-	// You may be selling your one-of-a-kind NFT for the first time, but not it's accompanying Metadata,
-	// of which you would like to retain ownership. You get 100% of the payment the first sale, then
-	// royalties forever after.
-	//
-	// You may be re-selling something like a Limited/Open Edition print from another auction,
-	// a master edition record token by itself (Without accompanying metadata/printing ownership), etc.
-	// This means artists will get royalty fees according to the top level royalty % on the metadata
-	// split according to their percentages of contribution.
-	//
-	// No metadata ownership is transferred in this instruction, which means while you may be transferring
-	// the token for a limited/open edition away, you would still be (nominally) the owner of the limited edition
-	// metadata, though it confers no rights or privileges of any kind.
-	TokenOnlyTransfer_WinningConfigType WinningConfigType = iota
-
-	// Means you are auctioning off the master edition record and it's metadata ownership as well as the
-	// token itself. The other person will be able to mint authorization tokens and make changes to the
-	// artwork.
-	FullRightsTransfer_WinningConfigType
-
-	// Means you are using authorization tokens to print off editions during the auction using
-	// from a MasterEditionV1
-	PrintingV1_WinningConfigType
-
-	// Means you are using the MasterEditionV2 to print off editions
-	PrintingV2_WinningConfigType
-
-	// Means you are using a MasterEditionV2 as a participation prize.
-	Participation_WinningConfigType
-)
-
-func (value WinningConfigType) String() string {
-	switch value {
-	case TokenOnlyTransfer_WinningConfigType:
-		return "TokenOnlyTransfer"
-	case FullRightsTransfer_WinningConfigType:
-		return "FullRightsTransfer"
-	case PrintingV1_WinningConfigType:
-		return "PrintingV1"
-	case PrintingV2_WinningConfigType:
-		return "PrintingV2"
-	case Participation_WinningConfigType:
-		return "Participation"
-	default:
-		return ""
-	}
 }
 
 type ParticipationConfig struct {
@@ -1858,52 +272,13 @@ func (obj *ParticipationConfig) UnmarshalWithDecoder(decoder *ag_binary.Decoder)
 	return nil
 }
 
-type WinningConstraint ag_binary.BorshEnum
-
-const (
-	NoParticipationPrize_WinningConstraint WinningConstraint = iota
-	ParticipationPrizeGiven_WinningConstraint
-)
-
-func (value WinningConstraint) String() string {
-	switch value {
-	case NoParticipationPrize_WinningConstraint:
-		return "NoParticipationPrize"
-	case ParticipationPrizeGiven_WinningConstraint:
-		return "ParticipationPrizeGiven"
-	default:
-		return ""
-	}
-}
-
-type NonWinningConstraint ag_binary.BorshEnum
-
-const (
-	NoParticipationPrize_NonWinningConstraint NonWinningConstraint = iota
-	GivenForFixedPrice_NonWinningConstraint
-	GivenForBidPrice_NonWinningConstraint
-)
-
-func (value NonWinningConstraint) String() string {
-	switch value {
-	case NoParticipationPrize_NonWinningConstraint:
-		return "NoParticipationPrize"
-	case GivenForFixedPrice_NonWinningConstraint:
-		return "GivenForFixedPrice"
-	case GivenForBidPrice_NonWinningConstraint:
-		return "GivenForBidPrice"
-	default:
-		return ""
-	}
-}
-
 type EmptyPaymentAccountArgs struct {
 	// If not redeeming a participation NFT's contributions, need to provide
 	// the winning config index your redeeming for. For participation, just pass None.
 	WinningConfigIndex *uint8 `bin:"optional"`
 
 	// If not redeeming a participation NFT, you also need to index into the winning config item's list.
-	WinningConfigItemIndex *uint8 `bin:"optional"`
+	WinningConfigItemIndex *uint64 `bin:"optional"`
 
 	// index in the metadata creator list, can be None if metadata has no creator list.
 	CreatorIndex *uint8 `bin:"optional"`
@@ -2055,7 +430,7 @@ func (obj *SetWhitelistedCreatorArgs) UnmarshalWithDecoder(decoder *ag_binary.De
 }
 
 type RedeemUnusedWinningConfigItemsAsAuctioneerArgs struct {
-	WinningConfigItemIndex uint8
+	WinningConfigItemIndex uint64
 	ProxyCall              ProxyCallAddress
 }
 
@@ -2134,6 +509,171 @@ func (obj *RedeemPrintingV2BidArgs) UnmarshalWithDecoder(decoder *ag_binary.Deco
 	err = decoder.Decode(&obj.WinIndex)
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+type EndAuctionArgs struct {
+	// If the auction was blinded, a revealing price must be specified to release the auction
+	// winnings.
+	Reveal *Revealer `bin:"optional"`
+}
+
+func (obj EndAuctionArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Reveal` param (optional):
+	{
+		if obj.Reveal == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.Reveal)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (obj *EndAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Reveal` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.Reveal)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+type Revealer struct {
+	Price uint64
+	Salt  uint64
+}
+
+func (obj Revealer) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Price` param:
+	err = encoder.Encode(obj.Price)
+	if err != nil {
+		return err
+	}
+	// Serialize `Salt` param:
+	err = encoder.Encode(obj.Salt)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *Revealer) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Price`:
+	err = decoder.Decode(&obj.Price)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Salt`:
+	err = decoder.Decode(&obj.Salt)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type SetStoreIndexArgs struct {
+	Page   uint64
+	Offset uint64
+}
+
+func (obj SetStoreIndexArgs) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Page` param:
+	err = encoder.Encode(obj.Page)
+	if err != nil {
+		return err
+	}
+	// Serialize `Offset` param:
+	err = encoder.Encode(obj.Offset)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *SetStoreIndexArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Page`:
+	err = decoder.Decode(&obj.Page)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Offset`:
+	err = decoder.Decode(&obj.Offset)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type SetStoreV2Args struct {
+	Public      bool
+	SettingsUri *string `bin:"optional"`
+}
+
+func (obj SetStoreV2Args) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Public` param:
+	err = encoder.Encode(obj.Public)
+	if err != nil {
+		return err
+	}
+	// Serialize `SettingsUri` param (optional):
+	{
+		if obj.SettingsUri == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.SettingsUri)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (obj *SetStoreV2Args) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Public`:
+	err = decoder.Decode(&obj.Public)
+	if err != nil {
+		return err
+	}
+	// Deserialize `SettingsUri` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.SettingsUri)
+			if err != nil {
+				return err
+			}
+		}
 	}
 	return nil
 }

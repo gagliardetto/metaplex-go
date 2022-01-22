@@ -7,6 +7,54 @@ import (
 	ag_solanago "github.com/gagliardetto/solana-go"
 )
 
+type Key ag_binary.BorshEnum
+
+const (
+	Uninitialized_Key Key = iota
+	SafetyDepositBoxV1_Key
+	ExternalAccountKeyV1_Key
+	VaultV1_Key
+)
+
+func (value Key) String() string {
+	switch value {
+	case Uninitialized_Key:
+		return "Uninitialized"
+	case SafetyDepositBoxV1_Key:
+		return "SafetyDepositBoxV1"
+	case ExternalAccountKeyV1_Key:
+		return "ExternalAccountKeyV1"
+	case VaultV1_Key:
+		return "VaultV1"
+	default:
+		return ""
+	}
+}
+
+type VaultState ag_binary.BorshEnum
+
+const (
+	Inactive_VaultState VaultState = iota
+	Active_VaultState
+	Combined_VaultState
+	Deactivated_VaultState
+)
+
+func (value VaultState) String() string {
+	switch value {
+	case Inactive_VaultState:
+		return "Inactive"
+	case Active_VaultState:
+		return "Active"
+	case Combined_VaultState:
+		return "Combined"
+	case Deactivated_VaultState:
+		return "Deactivated"
+	default:
+		return ""
+	}
+}
+
 type Vault struct {
 	Key Key
 
@@ -232,6 +280,66 @@ func (obj *SafetyDepositBox) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (e
 	}
 	// Deserialize `Order`:
 	err = decoder.Decode(&obj.Order)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type ExternalPriceAccount struct {
+	Key           Key
+	PricePerShare uint64
+
+	// Mint of the currency we are pricing the shares against, should be same as redeem_treasury.
+	// Most likely will be USDC mint most of the time.
+	PriceMint ag_solanago.PublicKey
+
+	// Whether or not combination has been allowed for this vault.
+	AllowedToCombine bool
+}
+
+func (obj ExternalPriceAccount) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Key` param:
+	err = encoder.Encode(obj.Key)
+	if err != nil {
+		return err
+	}
+	// Serialize `PricePerShare` param:
+	err = encoder.Encode(obj.PricePerShare)
+	if err != nil {
+		return err
+	}
+	// Serialize `PriceMint` param:
+	err = encoder.Encode(obj.PriceMint)
+	if err != nil {
+		return err
+	}
+	// Serialize `AllowedToCombine` param:
+	err = encoder.Encode(obj.AllowedToCombine)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *ExternalPriceAccount) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Key`:
+	err = decoder.Decode(&obj.Key)
+	if err != nil {
+		return err
+	}
+	// Deserialize `PricePerShare`:
+	err = decoder.Decode(&obj.PricePerShare)
+	if err != nil {
+		return err
+	}
+	// Deserialize `PriceMint`:
+	err = decoder.Decode(&obj.PriceMint)
+	if err != nil {
+		return err
+	}
+	// Deserialize `AllowedToCombine`:
+	err = decoder.Decode(&obj.AllowedToCombine)
 	if err != nil {
 		return err
 	}

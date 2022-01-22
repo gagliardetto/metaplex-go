@@ -31,16 +31,16 @@ type CreateMasterEdition struct {
 	// [4] = [SIGNER] payer
 	// ··········· payer
 	//
-	// [5] = [] metadataAccount
+	// [5] = [] metadata
 	// ··········· Metadata account
 	//
 	// [6] = [] tokenProgram
 	// ··········· Token program
 	//
-	// [7] = [] systemProgram
+	// [7] = [] system
 	// ··········· System program
 	//
-	// [8] = [] rentInfo
+	// [8] = [] rent
 	// ··········· Rent info
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -124,14 +124,14 @@ func (inst *CreateMasterEdition) GetPayerAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[4]
 }
 
-// SetMetadataAccount sets the "metadataAccount" account.
+// SetMetadataAccount sets the "metadata" account.
 // Metadata account
-func (inst *CreateMasterEdition) SetMetadataAccount(metadataAccount ag_solanago.PublicKey) *CreateMasterEdition {
-	inst.AccountMetaSlice[5] = ag_solanago.Meta(metadataAccount)
+func (inst *CreateMasterEdition) SetMetadataAccount(metadata ag_solanago.PublicKey) *CreateMasterEdition {
+	inst.AccountMetaSlice[5] = ag_solanago.Meta(metadata)
 	return inst
 }
 
-// GetMetadataAccount gets the "metadataAccount" account.
+// GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *CreateMasterEdition) GetMetadataAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[5]
@@ -150,29 +150,29 @@ func (inst *CreateMasterEdition) GetTokenProgramAccount() *ag_solanago.AccountMe
 	return inst.AccountMetaSlice[6]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *CreateMasterEdition) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *CreateMasterEdition {
-	inst.AccountMetaSlice[7] = ag_solanago.Meta(systemProgram)
+func (inst *CreateMasterEdition) SetSystemAccount(system ag_solanago.PublicKey) *CreateMasterEdition {
+	inst.AccountMetaSlice[7] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *CreateMasterEdition) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *CreateMasterEdition) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[7]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *CreateMasterEdition) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *CreateMasterEdition {
-	inst.AccountMetaSlice[8] = ag_solanago.Meta(rentInfo)
+func (inst *CreateMasterEdition) SetRentAccount(rent ag_solanago.PublicKey) *CreateMasterEdition {
+	inst.AccountMetaSlice[8] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *CreateMasterEdition) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *CreateMasterEdition) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[8]
 }
 
@@ -219,16 +219,16 @@ func (inst *CreateMasterEdition) Validate() error {
 			return errors.New("accounts.Payer is not set")
 		}
 		if inst.AccountMetaSlice[5] == nil {
-			return errors.New("accounts.MetadataAccount is not set")
+			return errors.New("accounts.Metadata is not set")
 		}
 		if inst.AccountMetaSlice[6] == nil {
 			return errors.New("accounts.TokenProgram is not set")
 		}
 		if inst.AccountMetaSlice[7] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[8] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 	}
 	return nil
@@ -256,8 +256,8 @@ func (inst *CreateMasterEdition) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice[4]))
 						accountsBranch.Child(ag_format.Meta("            metadata", inst.AccountMetaSlice[5]))
 						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("       systemProgram", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("            rentInfo", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("                rent", inst.AccountMetaSlice[8]))
 					})
 				})
 		})
@@ -290,10 +290,10 @@ func NewCreateMasterEditionInstruction(
 	updateAuthority ag_solanago.PublicKey,
 	mintAuthority ag_solanago.PublicKey,
 	payer ag_solanago.PublicKey,
-	metadataAccount ag_solanago.PublicKey,
+	metadata ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey) *CreateMasterEdition {
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey) *CreateMasterEdition {
 	return NewCreateMasterEditionInstructionBuilder().
 		SetArgs(args).
 		SetUnallocatedEditionV2Account(unallocatedEditionV2).
@@ -301,8 +301,8 @@ func NewCreateMasterEditionInstruction(
 		SetUpdateAuthorityAccount(updateAuthority).
 		SetMintAuthorityAccount(mintAuthority).
 		SetPayerAccount(payer).
-		SetMetadataAccount(metadataAccount).
+		SetMetadataAccount(metadata).
 		SetTokenProgramAccount(tokenProgram).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo)
+		SetSystemAccount(system).
+		SetRentAccount(rent)
 }

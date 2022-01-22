@@ -205,9 +205,9 @@ func (inst *DecommissionAuctionManager) Validate() error {
 		if inst.AccountMetaSlice[6] == nil {
 			return errors.New("accounts.ClockSysvar is not set")
 		}
-		if inst.AccountMetaSlice[7] == nil {
-			return errors.New("accounts.VaultProgram is not set")
-		}
+
+		// [7] = VaultProgram is optional
+
 	}
 	return nil
 }

@@ -100,6 +100,39 @@ const (
 	// Puff a Metadata - make all of it's variable length fields (name/uri/symbol) a fixed length using a null character
 	// so that it can be found using offset searches by the RPC to make client lookups cheaper.
 	Instruction_PuffMetadata
+
+	// Update a Metadata with is_mutable as a parameter
+	Instruction_UpdateMetadataAccountV2
+
+	// Create Metadata object.
+	Instruction_CreateMetadataAccountV2
+
+	// Register a Metadata as a Master Edition V2, which means Edition V2s can be minted.
+	// Henceforth, no further tokens will be mintable from this primary mint. Will throw an error if more than one
+	// token exists, and will throw an error if less than one token exists in this primary mint.
+	Instruction_CreateMasterEditionV3
+
+	// If a MetadataAccount Has a Collection allow the UpdateAuthority of the Collection to Verify the NFT Belongs in the Collection
+	Instruction_VerifyCollection
+
+	// Utilize or Use an NFT , burns the NFT and returns the lamports to the update authority if the use method is burn and its out of uses.
+	// Use Authority can be the Holder of the NFT, or a Delegated Use Authority.
+	Instruction_Utilize
+
+	// Approve another account to call `utilize` on this NFT
+	Instruction_ApproveUseAuthority
+
+	// Revoke account to call `utilize` on this NFT
+	Instruction_RevokeUseAuthority
+
+	// If a MetadataAccount Has a Collection allow an Authority of the Collection to unverify an NFT in a Collection
+	Instruction_UnverifyCollection
+
+	// Approve another account to verify nfts beloging to a collection, [verify_collection] on the collection NFT
+	Instruction_ApproveCollectionAuthority
+
+	// Revoke account to call [verify_collection] on this NFT
+	Instruction_RevokeCollectionAuthority
 )
 
 // InstructionIDToName returns the name of the instruction given its ID.
@@ -135,6 +168,26 @@ func InstructionIDToName(id uint8) string {
 		return "MintNewEditionFromMasterEditionViaVaultProxy"
 	case Instruction_PuffMetadata:
 		return "PuffMetadata"
+	case Instruction_UpdateMetadataAccountV2:
+		return "UpdateMetadataAccountV2"
+	case Instruction_CreateMetadataAccountV2:
+		return "CreateMetadataAccountV2"
+	case Instruction_CreateMasterEditionV3:
+		return "CreateMasterEditionV3"
+	case Instruction_VerifyCollection:
+		return "VerifyCollection"
+	case Instruction_Utilize:
+		return "Utilize"
+	case Instruction_ApproveUseAuthority:
+		return "ApproveUseAuthority"
+	case Instruction_RevokeUseAuthority:
+		return "RevokeUseAuthority"
+	case Instruction_UnverifyCollection:
+		return "UnverifyCollection"
+	case Instruction_ApproveCollectionAuthority:
+		return "ApproveCollectionAuthority"
+	case Instruction_RevokeCollectionAuthority:
+		return "RevokeCollectionAuthority"
 	default:
 		return ""
 	}
@@ -199,6 +252,36 @@ var InstructionImplDef = ag_binary.NewVariantDefinition(
 		},
 		{
 			"PuffMetadata", (*PuffMetadata)(nil),
+		},
+		{
+			"UpdateMetadataAccountV2", (*UpdateMetadataAccountV2)(nil),
+		},
+		{
+			"CreateMetadataAccountV2", (*CreateMetadataAccountV2)(nil),
+		},
+		{
+			"CreateMasterEditionV3", (*CreateMasterEditionV3)(nil),
+		},
+		{
+			"VerifyCollection", (*VerifyCollection)(nil),
+		},
+		{
+			"Utilize", (*Utilize)(nil),
+		},
+		{
+			"ApproveUseAuthority", (*ApproveUseAuthority)(nil),
+		},
+		{
+			"RevokeUseAuthority", (*RevokeUseAuthority)(nil),
+		},
+		{
+			"UnverifyCollection", (*UnverifyCollection)(nil),
+		},
+		{
+			"ApproveCollectionAuthority", (*ApproveCollectionAuthority)(nil),
+		},
+		{
+			"RevokeCollectionAuthority", (*RevokeCollectionAuthority)(nil),
 		},
 	},
 )

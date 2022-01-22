@@ -44,11 +44,14 @@ const (
 	Instruction_StartAuction
 
 	// Update the authority for an auction account.
-	// https://github.com/metaplex-foundation/metaplex/blob/4a1b7d2f674013bc8bd3149294c66b03b27120d0/rust/auction/program/src/instruction.rs#L115
 	Instruction_SetAuthority
 
 	// Place a bid on a running auction.
 	Instruction_PlaceBid
+
+	// Create a new auction account bound to a resource, initially in a pending state.
+	// The only one difference with above instruction it's additional parameters in CreateAuctionArgsV2
+	Instruction_CreateAuctionV2
 )
 
 // InstructionIDToName returns the name of the instruction given its ID.
@@ -68,6 +71,8 @@ func InstructionIDToName(id uint8) string {
 		return "SetAuthority"
 	case Instruction_PlaceBid:
 		return "PlaceBid"
+	case Instruction_CreateAuctionV2:
+		return "CreateAuctionV2"
 	default:
 		return ""
 	}
@@ -108,6 +113,9 @@ var InstructionImplDef = ag_binary.NewVariantDefinition(
 		},
 		{
 			"PlaceBid", (*PlaceBid)(nil),
+		},
+		{
+			"CreateAuctionV2", (*CreateAuctionV2)(nil),
 		},
 	},
 )

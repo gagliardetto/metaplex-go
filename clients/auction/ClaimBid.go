@@ -40,13 +40,16 @@ type ClaimBid struct {
 	//
 	// [8] = [] tokenProgram
 	// ··········· Token program
+	//
+	// [9] = [] auctionExtendedPDA
+	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewClaimBidInstructionBuilder creates a new `ClaimBid` instruction builder.
 func NewClaimBidInstructionBuilder() *ClaimBid {
 	nd := &ClaimBid{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 9),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 10),
 	}
 	return nd
 }
@@ -174,6 +177,19 @@ func (inst *ClaimBid) GetTokenProgramAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[8]
 }
 
+// SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *ClaimBid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanago.PublicKey) *ClaimBid {
+	inst.AccountMetaSlice[9] = ag_solanago.Meta(auctionExtendedPDA)
+	return inst
+}
+
+// GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *ClaimBid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[9]
+}
+
 func (inst ClaimBid) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -228,6 +244,9 @@ func (inst *ClaimBid) Validate() error {
 		if inst.AccountMetaSlice[8] == nil {
 			return errors.New("accounts.TokenProgram is not set")
 		}
+		if inst.AccountMetaSlice[9] == nil {
+			return errors.New("accounts.AuctionExtendedPDA is not set")
+		}
 	}
 	return nil
 }
@@ -246,7 +265,7 @@ func (inst *ClaimBid) EncodeToTree(parent ag_treeout.Branches) {
 					})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=10]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("          destination", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("       bidderPotToken", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("         bidderPotPDA", inst.AccountMetaSlice[2]))
@@ -256,6 +275,7 @@ func (inst *ClaimBid) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("tokenMintOfTheAuction", inst.AccountMetaSlice[6]))
 						accountsBranch.Child(ag_format.Meta("          clockSysvar", inst.AccountMetaSlice[7]))
 						accountsBranch.Child(ag_format.Meta("         tokenProgram", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("   auctionExtendedPDA", inst.AccountMetaSlice[9]))
 					})
 				})
 		})
@@ -291,7 +311,8 @@ func NewClaimBidInstruction(
 	bidderWallet ag_solanago.PublicKey,
 	tokenMintOfTheAuction ag_solanago.PublicKey,
 	clockSysvar ag_solanago.PublicKey,
-	tokenProgram ag_solanago.PublicKey) *ClaimBid {
+	tokenProgram ag_solanago.PublicKey,
+	auctionExtendedPDA ag_solanago.PublicKey) *ClaimBid {
 	return NewClaimBidInstructionBuilder().
 		SetArgs(args).
 		SetDestinationAccount(destinationAccount).
@@ -302,5 +323,6 @@ func NewClaimBidInstruction(
 		SetBidderWalletAccount(bidderWallet).
 		SetTokenMintOfTheAuctionAccount(tokenMintOfTheAuction).
 		SetClockSysvarAccount(clockSysvar).
-		SetTokenProgramAccount(tokenProgram)
+		SetTokenProgramAccount(tokenProgram).
+		SetAuctionExtendedPDAAccount(auctionExtendedPDA)
 }

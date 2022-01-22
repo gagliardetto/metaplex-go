@@ -25,7 +25,7 @@ type AuctionData struct {
 	EndAuctionAt *ag_solanago.UnixTimeSeconds `bin:"optional"`
 
 	// Gap time is the amount of time in slots after the previous bid at which the auction ends.
-	EndAuctionGap *ag_solanago.UnixTimeSeconds `bin:"optional"`
+	EndAuctionGap *ag_solanago.DurationSeconds `bin:"optional"`
 
 	// Minimum price for any bid to meet.
 	PriceFloor PriceFloor
@@ -124,13 +124,13 @@ func (obj AuctionData) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error
 	{
 		tmp := priceFloorContainer{}
 		switch realvalue := obj.PriceFloor.(type) {
-		case *None:
+		case *PriceFloorNone:
 			tmp.Enum = 0
 			tmp.None = *realvalue
-		case *MinimumPrice:
+		case *PriceFloorMinimumPrice:
 			tmp.Enum = 1
 			tmp.MinimumPrice = *realvalue
-		case *BlindedPrice:
+		case *PriceFloorBlindedPrice:
 			tmp.Enum = 2
 			tmp.BlindedPrice = *realvalue
 		}
@@ -148,10 +148,10 @@ func (obj AuctionData) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error
 	{
 		tmp := bidStateContainer{}
 		switch realvalue := obj.BidState.(type) {
-		case *EnglishAuction:
+		case *BidStateEnglishAuction:
 			tmp.Enum = 0
 			tmp.EnglishAuction = *realvalue
-		case *OpenEdition:
+		case *BidStateOpenEdition:
 			tmp.Enum = 1
 			tmp.OpenEdition = *realvalue
 		}

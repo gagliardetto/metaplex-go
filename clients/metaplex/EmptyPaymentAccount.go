@@ -351,9 +351,9 @@ func (inst *EmptyPaymentAccount) Validate() error {
 		if inst.AccountMetaSlice[5] == nil {
 			return errors.New("accounts.Metadata is not set")
 		}
-		if inst.AccountMetaSlice[6] == nil {
-			return errors.New("accounts.MasterEdition is not set")
-		}
+
+		// [6] = MasterEdition is optional
+
 		if inst.AccountMetaSlice[7] == nil {
 			return errors.New("accounts.SafetyDepositBox is not set")
 		}

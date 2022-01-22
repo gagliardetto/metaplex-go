@@ -88,13 +88,16 @@ type RedeemFullRightsTransferBid struct {
 	// [20] = [] safetyDepositConfig
 	// ··········· Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 	// ··········· This account will only get used AND BE REQUIRED in the event this is an AuctionManagerV2
+	//
+	// [21] = [] auctionExtendedPDA
+	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewRedeemFullRightsTransferBidInstructionBuilder creates a new `RedeemFullRightsTransferBid` instruction builder.
 func NewRedeemFullRightsTransferBidInstructionBuilder() *RedeemFullRightsTransferBid {
 	nd := &RedeemFullRightsTransferBid{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 21),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 22),
 	}
 	return nd
 }
@@ -384,6 +387,19 @@ func (inst *RedeemFullRightsTransferBid) GetSafetyDepositConfigAccount() *ag_sol
 	return inst.AccountMetaSlice[20]
 }
 
+// SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemFullRightsTransferBid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanago.PublicKey) *RedeemFullRightsTransferBid {
+	inst.AccountMetaSlice[21] = ag_solanago.Meta(auctionExtendedPDA)
+	return inst
+}
+
+// GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemFullRightsTransferBid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[21]
+}
+
 func (inst RedeemFullRightsTransferBid) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -455,9 +471,9 @@ func (inst *RedeemFullRightsTransferBid) Validate() error {
 		if inst.AccountMetaSlice[16] == nil {
 			return errors.New("accounts.RentSysvar is not set")
 		}
-		if inst.AccountMetaSlice[17] == nil {
-			return errors.New("accounts.MasterMetadata is not set")
-		}
+
+		// [17] = MasterMetadata is optional
+
 		if inst.AccountMetaSlice[18] == nil {
 			return errors.New("accounts.NewAuthority is not set")
 		}
@@ -466,6 +482,9 @@ func (inst *RedeemFullRightsTransferBid) Validate() error {
 		}
 		if inst.AccountMetaSlice[20] == nil {
 			return errors.New("accounts.SafetyDepositConfig is not set")
+		}
+		if inst.AccountMetaSlice[21] == nil {
+			return errors.New("accounts.AuctionExtendedPDA is not set")
 		}
 	}
 	return nil
@@ -483,7 +502,7 @@ func (inst *RedeemFullRightsTransferBid) EncodeToTree(parent ag_treeout.Branches
 					instructionBranch.Child("Params[len=0]").ParentFunc(func(paramsBranch ag_treeout.Branches) {})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=21]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=22]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("              destination", inst.AccountMetaSlice[2]))
@@ -505,6 +524,7 @@ func (inst *RedeemFullRightsTransferBid) EncodeToTree(parent ag_treeout.Branches
 						accountsBranch.Child(ag_format.Meta("             newAuthority", inst.AccountMetaSlice[18]))
 						accountsBranch.Child(ag_format.Meta("pdaBasedTransferAuthority", inst.AccountMetaSlice[19]))
 						accountsBranch.Child(ag_format.Meta("      safetyDepositConfig", inst.AccountMetaSlice[20]))
+						accountsBranch.Child(ag_format.Meta("       auctionExtendedPDA", inst.AccountMetaSlice[21]))
 					})
 				})
 		})
@@ -540,7 +560,8 @@ func NewRedeemFullRightsTransferBidInstruction(
 	masterMetadata ag_solanago.PublicKey,
 	newAuthority ag_solanago.PublicKey,
 	pdaBasedTransferAuthority ag_solanago.PublicKey,
-	safetyDepositConfig ag_solanago.PublicKey) *RedeemFullRightsTransferBid {
+	safetyDepositConfig ag_solanago.PublicKey,
+	auctionExtendedPDA ag_solanago.PublicKey) *RedeemFullRightsTransferBid {
 	return NewRedeemFullRightsTransferBidInstructionBuilder().
 		SetAuctionManagerAccount(auctionManager).
 		SetSafetyDepositTokenStorageAccount(safetyDepositTokenStorage).
@@ -562,5 +583,6 @@ func NewRedeemFullRightsTransferBidInstruction(
 		SetMasterMetadataAccount(masterMetadata).
 		SetNewAuthorityAccount(newAuthority).
 		SetPdaBasedTransferAuthorityAccount(pdaBasedTransferAuthority).
-		SetSafetyDepositConfigAccount(safetyDepositConfig)
+		SetSafetyDepositConfigAccount(safetyDepositConfig).
+		SetAuctionExtendedPDAAccount(auctionExtendedPDA)
 }

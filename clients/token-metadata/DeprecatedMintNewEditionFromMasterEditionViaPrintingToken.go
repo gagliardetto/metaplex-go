@@ -53,10 +53,10 @@ type DeprecatedMintNewEditionFromMasterEditionViaPrintingToken struct {
 	// [12] = [] tokenProgram
 	// ··········· Token program
 	//
-	// [13] = [] systemProgram
+	// [13] = [] system
 	// ··········· System program
 	//
-	// [14] = [] rentInfo
+	// [14] = [] rent
 	// ··········· Rent info
 	//
 	// [15] = [WRITE] reservationList
@@ -242,29 +242,29 @@ func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) GetTokenP
 	return inst.AccountMetaSlice[12]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken {
-	inst.AccountMetaSlice[13] = ag_solanago.Meta(systemProgram)
+func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) SetSystemAccount(system ag_solanago.PublicKey) *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken {
+	inst.AccountMetaSlice[13] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[13]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken {
-	inst.AccountMetaSlice[14] = ag_solanago.Meta(rentInfo)
+func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) SetRentAccount(rent ag_solanago.PublicKey) *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken {
+	inst.AccountMetaSlice[14] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[14]
 }
 
@@ -343,10 +343,10 @@ func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) Validate(
 			return errors.New("accounts.TokenProgram is not set")
 		}
 		if inst.AccountMetaSlice[13] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[14] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 
 		// [15] = ReservationList is optional
@@ -381,8 +381,8 @@ func (inst *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken) EncodeToT
 						accountsBranch.Child(ag_format.Meta("      updateAuthority", inst.AccountMetaSlice[10]))
 						accountsBranch.Child(ag_format.Meta(" masterRecordMetadata", inst.AccountMetaSlice[11]))
 						accountsBranch.Child(ag_format.Meta("         tokenProgram", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("        systemProgram", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("             rentInfo", inst.AccountMetaSlice[14]))
+						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice[13]))
+						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice[14]))
 						accountsBranch.Child(ag_format.Meta("      reservationList", inst.AccountMetaSlice[15]))
 					})
 				})
@@ -412,8 +412,8 @@ func NewDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenInstruction(
 	updateAuthority ag_solanago.PublicKey,
 	masterRecordMetadata ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey,
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey,
 	reservationList ag_solanago.PublicKey) *DeprecatedMintNewEditionFromMasterEditionViaPrintingToken {
 	return NewDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenInstructionBuilder().
 		SetNewMetadataKeyAccount(newMetadataKey).
@@ -429,7 +429,7 @@ func NewDeprecatedMintNewEditionFromMasterEditionViaPrintingTokenInstruction(
 		SetUpdateAuthorityAccount(updateAuthority).
 		SetMasterRecordMetadataAccount(masterRecordMetadata).
 		SetTokenProgramAccount(tokenProgram).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo).
+		SetSystemAccount(system).
+		SetRentAccount(rent).
 		SetReservationListAccount(reservationList)
 }

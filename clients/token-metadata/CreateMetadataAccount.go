@@ -29,10 +29,10 @@ type CreateMetadataAccount struct {
 	// [4] = [] updateAuthorityInfo
 	// ··········· update authority info
 	//
-	// [5] = [] systemProgram
+	// [5] = [] system
 	// ··········· System program
 	//
-	// [6] = [] rentInfo
+	// [6] = [] rent
 	// ··········· Rent info
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -116,29 +116,29 @@ func (inst *CreateMetadataAccount) GetUpdateAuthorityInfoAccount() *ag_solanago.
 	return inst.AccountMetaSlice[4]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *CreateMetadataAccount) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *CreateMetadataAccount {
-	inst.AccountMetaSlice[5] = ag_solanago.Meta(systemProgram)
+func (inst *CreateMetadataAccount) SetSystemAccount(system ag_solanago.PublicKey) *CreateMetadataAccount {
+	inst.AccountMetaSlice[5] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *CreateMetadataAccount) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *CreateMetadataAccount) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[5]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *CreateMetadataAccount) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *CreateMetadataAccount {
-	inst.AccountMetaSlice[6] = ag_solanago.Meta(rentInfo)
+func (inst *CreateMetadataAccount) SetRentAccount(rent ag_solanago.PublicKey) *CreateMetadataAccount {
+	inst.AccountMetaSlice[6] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *CreateMetadataAccount) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *CreateMetadataAccount) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[6]
 }
 
@@ -185,10 +185,10 @@ func (inst *CreateMetadataAccount) Validate() error {
 			return errors.New("accounts.UpdateAuthorityInfo is not set")
 		}
 		if inst.AccountMetaSlice[5] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[6] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 	}
 	return nil
@@ -214,8 +214,8 @@ func (inst *CreateMetadataAccount) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("      mintAuthority", inst.AccountMetaSlice[2]))
 						accountsBranch.Child(ag_format.Meta("              payer", inst.AccountMetaSlice[3]))
 						accountsBranch.Child(ag_format.Meta("updateAuthorityInfo", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("      systemProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("           rentInfo", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("             system", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta("               rent", inst.AccountMetaSlice[6]))
 					})
 				})
 		})
@@ -248,8 +248,8 @@ func NewCreateMetadataAccountInstruction(
 	mintAuthority ag_solanago.PublicKey,
 	payer ag_solanago.PublicKey,
 	updateAuthorityInfo ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey) *CreateMetadataAccount {
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey) *CreateMetadataAccount {
 	return NewCreateMetadataAccountInstructionBuilder().
 		SetArgs(args).
 		SetMetadataKeyPDAAccount(metadataKeyPDA).
@@ -257,6 +257,6 @@ func NewCreateMetadataAccountInstruction(
 		SetMintAuthorityAccount(mintAuthority).
 		SetPayerAccount(payer).
 		SetUpdateAuthorityInfoAccount(updateAuthorityInfo).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo)
+		SetSystemAccount(system).
+		SetRentAccount(rent)
 }

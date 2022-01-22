@@ -60,10 +60,10 @@ type MintNewEditionFromMasterEditionViaVaultProxy struct {
 	// [14] = [] tokenVaultProgram
 	// ··········· Token vault program
 	//
-	// [15] = [] systemProgram
+	// [15] = [] system
 	// ··········· System program
 	//
-	// [16] = [] rentInfo
+	// [16] = [] rent
 	// ··········· Rent info
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -279,29 +279,29 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetTokenVaultProgramAc
 	return inst.AccountMetaSlice[14]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
-	inst.AccountMetaSlice[15] = ag_solanago.Meta(systemProgram)
+func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetSystemAccount(system ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
+	inst.AccountMetaSlice[15] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[15]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
-	inst.AccountMetaSlice[16] = ag_solanago.Meta(rentInfo)
+func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetRentAccount(rent ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
+	inst.AccountMetaSlice[16] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[16]
 }
 
@@ -378,10 +378,10 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) Validate() error {
 			return errors.New("accounts.TokenVaultProgram is not set")
 		}
 		if inst.AccountMetaSlice[15] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[16] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 	}
 	return nil
@@ -417,8 +417,8 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) EncodeToTree(parent ag
 						accountsBranch.Child(ag_format.Meta("   masterRecordMetadata", inst.AccountMetaSlice[12]))
 						accountsBranch.Child(ag_format.Meta("           tokenProgram", inst.AccountMetaSlice[13]))
 						accountsBranch.Child(ag_format.Meta("      tokenVaultProgram", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("          systemProgram", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("               rentInfo", inst.AccountMetaSlice[16]))
+						accountsBranch.Child(ag_format.Meta("                 system", inst.AccountMetaSlice[15]))
+						accountsBranch.Child(ag_format.Meta("                   rent", inst.AccountMetaSlice[16]))
 					})
 				})
 		})
@@ -461,8 +461,8 @@ func NewMintNewEditionFromMasterEditionViaVaultProxyInstruction(
 	masterRecordMetadata ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey,
 	tokenVaultProgram ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaVaultProxy {
 	return NewMintNewEditionFromMasterEditionViaVaultProxyInstructionBuilder().
 		SetArgs(args).
 		SetNewMetadataKeyAccount(newMetadataKey).
@@ -480,6 +480,6 @@ func NewMintNewEditionFromMasterEditionViaVaultProxyInstruction(
 		SetMasterRecordMetadataAccount(masterRecordMetadata).
 		SetTokenProgramAccount(tokenProgram).
 		SetTokenVaultProgramAccount(tokenVaultProgram).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo)
+		SetSystemAccount(system).
+		SetRentAccount(rent)
 }

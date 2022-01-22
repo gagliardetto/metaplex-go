@@ -11,14 +11,16 @@ import (
 )
 
 // Update the authority for an auction account.
-// https://github.com/metaplex-foundation/metaplex/blob/4a1b7d2f674013bc8bd3149294c66b03b27120d0/rust/auction/program/src/instruction.rs#L115
 type SetAuthority struct {
 
 	// [0] = [WRITE] auction
+	// ··········· auction (pda of ['auction', program id, resource id])
 	//
 	// [1] = [SIGNER] authority
+	// ··········· authority
 	//
 	// [2] = [] newAuthority
+	// ··········· newAuthority
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
@@ -31,34 +33,40 @@ func NewSetAuthorityInstructionBuilder() *SetAuthority {
 }
 
 // SetAuctionAccount sets the "auction" account.
+// auction (pda of ['auction', program id, resource id])
 func (inst *SetAuthority) SetAuctionAccount(auction ag_solanago.PublicKey) *SetAuthority {
 	inst.AccountMetaSlice[0] = ag_solanago.Meta(auction).WRITE()
 	return inst
 }
 
 // GetAuctionAccount gets the "auction" account.
+// auction (pda of ['auction', program id, resource id])
 func (inst *SetAuthority) GetAuctionAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[0]
 }
 
 // SetAuthorityAccount sets the "authority" account.
+// authority
 func (inst *SetAuthority) SetAuthorityAccount(authority ag_solanago.PublicKey) *SetAuthority {
 	inst.AccountMetaSlice[1] = ag_solanago.Meta(authority).SIGNER()
 	return inst
 }
 
 // GetAuthorityAccount gets the "authority" account.
+// authority
 func (inst *SetAuthority) GetAuthorityAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[1]
 }
 
 // SetNewAuthorityAccount sets the "newAuthority" account.
+// newAuthority
 func (inst *SetAuthority) SetNewAuthorityAccount(newAuthority ag_solanago.PublicKey) *SetAuthority {
 	inst.AccountMetaSlice[2] = ag_solanago.Meta(newAuthority)
 	return inst
 }
 
 // GetNewAuthorityAccount gets the "newAuthority" account.
+// newAuthority
 func (inst *SetAuthority) GetNewAuthorityAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[2]
 }

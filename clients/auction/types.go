@@ -59,7 +59,7 @@ type CreateAuctionArgs struct {
 	EndAuctionAt *ag_solanago.UnixTimeSeconds `bin:"optional"`
 
 	// Gap time is how much time after the previous bid where the auction ends. See AuctionData.
-	EndAuctionGap *ag_solanago.UnixTimeSeconds `bin:"optional"`
+	EndAuctionGap *ag_solanago.DurationSeconds `bin:"optional"`
 
 	// Token mint for the SPL token used for bidding.
 	TokenMint ag_solanago.PublicKey
@@ -262,6 +262,285 @@ func (obj *CreateAuctionArgs) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (
 	return nil
 }
 
+type CreateAuctionArgsV2 struct {
+	// How many winners are allowed for this auction. See AuctionData.
+	Winners WinnerLimit
+
+	// End time is the cut-off point that the auction is forced to end by. See AuctionData.
+	EndAuctionAt *ag_solanago.UnixTimeSeconds `bin:"optional"`
+
+	// Gap time is how much time after the previous bid where the auction ends. See AuctionData.
+	EndAuctionGap *ag_solanago.DurationSeconds `bin:"optional"`
+
+	// Token mint for the SPL token used for bidding.
+	TokenMint ag_solanago.PublicKey
+
+	// Authority
+	Authority ag_solanago.PublicKey
+
+	// The resource being auctioned. See AuctionData.
+	Resource ag_solanago.PublicKey
+
+	// Set a price floor.
+	PriceFloor PriceFloor
+
+	// Add a tick size increment
+	TickSize *uint64 `bin:"optional"`
+
+	// Add a minimum percentage increase each bid must meet.
+	GapTickSizePercentage *uint8 `bin:"optional"`
+
+	// Add a instant sale price.
+	InstantSalePrice *uint64 `bin:"optional"`
+
+	// Auction name
+	Name *AuctionName `bin:"optional"`
+}
+
+func (obj CreateAuctionArgsV2) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Winners` param:
+	err = encoder.Encode(obj.Winners)
+	if err != nil {
+		return err
+	}
+	// Serialize `EndAuctionAt` param (optional):
+	{
+		if obj.EndAuctionAt == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.EndAuctionAt)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `EndAuctionGap` param (optional):
+	{
+		if obj.EndAuctionGap == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.EndAuctionGap)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `TokenMint` param:
+	err = encoder.Encode(obj.TokenMint)
+	if err != nil {
+		return err
+	}
+	// Serialize `Authority` param:
+	err = encoder.Encode(obj.Authority)
+	if err != nil {
+		return err
+	}
+	// Serialize `Resource` param:
+	err = encoder.Encode(obj.Resource)
+	if err != nil {
+		return err
+	}
+	// Serialize `PriceFloor` param:
+	err = encoder.Encode(obj.PriceFloor)
+	if err != nil {
+		return err
+	}
+	// Serialize `TickSize` param (optional):
+	{
+		if obj.TickSize == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.TickSize)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `GapTickSizePercentage` param (optional):
+	{
+		if obj.GapTickSizePercentage == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.GapTickSizePercentage)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `InstantSalePrice` param (optional):
+	{
+		if obj.InstantSalePrice == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.InstantSalePrice)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `Name` param (optional):
+	{
+		if obj.Name == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.Name)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (obj *CreateAuctionArgsV2) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Winners`:
+	err = decoder.Decode(&obj.Winners)
+	if err != nil {
+		return err
+	}
+	// Deserialize `EndAuctionAt` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.EndAuctionAt)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `EndAuctionGap` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.EndAuctionGap)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `TokenMint`:
+	err = decoder.Decode(&obj.TokenMint)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Authority`:
+	err = decoder.Decode(&obj.Authority)
+	if err != nil {
+		return err
+	}
+	// Deserialize `Resource`:
+	err = decoder.Decode(&obj.Resource)
+	if err != nil {
+		return err
+	}
+	// Deserialize `PriceFloor`:
+	err = decoder.Decode(&obj.PriceFloor)
+	if err != nil {
+		return err
+	}
+	// Deserialize `TickSize` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.TickSize)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `GapTickSizePercentage` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.GapTickSizePercentage)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `InstantSalePrice` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.InstantSalePrice)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `Name` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.Name)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 type EndAuctionArgs struct {
 	// The resource being auctioned. See AuctionData.
 	Resource ag_solanago.PublicKey
@@ -385,15 +664,15 @@ type WinnerLimit interface {
 
 type winnerLimitContainer struct {
 	Enum      ag_binary.BorshEnum `borsh_enum:"true"`
-	Unlimited Unlimited
-	Capped    Capped
+	Unlimited WinnerLimitUnlimited
+	Capped    WinnerLimitCapped
 }
 
-type Unlimited struct {
-	N int64
+type WinnerLimitUnlimited struct {
+	N uint64
 }
 
-func (obj Unlimited) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj WinnerLimitUnlimited) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `N` param:
 	err = encoder.Encode(obj.N)
 	if err != nil {
@@ -402,7 +681,7 @@ func (obj Unlimited) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) 
 	return nil
 }
 
-func (obj *Unlimited) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *WinnerLimitUnlimited) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `N`:
 	err = decoder.Decode(&obj.N)
 	if err != nil {
@@ -411,13 +690,13 @@ func (obj *Unlimited) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err erro
 	return nil
 }
 
-func (_ *Unlimited) isWinnerLimit() {}
+func (_ *WinnerLimitUnlimited) isWinnerLimit() {}
 
-type Capped struct {
-	Limit int64
+type WinnerLimitCapped struct {
+	Limit uint64
 }
 
-func (obj Capped) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj WinnerLimitCapped) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `Limit` param:
 	err = encoder.Encode(obj.Limit)
 	if err != nil {
@@ -426,7 +705,7 @@ func (obj Capped) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	return nil
 }
 
-func (obj *Capped) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *WinnerLimitCapped) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `Limit`:
 	err = decoder.Decode(&obj.Limit)
 	if err != nil {
@@ -435,7 +714,7 @@ func (obj *Capped) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) 
 	return nil
 }
 
-func (_ *Capped) isWinnerLimit() {}
+func (_ *WinnerLimitCapped) isWinnerLimit() {}
 
 type PriceFloor interface {
 	isPriceFloor()
@@ -443,16 +722,16 @@ type PriceFloor interface {
 
 type priceFloorContainer struct {
 	Enum         ag_binary.BorshEnum `borsh_enum:"true"`
-	None         None
-	MinimumPrice MinimumPrice
-	BlindedPrice BlindedPrice
+	None         PriceFloorNone
+	MinimumPrice PriceFloorMinimumPrice
+	BlindedPrice PriceFloorBlindedPrice
 }
 
-type None struct {
+type PriceFloorNone struct {
 	V [32]uint8
 }
 
-func (obj None) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj PriceFloorNone) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `V` param:
 	err = encoder.Encode(obj.V)
 	if err != nil {
@@ -461,7 +740,7 @@ func (obj None) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	return nil
 }
 
-func (obj *None) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *PriceFloorNone) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `V`:
 	err = decoder.Decode(&obj.V)
 	if err != nil {
@@ -470,13 +749,13 @@ func (obj *None) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	return nil
 }
 
-func (_ *None) isPriceFloor() {}
+func (_ *PriceFloorNone) isPriceFloor() {}
 
-type MinimumPrice struct {
+type PriceFloorMinimumPrice struct {
 	V [4]uint64
 }
 
-func (obj MinimumPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj PriceFloorMinimumPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `V` param:
 	err = encoder.Encode(obj.V)
 	if err != nil {
@@ -485,7 +764,7 @@ func (obj MinimumPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err erro
 	return nil
 }
 
-func (obj *MinimumPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *PriceFloorMinimumPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `V`:
 	err = decoder.Decode(&obj.V)
 	if err != nil {
@@ -494,13 +773,13 @@ func (obj *MinimumPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 	return nil
 }
 
-func (_ *MinimumPrice) isPriceFloor() {}
+func (_ *PriceFloorMinimumPrice) isPriceFloor() {}
 
-type BlindedPrice struct {
+type PriceFloorBlindedPrice struct {
 	V ag_solanago.Hash
 }
 
-func (obj BlindedPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj PriceFloorBlindedPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `V` param:
 	err = encoder.Encode(obj.V)
 	if err != nil {
@@ -509,7 +788,7 @@ func (obj BlindedPrice) MarshalWithEncoder(encoder *ag_binary.Encoder) (err erro
 	return nil
 }
 
-func (obj *BlindedPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *PriceFloorBlindedPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `V`:
 	err = decoder.Decode(&obj.V)
 	if err != nil {
@@ -518,7 +797,7 @@ func (obj *BlindedPrice) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 	return nil
 }
 
-func (_ *BlindedPrice) isPriceFloor() {}
+func (_ *PriceFloorBlindedPrice) isPriceFloor() {}
 
 type Revealer struct {
 	Price uint64
@@ -580,16 +859,16 @@ type BidState interface {
 
 type bidStateContainer struct {
 	Enum           ag_binary.BorshEnum `borsh_enum:"true"`
-	EnglishAuction EnglishAuction
-	OpenEdition    OpenEdition
+	EnglishAuction BidStateEnglishAuction
+	OpenEdition    BidStateOpenEdition
 }
 
-type EnglishAuction struct {
+type BidStateEnglishAuction struct {
 	Bids []Bid
 	Max  uint8
 }
 
-func (obj EnglishAuction) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj BidStateEnglishAuction) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `Bids` param:
 	err = encoder.Encode(obj.Bids)
 	if err != nil {
@@ -603,7 +882,7 @@ func (obj EnglishAuction) MarshalWithEncoder(encoder *ag_binary.Encoder) (err er
 	return nil
 }
 
-func (obj *EnglishAuction) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *BidStateEnglishAuction) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `Bids`:
 	err = decoder.Decode(&obj.Bids)
 	if err != nil {
@@ -617,14 +896,14 @@ func (obj *EnglishAuction) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err
 	return nil
 }
 
-func (_ *EnglishAuction) isBidState() {}
+func (_ *BidStateEnglishAuction) isBidState() {}
 
-type OpenEdition struct {
+type BidStateOpenEdition struct {
 	Bids []Bid
 	Max  uint8
 }
 
-func (obj OpenEdition) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+func (obj BidStateOpenEdition) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
 	// Serialize `Bids` param:
 	err = encoder.Encode(obj.Bids)
 	if err != nil {
@@ -638,7 +917,7 @@ func (obj OpenEdition) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error
 	return nil
 }
 
-func (obj *OpenEdition) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+func (obj *BidStateOpenEdition) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
 	// Deserialize `Bids`:
 	err = decoder.Decode(&obj.Bids)
 	if err != nil {
@@ -652,7 +931,7 @@ func (obj *OpenEdition) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err er
 	return nil
 }
 
-func (_ *OpenEdition) isBidState() {}
+func (_ *BidStateOpenEdition) isBidState() {}
 
 type Bid struct {
 	Key    ag_solanago.PublicKey
@@ -696,6 +975,12 @@ type AuctionDataExtended struct {
 
 	// gap_tick_size_percentage - two decimal points
 	GapTickSizePercentage *uint8 `bin:"optional"`
+
+	// Instant sale price
+	InstantSalePrice *uint64 `bin:"optional"`
+
+	// Auction name
+	Name *AuctionName `bin:"optional"`
 }
 
 func (obj AuctionDataExtended) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
@@ -740,6 +1025,42 @@ func (obj AuctionDataExtended) MarshalWithEncoder(encoder *ag_binary.Encoder) (e
 			}
 		}
 	}
+	// Serialize `InstantSalePrice` param (optional):
+	{
+		if obj.InstantSalePrice == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.InstantSalePrice)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Serialize `Name` param (optional):
+	{
+		if obj.Name == nil {
+			err = encoder.WriteBool(false)
+			if err != nil {
+				return err
+			}
+		} else {
+			err = encoder.WriteBool(true)
+			if err != nil {
+				return err
+			}
+			err = encoder.Encode(obj.Name)
+			if err != nil {
+				return err
+			}
+		}
+	}
 	return nil
 }
 
@@ -774,6 +1095,54 @@ func (obj *AuctionDataExtended) UnmarshalWithDecoder(decoder *ag_binary.Decoder)
 				return err
 			}
 		}
+	}
+	// Deserialize `InstantSalePrice` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.InstantSalePrice)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	// Deserialize `Name` (optional):
+	{
+		ok, err := decoder.ReadBool()
+		if err != nil {
+			return err
+		}
+		if ok {
+			err = decoder.Decode(&obj.Name)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+type AuctionName struct {
+	Name [32]uint8
+}
+
+func (obj AuctionName) MarshalWithEncoder(encoder *ag_binary.Encoder) (err error) {
+	// Serialize `Name` param:
+	err = encoder.Encode(obj.Name)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (obj *AuctionName) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error) {
+	// Deserialize `Name`:
+	err = decoder.Decode(&obj.Name)
+	if err != nil {
+		return err
 	}
 	return nil
 }

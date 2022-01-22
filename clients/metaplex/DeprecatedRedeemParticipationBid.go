@@ -88,13 +88,16 @@ type DeprecatedRedeemParticipationBid struct {
 	//
 	// [20] = [WRITE] participationNFTPrintingHoldingAccount
 	// ··········· Participation NFT printing holding account (present on participation_state)
+	//
+	// [21] = [] auctionExtendedPDA
+	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewDeprecatedRedeemParticipationBidInstructionBuilder creates a new `DeprecatedRedeemParticipationBid` instruction builder.
 func NewDeprecatedRedeemParticipationBidInstructionBuilder() *DeprecatedRedeemParticipationBid {
 	nd := &DeprecatedRedeemParticipationBid{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 21),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 22),
 	}
 	return nd
 }
@@ -378,6 +381,19 @@ func (inst *DeprecatedRedeemParticipationBid) GetParticipationNFTPrintingHolding
 	return inst.AccountMetaSlice[20]
 }
 
+// SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *DeprecatedRedeemParticipationBid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanago.PublicKey) *DeprecatedRedeemParticipationBid {
+	inst.AccountMetaSlice[21] = ag_solanago.Meta(auctionExtendedPDA)
+	return inst
+}
+
+// GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *DeprecatedRedeemParticipationBid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[21]
+}
+
 func (inst DeprecatedRedeemParticipationBid) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -461,6 +477,9 @@ func (inst *DeprecatedRedeemParticipationBid) Validate() error {
 		if inst.AccountMetaSlice[20] == nil {
 			return errors.New("accounts.ParticipationNFTPrintingHoldingAccount is not set")
 		}
+		if inst.AccountMetaSlice[21] == nil {
+			return errors.New("accounts.AuctionExtendedPDA is not set")
+		}
 	}
 	return nil
 }
@@ -477,7 +496,7 @@ func (inst *DeprecatedRedeemParticipationBid) EncodeToTree(parent ag_treeout.Bra
 					instructionBranch.Child("Params[len=0]").ParentFunc(func(paramsBranch ag_treeout.Branches) {})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=21]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=22]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("                 auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("      safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("                    destination", inst.AccountMetaSlice[2]))
@@ -499,6 +518,7 @@ func (inst *DeprecatedRedeemParticipationBid) EncodeToTree(parent ag_treeout.Bra
 						accountsBranch.Child(ag_format.Meta("                  acceptPayment", inst.AccountMetaSlice[18]))
 						accountsBranch.Child(ag_format.Meta("                          token", inst.AccountMetaSlice[19]))
 						accountsBranch.Child(ag_format.Meta("participationNFTPrintingHolding", inst.AccountMetaSlice[20]))
+						accountsBranch.Child(ag_format.Meta("             auctionExtendedPDA", inst.AccountMetaSlice[21]))
 					})
 				})
 		})
@@ -534,7 +554,8 @@ func NewDeprecatedRedeemParticipationBidInstruction(
 	transferAuthority ag_solanago.PublicKey,
 	acceptPayment ag_solanago.PublicKey,
 	tokenAccount ag_solanago.PublicKey,
-	participationNFTPrintingHoldingAccount ag_solanago.PublicKey) *DeprecatedRedeemParticipationBid {
+	participationNFTPrintingHoldingAccount ag_solanago.PublicKey,
+	auctionExtendedPDA ag_solanago.PublicKey) *DeprecatedRedeemParticipationBid {
 	return NewDeprecatedRedeemParticipationBidInstructionBuilder().
 		SetAuctionManagerAccount(auctionManager).
 		SetSafetyDepositTokenStorageAccount(safetyDepositTokenStorage).
@@ -556,5 +577,6 @@ func NewDeprecatedRedeemParticipationBidInstruction(
 		SetTransferAuthorityAccount(transferAuthority).
 		SetAcceptPaymentAccount(acceptPayment).
 		SetTokenAccount(tokenAccount).
-		SetParticipationNFTPrintingHoldingAccount(participationNFTPrintingHoldingAccount)
+		SetParticipationNFTPrintingHoldingAccount(participationNFTPrintingHoldingAccount).
+		SetAuctionExtendedPDAAccount(auctionExtendedPDA)
 }

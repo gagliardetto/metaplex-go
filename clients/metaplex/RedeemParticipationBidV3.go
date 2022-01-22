@@ -116,13 +116,16 @@ type RedeemParticipationBidV3 struct {
 	//
 	// [27] = [] metadataAccount
 	// ··········· Metadata account of token in vault
+	//
+	// [28] = [] auctionDataExtended
+	// ··········· Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewRedeemParticipationBidV3InstructionBuilder creates a new `RedeemParticipationBidV3` instruction builder.
 func NewRedeemParticipationBidV3InstructionBuilder() *RedeemParticipationBidV3 {
 	nd := &RedeemParticipationBidV3{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 28),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 29),
 	}
 	return nd
 }
@@ -507,6 +510,19 @@ func (inst *RedeemParticipationBidV3) GetMetadataAccount() *ag_solanago.AccountM
 	return inst.AccountMetaSlice[27]
 }
 
+// SetAuctionDataExtendedAccount sets the "auctionDataExtended" account.
+// Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
+func (inst *RedeemParticipationBidV3) SetAuctionDataExtendedAccount(auctionDataExtended ag_solanago.PublicKey) *RedeemParticipationBidV3 {
+	inst.AccountMetaSlice[28] = ag_solanago.Meta(auctionDataExtended)
+	return inst
+}
+
+// GetAuctionDataExtendedAccount gets the "auctionDataExtended" account.
+// Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
+func (inst *RedeemParticipationBidV3) GetAuctionDataExtendedAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[28]
+}
+
 func (inst RedeemParticipationBidV3) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -618,6 +634,9 @@ func (inst *RedeemParticipationBidV3) Validate() error {
 		if inst.AccountMetaSlice[27] == nil {
 			return errors.New("accounts.MetadataAccount is not set")
 		}
+		if inst.AccountMetaSlice[28] == nil {
+			return errors.New("accounts.AuctionDataExtended is not set")
+		}
 	}
 	return nil
 }
@@ -636,7 +655,7 @@ func (inst *RedeemParticipationBidV3) EncodeToTree(parent ag_treeout.Branches) {
 					})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=28]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=29]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("               singleItem", inst.AccountMetaSlice[2]))
@@ -665,6 +684,7 @@ func (inst *RedeemParticipationBidV3) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("               editionPDA", inst.AccountMetaSlice[25]))
 						accountsBranch.Child(ag_format.Meta("            mintAuthority", inst.AccountMetaSlice[26]))
 						accountsBranch.Child(ag_format.Meta("                 metadata", inst.AccountMetaSlice[27]))
+						accountsBranch.Child(ag_format.Meta("      auctionDataExtended", inst.AccountMetaSlice[28]))
 					})
 				})
 		})
@@ -719,7 +739,8 @@ func NewRedeemParticipationBidV3Instruction(
 	newTokenMint ag_solanago.PublicKey,
 	editionPDA ag_solanago.PublicKey,
 	mintAuthority ag_solanago.PublicKey,
-	metadataAccount ag_solanago.PublicKey) *RedeemParticipationBidV3 {
+	metadataAccount ag_solanago.PublicKey,
+	auctionDataExtended ag_solanago.PublicKey) *RedeemParticipationBidV3 {
 	return NewRedeemParticipationBidV3InstructionBuilder().
 		SetArgs(args).
 		SetAuctionManagerAccount(auctionManager).
@@ -749,5 +770,6 @@ func NewRedeemParticipationBidV3Instruction(
 		SetNewTokenMintAccount(newTokenMint).
 		SetEditionPDAAccount(editionPDA).
 		SetMintAuthorityAccount(mintAuthority).
-		SetMetadataAccount(metadataAccount)
+		SetMetadataAccount(metadataAccount).
+		SetAuctionDataExtendedAccount(auctionDataExtended)
 }

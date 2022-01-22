@@ -52,10 +52,10 @@ type MintNewEditionFromMasterEditionViaToken struct {
 	// [11] = [] tokenProgram
 	// ··········· Token program
 	//
-	// [12] = [] systemProgram
+	// [12] = [] system
 	// ··········· System program
 	//
-	// [13] = [] rentInfo
+	// [13] = [] rent
 	// ··········· Rent info
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -232,29 +232,29 @@ func (inst *MintNewEditionFromMasterEditionViaToken) GetTokenProgramAccount() *a
 	return inst.AccountMetaSlice[11]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *MintNewEditionFromMasterEditionViaToken) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
-	inst.AccountMetaSlice[12] = ag_solanago.Meta(systemProgram)
+func (inst *MintNewEditionFromMasterEditionViaToken) SetSystemAccount(system ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
+	inst.AccountMetaSlice[12] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *MintNewEditionFromMasterEditionViaToken) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *MintNewEditionFromMasterEditionViaToken) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[12]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *MintNewEditionFromMasterEditionViaToken) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
-	inst.AccountMetaSlice[13] = ag_solanago.Meta(rentInfo)
+func (inst *MintNewEditionFromMasterEditionViaToken) SetRentAccount(rent ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
+	inst.AccountMetaSlice[13] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *MintNewEditionFromMasterEditionViaToken) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *MintNewEditionFromMasterEditionViaToken) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[13]
 }
 
@@ -322,10 +322,10 @@ func (inst *MintNewEditionFromMasterEditionViaToken) Validate() error {
 			return errors.New("accounts.TokenProgram is not set")
 		}
 		if inst.AccountMetaSlice[12] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[13] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 	}
 	return nil
@@ -358,8 +358,8 @@ func (inst *MintNewEditionFromMasterEditionViaToken) EncodeToTree(parent ag_tree
 						accountsBranch.Child(ag_format.Meta("  updateAuthorityInfo", inst.AccountMetaSlice[9]))
 						accountsBranch.Child(ag_format.Meta(" masterRecordMetadata", inst.AccountMetaSlice[10]))
 						accountsBranch.Child(ag_format.Meta("         tokenProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("        systemProgram", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("             rentInfo", inst.AccountMetaSlice[13]))
+						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice[12]))
+						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice[13]))
 					})
 				})
 		})
@@ -399,8 +399,8 @@ func NewMintNewEditionFromMasterEditionViaTokenInstruction(
 	updateAuthorityInfo ag_solanago.PublicKey,
 	masterRecordMetadata ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey) *MintNewEditionFromMasterEditionViaToken {
 	return NewMintNewEditionFromMasterEditionViaTokenInstructionBuilder().
 		SetArgs(args).
 		SetNewMetadataKeyAccount(newMetadataKey).
@@ -415,6 +415,6 @@ func NewMintNewEditionFromMasterEditionViaTokenInstruction(
 		SetUpdateAuthorityInfoAccount(updateAuthorityInfo).
 		SetMasterRecordMetadataAccount(masterRecordMetadata).
 		SetTokenProgramAccount(tokenProgram).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo)
+		SetSystemAccount(system).
+		SetRentAccount(rent)
 }

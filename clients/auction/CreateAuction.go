@@ -20,10 +20,13 @@ type CreateAuction struct {
 	// [1] = [WRITE] uninitializedAuctionAccount
 	// ··········· Uninitialized auction account.
 	//
-	// [2] = [] rentSysvar
+	// [2] = [WRITE] auctionExtendedData
+	// ··········· Auction extended data account (pda relative to auction of ['auction', program id, vault key, 'extended']).
+	//
+	// [3] = [] rentSysvar
 	// ··········· Rent sysvar
 	//
-	// [3] = [] systemAccount
+	// [4] = [] systemAccount
 	// ··········· System account
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -31,7 +34,7 @@ type CreateAuction struct {
 // NewCreateAuctionInstructionBuilder creates a new `CreateAuction` instruction builder.
 func NewCreateAuctionInstructionBuilder() *CreateAuction {
 	nd := &CreateAuction{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 4),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 5),
 	}
 	return nd
 }
@@ -68,30 +71,43 @@ func (inst *CreateAuction) GetUninitializedAuctionAccount() *ag_solanago.Account
 	return inst.AccountMetaSlice[1]
 }
 
+// SetAuctionExtendedDataAccount sets the "auctionExtendedData" account.
+// Auction extended data account (pda relative to auction of ['auction', program id, vault key, 'extended']).
+func (inst *CreateAuction) SetAuctionExtendedDataAccount(auctionExtendedData ag_solanago.PublicKey) *CreateAuction {
+	inst.AccountMetaSlice[2] = ag_solanago.Meta(auctionExtendedData).WRITE()
+	return inst
+}
+
+// GetAuctionExtendedDataAccount gets the "auctionExtendedData" account.
+// Auction extended data account (pda relative to auction of ['auction', program id, vault key, 'extended']).
+func (inst *CreateAuction) GetAuctionExtendedDataAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[2]
+}
+
 // SetRentSysvarAccount sets the "rentSysvar" account.
 // Rent sysvar
 func (inst *CreateAuction) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey) *CreateAuction {
-	inst.AccountMetaSlice[2] = ag_solanago.Meta(rentSysvar)
+	inst.AccountMetaSlice[3] = ag_solanago.Meta(rentSysvar)
 	return inst
 }
 
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *CreateAuction) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice[3]
 }
 
 // SetSystemAccount sets the "systemAccount" account.
 // System account
 func (inst *CreateAuction) SetSystemAccount(systemAccount ag_solanago.PublicKey) *CreateAuction {
-	inst.AccountMetaSlice[3] = ag_solanago.Meta(systemAccount)
+	inst.AccountMetaSlice[4] = ag_solanago.Meta(systemAccount)
 	return inst
 }
 
 // GetSystemAccount gets the "systemAccount" account.
 // System account
 func (inst *CreateAuction) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice[4]
 }
 
 func (inst CreateAuction) Build() *Instruction {
@@ -128,9 +144,12 @@ func (inst *CreateAuction) Validate() error {
 			return errors.New("accounts.UninitializedAuctionAccount is not set")
 		}
 		if inst.AccountMetaSlice[2] == nil {
-			return errors.New("accounts.RentSysvar is not set")
+			return errors.New("accounts.AuctionExtendedData is not set")
 		}
 		if inst.AccountMetaSlice[3] == nil {
+			return errors.New("accounts.RentSysvar is not set")
+		}
+		if inst.AccountMetaSlice[4] == nil {
 			return errors.New("accounts.SystemAccount is not set")
 		}
 	}
@@ -151,11 +170,12 @@ func (inst *CreateAuction) EncodeToTree(parent ag_treeout.Branches) {
 					})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=4]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=5]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("             creator", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("uninitializedAuction", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice[3]))
+						accountsBranch.Child(ag_format.Meta(" auctionExtendedData", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice[3]))
+						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice[4]))
 					})
 				})
 		})
@@ -185,12 +205,14 @@ func NewCreateAuctionInstruction(
 	// Accounts:
 	creator ag_solanago.PublicKey,
 	uninitializedAuctionAccount ag_solanago.PublicKey,
+	auctionExtendedData ag_solanago.PublicKey,
 	rentSysvar ag_solanago.PublicKey,
 	systemAccount ag_solanago.PublicKey) *CreateAuction {
 	return NewCreateAuctionInstructionBuilder().
 		SetArgs(args).
 		SetCreatorAccount(creator).
 		SetUninitializedAuctionAccount(uninitializedAuctionAccount).
+		SetAuctionExtendedDataAccount(auctionExtendedData).
 		SetRentSysvarAccount(rentSysvar).
 		SetSystemAccount(systemAccount)
 }

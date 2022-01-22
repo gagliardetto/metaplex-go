@@ -49,7 +49,7 @@ type ValidateSafetyDepositBoxV2 struct {
 	// [9] = [] mintAccount
 	// ··········· Mint account of the token in the safety deposit box
 	//
-	// [10] = [] editionOrMasteredition
+	// [10] = [] editionOrMasterEdition
 	// ··········· Edition OR MasterEdition record key
 	// ··········· Remember this does not need to be an existing account (may not be depending on token), just is a pda with seed
 	// ··········· of ['metadata', program id, Printing mint id, 'edition']. - remember PDA is relative to token metadata program.
@@ -225,20 +225,20 @@ func (inst *ValidateSafetyDepositBoxV2) GetMintAccount() *ag_solanago.AccountMet
 	return inst.AccountMetaSlice[9]
 }
 
-// SetEditionOrMastereditionAccount sets the "editionOrMasteredition" account.
+// SetEditionOrMasterEditionAccount sets the "editionOrMasterEdition" account.
 // Edition OR MasterEdition record key
 // Remember this does not need to be an existing account (may not be depending on token), just is a pda with seed
 // of ['metadata', program id, Printing mint id, 'edition']. - remember PDA is relative to token metadata program.
-func (inst *ValidateSafetyDepositBoxV2) SetEditionOrMastereditionAccount(editionOrMasteredition ag_solanago.PublicKey) *ValidateSafetyDepositBoxV2 {
-	inst.AccountMetaSlice[10] = ag_solanago.Meta(editionOrMasteredition)
+func (inst *ValidateSafetyDepositBoxV2) SetEditionOrMasterEditionAccount(editionOrMasterEdition ag_solanago.PublicKey) *ValidateSafetyDepositBoxV2 {
+	inst.AccountMetaSlice[10] = ag_solanago.Meta(editionOrMasterEdition)
 	return inst
 }
 
-// GetEditionOrMastereditionAccount gets the "editionOrMasteredition" account.
+// GetEditionOrMasterEditionAccount gets the "editionOrMasterEdition" account.
 // Edition OR MasterEdition record key
 // Remember this does not need to be an existing account (may not be depending on token), just is a pda with seed
 // of ['metadata', program id, Printing mint id, 'edition']. - remember PDA is relative to token metadata program.
-func (inst *ValidateSafetyDepositBoxV2) GetEditionOrMastereditionAccount() *ag_solanago.AccountMeta {
+func (inst *ValidateSafetyDepositBoxV2) GetEditionOrMasterEditionAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[10]
 }
 
@@ -391,7 +391,7 @@ func (inst *ValidateSafetyDepositBoxV2) Validate() error {
 			return errors.New("accounts.MintAccount is not set")
 		}
 		if inst.AccountMetaSlice[10] == nil {
-			return errors.New("accounts.EditionOrMasteredition is not set")
+			return errors.New("accounts.EditionOrMasterEdition is not set")
 		}
 		if inst.AccountMetaSlice[11] == nil {
 			return errors.New("accounts.VaultAccount is not set")
@@ -443,7 +443,7 @@ func (inst *ValidateSafetyDepositBoxV2) EncodeToTree(parent ag_treeout.Branches)
 						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice[7]))
 						accountsBranch.Child(ag_format.Meta("      safetyDepositBoxStorage", inst.AccountMetaSlice[8]))
 						accountsBranch.Child(ag_format.Meta("                         mint", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("       editionOrMasteredition", inst.AccountMetaSlice[10]))
+						accountsBranch.Child(ag_format.Meta("       editionOrMasterEdition", inst.AccountMetaSlice[10]))
 						accountsBranch.Child(ag_format.Meta("                        vault", inst.AccountMetaSlice[11]))
 						accountsBranch.Child(ag_format.Meta("                    authority", inst.AccountMetaSlice[12]))
 						accountsBranch.Child(ag_format.Meta("            metadataAuthority", inst.AccountMetaSlice[13]))
@@ -488,7 +488,7 @@ func NewValidateSafetyDepositBoxV2Instruction(
 	safetyDepositBox ag_solanago.PublicKey,
 	safetyDepositBoxStorage ag_solanago.PublicKey,
 	mintAccount ag_solanago.PublicKey,
-	editionOrMasteredition ag_solanago.PublicKey,
+	editionOrMasterEdition ag_solanago.PublicKey,
 	vaultAccount ag_solanago.PublicKey,
 	authority ag_solanago.PublicKey,
 	metadataAuthority ag_solanago.PublicKey,
@@ -508,7 +508,7 @@ func NewValidateSafetyDepositBoxV2Instruction(
 		SetSafetyDepositBoxAccount(safetyDepositBox).
 		SetSafetyDepositBoxStorageAccount(safetyDepositBoxStorage).
 		SetMintAccount(mintAccount).
-		SetEditionOrMastereditionAccount(editionOrMasteredition).
+		SetEditionOrMasterEditionAccount(editionOrMasterEdition).
 		SetVaultAccount(vaultAccount).
 		SetAuthorityAccount(authority).
 		SetMetadataAuthorityAccount(metadataAuthority).

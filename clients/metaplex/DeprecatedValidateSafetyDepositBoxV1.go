@@ -414,9 +414,9 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) Validate() error {
 		if inst.AccountMetaSlice[16] == nil {
 			return errors.New("accounts.RentSysvar is not set")
 		}
-		if inst.AccountMetaSlice[17] == nil {
-			return errors.New("accounts.LimitedEditionPrintingMint is not set")
-		}
+
+		// [17] = LimitedEditionPrintingMint is optional
+
 		if inst.AccountMetaSlice[18] == nil {
 			return errors.New("accounts.LimitedEditionPrintingMintAuthority is not set")
 		}

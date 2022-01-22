@@ -14,13 +14,21 @@ import (
 type EndAuction struct {
 	Args *EndAuctionArgs
 
+	// [0] = [WRITE, SIGNER] auctionAuthority
+	// ··········· Auction authority
+	//
+	// [1] = [WRITE] auction
+	// ··········· Auction
+	//
+	// [2] = [] clockSysvar
+	// ··········· Clock sysvar
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewEndAuctionInstructionBuilder creates a new `EndAuction` instruction builder.
 func NewEndAuctionInstructionBuilder() *EndAuction {
 	nd := &EndAuction{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 0),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 3),
 	}
 	return nd
 }
@@ -29,6 +37,45 @@ func NewEndAuctionInstructionBuilder() *EndAuction {
 func (inst *EndAuction) SetArgs(args EndAuctionArgs) *EndAuction {
 	inst.Args = &args
 	return inst
+}
+
+// SetAuctionAuthorityAccount sets the "auctionAuthority" account.
+// Auction authority
+func (inst *EndAuction) SetAuctionAuthorityAccount(auctionAuthority ag_solanago.PublicKey) *EndAuction {
+	inst.AccountMetaSlice[0] = ag_solanago.Meta(auctionAuthority).WRITE().SIGNER()
+	return inst
+}
+
+// GetAuctionAuthorityAccount gets the "auctionAuthority" account.
+// Auction authority
+func (inst *EndAuction) GetAuctionAuthorityAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[0]
+}
+
+// SetAuctionAccount sets the "auction" account.
+// Auction
+func (inst *EndAuction) SetAuctionAccount(auction ag_solanago.PublicKey) *EndAuction {
+	inst.AccountMetaSlice[1] = ag_solanago.Meta(auction).WRITE()
+	return inst
+}
+
+// GetAuctionAccount gets the "auction" account.
+// Auction
+func (inst *EndAuction) GetAuctionAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[1]
+}
+
+// SetClockSysvarAccount sets the "clockSysvar" account.
+// Clock sysvar
+func (inst *EndAuction) SetClockSysvarAccount(clockSysvar ag_solanago.PublicKey) *EndAuction {
+	inst.AccountMetaSlice[2] = ag_solanago.Meta(clockSysvar)
+	return inst
+}
+
+// GetClockSysvarAccount gets the "clockSysvar" account.
+// Clock sysvar
+func (inst *EndAuction) GetClockSysvarAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[2]
 }
 
 func (inst EndAuction) Build() *Instruction {
@@ -58,6 +105,15 @@ func (inst *EndAuction) Validate() error {
 
 	// Check whether all (required) accounts are set:
 	{
+		if inst.AccountMetaSlice[0] == nil {
+			return errors.New("accounts.AuctionAuthority is not set")
+		}
+		if inst.AccountMetaSlice[1] == nil {
+			return errors.New("accounts.Auction is not set")
+		}
+		if inst.AccountMetaSlice[2] == nil {
+			return errors.New("accounts.ClockSysvar is not set")
+		}
 	}
 	return nil
 }
@@ -76,7 +132,11 @@ func (inst *EndAuction) EncodeToTree(parent ag_treeout.Branches) {
 					})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=0]").ParentFunc(func(accountsBranch ag_treeout.Branches) {})
+					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+						accountsBranch.Child(ag_format.Meta("auctionAuthority", inst.AccountMetaSlice[0]))
+						accountsBranch.Child(ag_format.Meta("         auction", inst.AccountMetaSlice[1]))
+						accountsBranch.Child(ag_format.Meta("     clockSysvar", inst.AccountMetaSlice[2]))
+					})
 				})
 		})
 }
@@ -101,7 +161,14 @@ func (obj *EndAuction) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err err
 // NewEndAuctionInstruction declares a new EndAuction instruction with the provided parameters and accounts.
 func NewEndAuctionInstruction(
 	// Parameters:
-	args EndAuctionArgs) *EndAuction {
+	args EndAuctionArgs,
+	// Accounts:
+	auctionAuthority ag_solanago.PublicKey,
+	auction ag_solanago.PublicKey,
+	clockSysvar ag_solanago.PublicKey) *EndAuction {
 	return NewEndAuctionInstructionBuilder().
-		SetArgs(args)
+		SetArgs(args).
+		SetAuctionAuthorityAccount(auctionAuthority).
+		SetAuctionAccount(auction).
+		SetClockSysvarAccount(clockSysvar)
 }

@@ -14,7 +14,7 @@ import (
 // so that it can be found using offset searches by the RPC to make client lookups cheaper.
 type PuffMetadata struct {
 
-	// [0] = [WRITE] metadataAccount
+	// [0] = [WRITE] metadata
 	// ··········· Metadata account
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -27,14 +27,14 @@ func NewPuffMetadataInstructionBuilder() *PuffMetadata {
 	return nd
 }
 
-// SetMetadataAccount sets the "metadataAccount" account.
+// SetMetadataAccount sets the "metadata" account.
 // Metadata account
-func (inst *PuffMetadata) SetMetadataAccount(metadataAccount ag_solanago.PublicKey) *PuffMetadata {
-	inst.AccountMetaSlice[0] = ag_solanago.Meta(metadataAccount).WRITE()
+func (inst *PuffMetadata) SetMetadataAccount(metadata ag_solanago.PublicKey) *PuffMetadata {
+	inst.AccountMetaSlice[0] = ag_solanago.Meta(metadata).WRITE()
 	return inst
 }
 
-// GetMetadataAccount gets the "metadataAccount" account.
+// GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *PuffMetadata) GetMetadataAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[0]
@@ -61,7 +61,7 @@ func (inst *PuffMetadata) Validate() error {
 	// Check whether all (required) accounts are set:
 	{
 		if inst.AccountMetaSlice[0] == nil {
-			return errors.New("accounts.MetadataAccount is not set")
+			return errors.New("accounts.Metadata is not set")
 		}
 	}
 	return nil
@@ -96,7 +96,7 @@ func (obj *PuffMetadata) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err e
 // NewPuffMetadataInstruction declares a new PuffMetadata instruction with the provided parameters and accounts.
 func NewPuffMetadataInstruction(
 	// Accounts:
-	metadataAccount ag_solanago.PublicKey) *PuffMetadata {
+	metadata ag_solanago.PublicKey) *PuffMetadata {
 	return NewPuffMetadataInstructionBuilder().
-		SetMetadataAccount(metadataAccount)
+		SetMetadataAccount(metadata)
 }

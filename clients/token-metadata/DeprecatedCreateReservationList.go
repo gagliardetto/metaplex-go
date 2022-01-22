@@ -33,10 +33,10 @@ type DeprecatedCreateReservationList struct {
 	// [5] = [] metadataKeyPDA
 	// ··········· Metadata key (pda of ['metadata', program id, mint id])
 	//
-	// [6] = [] systemProgram
+	// [6] = [] system
 	// ··········· System program
 	//
-	// [7] = [] rentInfo
+	// [7] = [] rent
 	// ··········· Rent info
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
@@ -129,29 +129,29 @@ func (inst *DeprecatedCreateReservationList) GetMetadataKeyPDAAccount() *ag_sola
 	return inst.AccountMetaSlice[5]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *DeprecatedCreateReservationList) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *DeprecatedCreateReservationList {
-	inst.AccountMetaSlice[6] = ag_solanago.Meta(systemProgram)
+func (inst *DeprecatedCreateReservationList) SetSystemAccount(system ag_solanago.PublicKey) *DeprecatedCreateReservationList {
+	inst.AccountMetaSlice[6] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *DeprecatedCreateReservationList) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedCreateReservationList) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[6]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *DeprecatedCreateReservationList) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *DeprecatedCreateReservationList {
-	inst.AccountMetaSlice[7] = ag_solanago.Meta(rentInfo)
+func (inst *DeprecatedCreateReservationList) SetRentAccount(rent ag_solanago.PublicKey) *DeprecatedCreateReservationList {
+	inst.AccountMetaSlice[7] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *DeprecatedCreateReservationList) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedCreateReservationList) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[7]
 }
 
@@ -194,10 +194,10 @@ func (inst *DeprecatedCreateReservationList) Validate() error {
 			return errors.New("accounts.MetadataKeyPDA is not set")
 		}
 		if inst.AccountMetaSlice[6] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[7] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 	}
 	return nil
@@ -222,8 +222,8 @@ func (inst *DeprecatedCreateReservationList) EncodeToTree(parent ag_treeout.Bran
 						accountsBranch.Child(ag_format.Meta("      masterEditionV1", inst.AccountMetaSlice[3]))
 						accountsBranch.Child(ag_format.Meta("             resource", inst.AccountMetaSlice[4]))
 						accountsBranch.Child(ag_format.Meta("       metadataKeyPDA", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("        systemProgram", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("             rentInfo", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice[7]))
 					})
 				})
 		})
@@ -245,8 +245,8 @@ func NewDeprecatedCreateReservationListInstruction(
 	masterEditionV1 ag_solanago.PublicKey,
 	resource ag_solanago.PublicKey,
 	metadataKeyPDA ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey) *DeprecatedCreateReservationList {
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey) *DeprecatedCreateReservationList {
 	return NewDeprecatedCreateReservationListInstructionBuilder().
 		SetPdaForReservationlistAccount(pdaForReservationlist).
 		SetPayerAccount(payer).
@@ -254,6 +254,6 @@ func NewDeprecatedCreateReservationListInstruction(
 		SetMasterEditionV1Account(masterEditionV1).
 		SetResourceAccount(resource).
 		SetMetadataKeyPDAAccount(metadataKeyPDA).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo)
+		SetSystemAccount(system).
+		SetRentAccount(rent)
 }

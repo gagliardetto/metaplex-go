@@ -87,13 +87,16 @@ type RedeemBid struct {
 	// [20] = [] safetyDepositConfig
 	// ··········· Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 	// ··········· This account will only get used AND BE REQUIRED in the event this is an AuctionManagerV2
+	//
+	// [21] = [] auctionExtendedPDA
+	// ··········· Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewRedeemBidInstructionBuilder creates a new `RedeemBid` instruction builder.
 func NewRedeemBidInstructionBuilder() *RedeemBid {
 	nd := &RedeemBid{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 21),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 22),
 	}
 	return nd
 }
@@ -379,6 +382,19 @@ func (inst *RedeemBid) GetSafetyDepositConfigAccount() *ag_solanago.AccountMeta 
 	return inst.AccountMetaSlice[20]
 }
 
+// SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemBid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanago.PublicKey) *RedeemBid {
+	inst.AccountMetaSlice[21] = ag_solanago.Meta(auctionExtendedPDA)
+	return inst
+}
+
+// GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
+// Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
+func (inst *RedeemBid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[21]
+}
+
 func (inst RedeemBid) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -461,6 +477,9 @@ func (inst *RedeemBid) Validate() error {
 		if inst.AccountMetaSlice[20] == nil {
 			return errors.New("accounts.SafetyDepositConfig is not set")
 		}
+		if inst.AccountMetaSlice[21] == nil {
+			return errors.New("accounts.AuctionExtendedPDA is not set")
+		}
 	}
 	return nil
 }
@@ -477,7 +496,7 @@ func (inst *RedeemBid) EncodeToTree(parent ag_treeout.Branches) {
 					instructionBranch.Child("Params[len=0]").ParentFunc(func(paramsBranch ag_treeout.Branches) {})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=21]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=22]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("              destination", inst.AccountMetaSlice[2]))
@@ -499,6 +518,7 @@ func (inst *RedeemBid) EncodeToTree(parent ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("            masterEdition", inst.AccountMetaSlice[18]))
 						accountsBranch.Child(ag_format.Meta("       reservationListPDA", inst.AccountMetaSlice[19]))
 						accountsBranch.Child(ag_format.Meta("      safetyDepositConfig", inst.AccountMetaSlice[20]))
+						accountsBranch.Child(ag_format.Meta("       auctionExtendedPDA", inst.AccountMetaSlice[21]))
 					})
 				})
 		})
@@ -534,7 +554,8 @@ func NewRedeemBidInstruction(
 	pdaBasedTransferAuthority ag_solanago.PublicKey,
 	masterEdition ag_solanago.PublicKey,
 	reservationListPDA ag_solanago.PublicKey,
-	safetyDepositConfig ag_solanago.PublicKey) *RedeemBid {
+	safetyDepositConfig ag_solanago.PublicKey,
+	auctionExtendedPDA ag_solanago.PublicKey) *RedeemBid {
 	return NewRedeemBidInstructionBuilder().
 		SetAuctionManagerAccount(auctionManager).
 		SetSafetyDepositTokenStorageAccount(safetyDepositTokenStorage).
@@ -556,5 +577,6 @@ func NewRedeemBidInstruction(
 		SetPdaBasedTransferAuthorityAccount(pdaBasedTransferAuthority).
 		SetMasterEditionAccount(masterEdition).
 		SetReservationListPDAAccount(reservationListPDA).
-		SetSafetyDepositConfigAccount(safetyDepositConfig)
+		SetSafetyDepositConfigAccount(safetyDepositConfig).
+		SetAuctionExtendedPDAAccount(auctionExtendedPDA)
 }

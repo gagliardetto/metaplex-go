@@ -48,10 +48,10 @@ type DeprecatedCreateMasterEdition struct {
 	// [9] = [] tokenProgram
 	// ··········· Token program
 	//
-	// [10] = [] systemProgram
+	// [10] = [] system
 	// ··········· System program
 	//
-	// [11] = [] rentInfo
+	// [11] = [] rent
 	// ··········· Rent info
 	//
 	// [12] = [SIGNER] oneTimeAuthorizationPrintingMintAuthority
@@ -207,29 +207,29 @@ func (inst *DeprecatedCreateMasterEdition) GetTokenProgramAccount() *ag_solanago
 	return inst.AccountMetaSlice[9]
 }
 
-// SetSystemProgramAccount sets the "systemProgram" account.
+// SetSystemAccount sets the "system" account.
 // System program
-func (inst *DeprecatedCreateMasterEdition) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey) *DeprecatedCreateMasterEdition {
-	inst.AccountMetaSlice[10] = ag_solanago.Meta(systemProgram)
+func (inst *DeprecatedCreateMasterEdition) SetSystemAccount(system ag_solanago.PublicKey) *DeprecatedCreateMasterEdition {
+	inst.AccountMetaSlice[10] = ag_solanago.Meta(system)
 	return inst
 }
 
-// GetSystemProgramAccount gets the "systemProgram" account.
+// GetSystemAccount gets the "system" account.
 // System program
-func (inst *DeprecatedCreateMasterEdition) GetSystemProgramAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedCreateMasterEdition) GetSystemAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[10]
 }
 
-// SetRentInfoAccount sets the "rentInfo" account.
+// SetRentAccount sets the "rent" account.
 // Rent info
-func (inst *DeprecatedCreateMasterEdition) SetRentInfoAccount(rentInfo ag_solanago.PublicKey) *DeprecatedCreateMasterEdition {
-	inst.AccountMetaSlice[11] = ag_solanago.Meta(rentInfo)
+func (inst *DeprecatedCreateMasterEdition) SetRentAccount(rent ag_solanago.PublicKey) *DeprecatedCreateMasterEdition {
+	inst.AccountMetaSlice[11] = ag_solanago.Meta(rent)
 	return inst
 }
 
-// GetRentInfoAccount gets the "rentInfo" account.
+// GetRentAccount gets the "rent" account.
 // Rent info
-func (inst *DeprecatedCreateMasterEdition) GetRentInfoAccount() *ag_solanago.AccountMeta {
+func (inst *DeprecatedCreateMasterEdition) GetRentAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[11]
 }
 
@@ -304,10 +304,10 @@ func (inst *DeprecatedCreateMasterEdition) Validate() error {
 			return errors.New("accounts.TokenProgram is not set")
 		}
 		if inst.AccountMetaSlice[10] == nil {
-			return errors.New("accounts.SystemProgram is not set")
+			return errors.New("accounts.System is not set")
 		}
 		if inst.AccountMetaSlice[11] == nil {
-			return errors.New("accounts.RentInfo is not set")
+			return errors.New("accounts.Rent is not set")
 		}
 		if inst.AccountMetaSlice[12] == nil {
 			return errors.New("accounts.OneTimeAuthorizationPrintingMintAuthority is not set")
@@ -341,8 +341,8 @@ func (inst *DeprecatedCreateMasterEdition) EncodeToTree(parent ag_treeout.Branch
 						accountsBranch.Child(ag_format.Meta("                                 metadata", inst.AccountMetaSlice[7]))
 						accountsBranch.Child(ag_format.Meta("                                    payer", inst.AccountMetaSlice[8]))
 						accountsBranch.Child(ag_format.Meta("                             tokenProgram", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                            systemProgram", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("                                 rentInfo", inst.AccountMetaSlice[11]))
+						accountsBranch.Child(ag_format.Meta("                                   system", inst.AccountMetaSlice[10]))
+						accountsBranch.Child(ag_format.Meta("                                     rent", inst.AccountMetaSlice[11]))
 						accountsBranch.Child(ag_format.Meta("oneTimeAuthorizationPrintingMintAuthority", inst.AccountMetaSlice[12]))
 					})
 				})
@@ -381,8 +381,8 @@ func NewDeprecatedCreateMasterEditionInstruction(
 	metadata ag_solanago.PublicKey,
 	payer ag_solanago.PublicKey,
 	tokenProgram ag_solanago.PublicKey,
-	systemProgram ag_solanago.PublicKey,
-	rentInfo ag_solanago.PublicKey,
+	system ag_solanago.PublicKey,
+	rent ag_solanago.PublicKey,
 	oneTimeAuthorizationPrintingMintAuthority ag_solanago.PublicKey) *DeprecatedCreateMasterEdition {
 	return NewDeprecatedCreateMasterEditionInstructionBuilder().
 		SetArgs(args).
@@ -396,7 +396,7 @@ func NewDeprecatedCreateMasterEditionInstruction(
 		SetMetadataAccount(metadata).
 		SetPayerAccount(payer).
 		SetTokenProgramAccount(tokenProgram).
-		SetSystemProgramAccount(systemProgram).
-		SetRentInfoAccount(rentInfo).
+		SetSystemAccount(system).
+		SetRentAccount(rent).
 		SetOneTimeAuthorizationPrintingMintAuthorityAccount(oneTimeAuthorizationPrintingMintAuthority)
 }

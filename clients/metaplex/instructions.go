@@ -206,6 +206,19 @@ const (
 	// NOTE: If you are redeeming a newly minted Open Edition, you must actually supply a destination account containing a token from a brand new
 	// mint. We do not provide the token to you. Our job with this action is to christen this mint + token combo as an official Open Edition.
 	Instruction_RedeemParticipationBidV3
+
+	// Ends an auction, regardless of end timing conditions.
+	Instruction_EndAuction
+
+	// Creates/Updates a store index page
+	Instruction_SetStoreIndex
+
+	// Creates/Updates a store index page
+	Instruction_SetAuctionCache
+
+	// Given a signer wallet, create a store with pda ['metaplex', wallet] (if it does not exist) and/or update it
+	// (if it already exists). Stores can be set to open (anybody can publish) or closed (publish only via whitelist).
+	Instruction_SetStoreV2
 )
 
 // InstructionIDToName returns the name of the instruction given its ID.
@@ -251,6 +264,14 @@ func InstructionIDToName(id uint8) string {
 		return "ValidateSafetyDepositBoxV2"
 	case Instruction_RedeemParticipationBidV3:
 		return "RedeemParticipationBidV3"
+	case Instruction_EndAuction:
+		return "EndAuction"
+	case Instruction_SetStoreIndex:
+		return "SetStoreIndex"
+	case Instruction_SetAuctionCache:
+		return "SetAuctionCache"
+	case Instruction_SetStoreV2:
+		return "SetStoreV2"
 	default:
 		return ""
 	}
@@ -330,6 +351,18 @@ var InstructionImplDef = ag_binary.NewVariantDefinition(
 		},
 		{
 			"RedeemParticipationBidV3", (*RedeemParticipationBidV3)(nil),
+		},
+		{
+			"EndAuction", (*EndAuction)(nil),
+		},
+		{
+			"SetStoreIndex", (*SetStoreIndex)(nil),
+		},
+		{
+			"SetAuctionCache", (*SetAuctionCache)(nil),
+		},
+		{
+			"SetStoreV2", (*SetStoreV2)(nil),
 		},
 	},
 )

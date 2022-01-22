@@ -114,13 +114,16 @@ type DeprecatedRedeemParticipationBidV2 struct {
 	//
 	// [27] = [] metadataAccount
 	// ··········· Metadata account of token in vault
+	//
+	// [28] = [] auctionDataExtended
+	// ··········· Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
 	ag_solanago.AccountMetaSlice `bin:"-" borsh_skip:"true"`
 }
 
 // NewDeprecatedRedeemParticipationBidV2InstructionBuilder creates a new `DeprecatedRedeemParticipationBidV2` instruction builder.
 func NewDeprecatedRedeemParticipationBidV2InstructionBuilder() *DeprecatedRedeemParticipationBidV2 {
 	nd := &DeprecatedRedeemParticipationBidV2{
-		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 28),
+		AccountMetaSlice: make(ag_solanago.AccountMetaSlice, 29),
 	}
 	return nd
 }
@@ -499,6 +502,19 @@ func (inst *DeprecatedRedeemParticipationBidV2) GetMetadataAccount() *ag_solanag
 	return inst.AccountMetaSlice[27]
 }
 
+// SetAuctionDataExtendedAccount sets the "auctionDataExtended" account.
+// Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
+func (inst *DeprecatedRedeemParticipationBidV2) SetAuctionDataExtendedAccount(auctionDataExtended ag_solanago.PublicKey) *DeprecatedRedeemParticipationBidV2 {
+	inst.AccountMetaSlice[28] = ag_solanago.Meta(auctionDataExtended)
+	return inst
+}
+
+// GetAuctionDataExtendedAccount gets the "auctionDataExtended" account.
+// Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
+func (inst *DeprecatedRedeemParticipationBidV2) GetAuctionDataExtendedAccount() *ag_solanago.AccountMeta {
+	return inst.AccountMetaSlice[28]
+}
+
 func (inst DeprecatedRedeemParticipationBidV2) Build() *Instruction {
 	return &Instruction{BaseVariant: ag_binary.BaseVariant{
 		Impl:   inst,
@@ -603,6 +619,9 @@ func (inst *DeprecatedRedeemParticipationBidV2) Validate() error {
 		if inst.AccountMetaSlice[27] == nil {
 			return errors.New("accounts.MetadataAccount is not set")
 		}
+		if inst.AccountMetaSlice[28] == nil {
+			return errors.New("accounts.AuctionDataExtended is not set")
+		}
 	}
 	return nil
 }
@@ -619,7 +638,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) EncodeToTree(parent ag_treeout.B
 					instructionBranch.Child("Params[len=0]").ParentFunc(func(paramsBranch ag_treeout.Branches) {})
 
 					// Accounts of the instruction:
-					instructionBranch.Child("Accounts[len=28]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
+					instructionBranch.Child("Accounts[len=29]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
 						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
 						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
 						accountsBranch.Child(ag_format.Meta("               singleItem", inst.AccountMetaSlice[2]))
@@ -648,6 +667,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) EncodeToTree(parent ag_treeout.B
 						accountsBranch.Child(ag_format.Meta("               editionPDA", inst.AccountMetaSlice[25]))
 						accountsBranch.Child(ag_format.Meta("            mintAuthority", inst.AccountMetaSlice[26]))
 						accountsBranch.Child(ag_format.Meta("                 metadata", inst.AccountMetaSlice[27]))
+						accountsBranch.Child(ag_format.Meta("      auctionDataExtended", inst.AccountMetaSlice[28]))
 					})
 				})
 		})
@@ -690,7 +710,8 @@ func NewDeprecatedRedeemParticipationBidV2Instruction(
 	newTokenMint ag_solanago.PublicKey,
 	editionPDA ag_solanago.PublicKey,
 	mintAuthority ag_solanago.PublicKey,
-	metadataAccount ag_solanago.PublicKey) *DeprecatedRedeemParticipationBidV2 {
+	metadataAccount ag_solanago.PublicKey,
+	auctionDataExtended ag_solanago.PublicKey) *DeprecatedRedeemParticipationBidV2 {
 	return NewDeprecatedRedeemParticipationBidV2InstructionBuilder().
 		SetAuctionManagerAccount(auctionManager).
 		SetSafetyDepositTokenStorageAccount(safetyDepositTokenStorage).
@@ -719,5 +740,6 @@ func NewDeprecatedRedeemParticipationBidV2Instruction(
 		SetNewTokenMintAccount(newTokenMint).
 		SetEditionPDAAccount(editionPDA).
 		SetMintAuthorityAccount(mintAuthority).
-		SetMetadataAccount(metadataAccount)
+		SetMetadataAccount(metadataAccount).
+		SetAuctionDataExtendedAccount(auctionDataExtended)
 }

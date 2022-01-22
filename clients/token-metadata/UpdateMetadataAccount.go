@@ -14,7 +14,7 @@ import (
 type UpdateMetadataAccount struct {
 	Args *UpdateMetadataAccountArgs
 
-	// [0] = [WRITE] metadataAccount
+	// [0] = [WRITE] metadata
 	// ··········· Metadata account
 	//
 	// [1] = [SIGNER] updateAuthorityKey
@@ -36,14 +36,14 @@ func (inst *UpdateMetadataAccount) SetArgs(args UpdateMetadataAccountArgs) *Upda
 	return inst
 }
 
-// SetMetadataAccount sets the "metadataAccount" account.
+// SetMetadataAccount sets the "metadata" account.
 // Metadata account
-func (inst *UpdateMetadataAccount) SetMetadataAccount(metadataAccount ag_solanago.PublicKey) *UpdateMetadataAccount {
-	inst.AccountMetaSlice[0] = ag_solanago.Meta(metadataAccount).WRITE()
+func (inst *UpdateMetadataAccount) SetMetadataAccount(metadata ag_solanago.PublicKey) *UpdateMetadataAccount {
+	inst.AccountMetaSlice[0] = ag_solanago.Meta(metadata).WRITE()
 	return inst
 }
 
-// GetMetadataAccount gets the "metadataAccount" account.
+// GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *UpdateMetadataAccount) GetMetadataAccount() *ag_solanago.AccountMeta {
 	return inst.AccountMetaSlice[0]
@@ -90,7 +90,7 @@ func (inst *UpdateMetadataAccount) Validate() error {
 	// Check whether all (required) accounts are set:
 	{
 		if inst.AccountMetaSlice[0] == nil {
-			return errors.New("accounts.MetadataAccount is not set")
+			return errors.New("accounts.Metadata is not set")
 		}
 		if inst.AccountMetaSlice[1] == nil {
 			return errors.New("accounts.UpdateAuthorityKey is not set")
@@ -143,10 +143,10 @@ func NewUpdateMetadataAccountInstruction(
 	// Parameters:
 	args UpdateMetadataAccountArgs,
 	// Accounts:
-	metadataAccount ag_solanago.PublicKey,
+	metadata ag_solanago.PublicKey,
 	updateAuthorityKey ag_solanago.PublicKey) *UpdateMetadataAccount {
 	return NewUpdateMetadataAccountInstructionBuilder().
 		SetArgs(args).
-		SetMetadataAccount(metadataAccount).
+		SetMetadataAccount(metadata).
 		SetUpdateAuthorityKeyAccount(updateAuthorityKey)
 }
