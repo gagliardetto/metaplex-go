@@ -61,7 +61,7 @@ func (inst *WithdrawSharesFromTreasury) SetInitializedDestinationAccount(initial
 // GetInitializedDestinationAccount gets the "initializedDestination" account.
 // Initialized Destination account for the shares being withdrawn
 func (inst *WithdrawSharesFromTreasury) GetInitializedDestinationAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetFractionTreasuryAccount sets the "fractionTreasury" account.
@@ -74,7 +74,7 @@ func (inst *WithdrawSharesFromTreasury) SetFractionTreasuryAccount(fractionTreas
 // GetFractionTreasuryAccount gets the "fractionTreasury" account.
 // Fraction treasury
 func (inst *WithdrawSharesFromTreasury) GetFractionTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetInitializedActiveTokenVaultAccount sets the "initializedActiveTokenVault" account.
@@ -87,7 +87,7 @@ func (inst *WithdrawSharesFromTreasury) SetInitializedActiveTokenVaultAccount(in
 // GetInitializedActiveTokenVaultAccount gets the "initializedActiveTokenVault" account.
 // The initialized active token vault
 func (inst *WithdrawSharesFromTreasury) GetInitializedActiveTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPdaBasedTransferAuthorityAccount sets the "pdaBasedTransferAuthority" account.
@@ -100,7 +100,7 @@ func (inst *WithdrawSharesFromTreasury) SetPdaBasedTransferAuthorityAccount(pdaB
 // GetPdaBasedTransferAuthorityAccount gets the "pdaBasedTransferAuthority" account.
 // PDA-based Transfer authority to move tokens from treasury to your destination[PREFIX, program_id]
 func (inst *WithdrawSharesFromTreasury) GetPdaBasedTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -113,7 +113,7 @@ func (inst *WithdrawSharesFromTreasury) SetVaultAuthorityAccount(vaultAuthority 
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority of vault
 func (inst *WithdrawSharesFromTreasury) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -126,7 +126,7 @@ func (inst *WithdrawSharesFromTreasury) SetTokenProgramAccount(tokenProgram ag_s
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *WithdrawSharesFromTreasury) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -139,7 +139,7 @@ func (inst *WithdrawSharesFromTreasury) SetRentSysvarAccount(rentSysvar ag_solan
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *WithdrawSharesFromTreasury) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 func (inst WithdrawSharesFromTreasury) Build() *Instruction {
@@ -209,13 +209,13 @@ func (inst *WithdrawSharesFromTreasury) EncodeToTree(parent ag_treeout.Branches)
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=7]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("     initializedDestination", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("  pdaBasedTransferAuthority", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                 rentSysvar", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("     initializedDestination", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("  pdaBasedTransferAuthority", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                 rentSysvar", inst.AccountMetaSlice.Get(6)))
 					})
 				})
 		})

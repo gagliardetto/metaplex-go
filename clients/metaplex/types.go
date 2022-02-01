@@ -465,15 +465,15 @@ func (obj *RedeemUnusedWinningConfigItemsAsAuctioneerArgs) UnmarshalWithDecoder(
 type ProxyCallAddress ag_binary.BorshEnum
 
 const (
-	RedeemBid_ProxyCallAddress ProxyCallAddress = iota
-	RedeemFullRightsTransferBid_ProxyCallAddress
+	ProxyCallAddressRedeemBid ProxyCallAddress = iota
+	ProxyCallAddressRedeemFullRightsTransferBid
 )
 
 func (value ProxyCallAddress) String() string {
 	switch value {
-	case RedeemBid_ProxyCallAddress:
+	case ProxyCallAddressRedeemBid:
 		return "RedeemBid"
-	case RedeemFullRightsTransferBid_ProxyCallAddress:
+	case ProxyCallAddressRedeemFullRightsTransferBid:
 		return "RedeemFullRightsTransferBid"
 	default:
 		return ""

@@ -80,7 +80,7 @@ func (inst *ClaimBid) SetAcceptPaymentAccount(acceptPayment ag_solanago.PublicKe
 // GetAcceptPaymentAccount gets the "acceptPayment" account.
 // The accept payment account on the auction manager
 func (inst *ClaimBid) GetAcceptPaymentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetBidderPotTokenAccount sets the "bidderPotToken" account.
@@ -93,7 +93,7 @@ func (inst *ClaimBid) SetBidderPotTokenAccount(bidderPotToken ag_solanago.Public
 // GetBidderPotTokenAccount gets the "bidderPotToken" account.
 // The bidder pot token account
 func (inst *ClaimBid) GetBidderPotTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetBidderPotPDAAccount sets the "bidderPotPDA" account.
@@ -108,7 +108,7 @@ func (inst *ClaimBid) SetBidderPotPDAAccount(bidderPotPDA ag_solanago.PublicKey)
 // The bidder pot pda account [seed of ['auction', program_id, auction key, bidder key] -
 // relative to the auction program, not auction manager
 func (inst *ClaimBid) GetBidderPotPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetAuctionManagerAccount sets the "auctionManager" account.
@@ -121,7 +121,7 @@ func (inst *ClaimBid) SetAuctionManagerAccount(auctionManager ag_solanago.Public
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *ClaimBid) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -134,7 +134,7 @@ func (inst *ClaimBid) SetAuctionAccount(auction ag_solanago.PublicKey) *ClaimBid
 // GetAuctionAccount gets the "auction" account.
 // The auction
 func (inst *ClaimBid) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetBidderWalletAccount sets the "bidderWallet" account.
@@ -147,7 +147,7 @@ func (inst *ClaimBid) SetBidderWalletAccount(bidderWallet ag_solanago.PublicKey)
 // GetBidderWalletAccount gets the "bidderWallet" account.
 // The bidder wallet
 func (inst *ClaimBid) GetBidderWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetTokenMintAccount sets the "tokenMint" account.
@@ -160,7 +160,7 @@ func (inst *ClaimBid) SetTokenMintAccount(tokenMint ag_solanago.PublicKey) *Clai
 // GetTokenMintAccount gets the "tokenMint" account.
 // Token mint of the auction
 func (inst *ClaimBid) GetTokenMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetVaultAccount sets the "vault" account.
@@ -173,7 +173,7 @@ func (inst *ClaimBid) SetVaultAccount(vault ag_solanago.PublicKey) *ClaimBid {
 // GetVaultAccount gets the "vault" account.
 // Vault
 func (inst *ClaimBid) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -186,7 +186,7 @@ func (inst *ClaimBid) SetStoreAccount(store ag_solanago.PublicKey) *ClaimBid {
 // GetStoreAccount gets the "store" account.
 // Store
 func (inst *ClaimBid) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetAuctionProgramAccount sets the "auctionProgram" account.
@@ -199,7 +199,7 @@ func (inst *ClaimBid) SetAuctionProgramAccount(auctionProgram ag_solanago.Public
 // GetAuctionProgramAccount gets the "auctionProgram" account.
 // Auction program
 func (inst *ClaimBid) GetAuctionProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetClockSysvarAccount sets the "clockSysvar" account.
@@ -212,7 +212,7 @@ func (inst *ClaimBid) SetClockSysvarAccount(clockSysvar ag_solanago.PublicKey) *
 // GetClockSysvarAccount gets the "clockSysvar" account.
 // Clock sysvar
 func (inst *ClaimBid) GetClockSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -225,7 +225,7 @@ func (inst *ClaimBid) SetTokenProgramAccount(tokenProgram ag_solanago.PublicKey)
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *ClaimBid) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetAuctionExtendedPDAAccount sets the "auctionExtendedPDA" account.
@@ -238,7 +238,7 @@ func (inst *ClaimBid) SetAuctionExtendedPDAAccount(auctionExtendedPDA ag_solanag
 // GetAuctionExtendedPDAAccount gets the "auctionExtendedPDA" account.
 // Auction extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 func (inst *ClaimBid) GetAuctionExtendedPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 func (inst ClaimBid) Build() *Instruction {
@@ -317,19 +317,19 @@ func (inst *ClaimBid) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=13]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("     acceptPayment", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("    bidderPotToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("      bidderPotPDA", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("    auctionManager", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("           auction", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("      bidderWallet", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("         tokenMint", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("             vault", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("             store", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("    auctionProgram", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("       clockSysvar", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("      tokenProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("auctionExtendedPDA", inst.AccountMetaSlice[12]))
+						accountsBranch.Child(ag_format.Meta("     acceptPayment", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("    bidderPotToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("      bidderPotPDA", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("    auctionManager", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("           auction", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("      bidderWallet", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("         tokenMint", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("             vault", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("             store", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("    auctionProgram", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("       clockSysvar", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("      tokenProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("auctionExtendedPDA", inst.AccountMetaSlice.Get(12)))
 					})
 				})
 		})

@@ -70,7 +70,7 @@ func (inst *MintNft) SetCandyMachineAccount(candyMachine ag_solanago.PublicKey) 
 
 // GetCandyMachineAccount gets the "candyMachine" account.
 func (inst *MintNft) GetCandyMachineAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetCandyMachineCreatorAccount sets the "candyMachineCreator" account.
@@ -81,7 +81,7 @@ func (inst *MintNft) SetCandyMachineCreatorAccount(candyMachineCreator ag_solana
 
 // GetCandyMachineCreatorAccount gets the "candyMachineCreator" account.
 func (inst *MintNft) GetCandyMachineCreatorAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -92,7 +92,7 @@ func (inst *MintNft) SetPayerAccount(payer ag_solanago.PublicKey) *MintNft {
 
 // GetPayerAccount gets the "payer" account.
 func (inst *MintNft) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetWalletAccount sets the "wallet" account.
@@ -103,7 +103,7 @@ func (inst *MintNft) SetWalletAccount(wallet ag_solanago.PublicKey) *MintNft {
 
 // GetWalletAccount gets the "wallet" account.
 func (inst *MintNft) GetWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetMetadataAccount sets the "metadata" account.
@@ -114,7 +114,7 @@ func (inst *MintNft) SetMetadataAccount(metadata ag_solanago.PublicKey) *MintNft
 
 // GetMetadataAccount gets the "metadata" account.
 func (inst *MintNft) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMintAccount sets the "mint" account.
@@ -125,7 +125,7 @@ func (inst *MintNft) SetMintAccount(mint ag_solanago.PublicKey) *MintNft {
 
 // GetMintAccount gets the "mint" account.
 func (inst *MintNft) GetMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetMintAuthorityAccount sets the "mintAuthority" account.
@@ -136,7 +136,7 @@ func (inst *MintNft) SetMintAuthorityAccount(mintAuthority ag_solanago.PublicKey
 
 // GetMintAuthorityAccount gets the "mintAuthority" account.
 func (inst *MintNft) GetMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetUpdateAuthorityAccount sets the "updateAuthority" account.
@@ -147,7 +147,7 @@ func (inst *MintNft) SetUpdateAuthorityAccount(updateAuthority ag_solanago.Publi
 
 // GetUpdateAuthorityAccount gets the "updateAuthority" account.
 func (inst *MintNft) GetUpdateAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetMasterEditionAccount sets the "masterEdition" account.
@@ -158,7 +158,7 @@ func (inst *MintNft) SetMasterEditionAccount(masterEdition ag_solanago.PublicKey
 
 // GetMasterEditionAccount gets the "masterEdition" account.
 func (inst *MintNft) GetMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -169,7 +169,7 @@ func (inst *MintNft) SetTokenMetadataProgramAccount(tokenMetadataProgram ag_sola
 
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 func (inst *MintNft) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -180,7 +180,7 @@ func (inst *MintNft) SetTokenProgramAccount(tokenProgram ag_solanago.PublicKey) 
 
 // GetTokenProgramAccount gets the "tokenProgram" account.
 func (inst *MintNft) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetSystemProgramAccount sets the "systemProgram" account.
@@ -191,7 +191,7 @@ func (inst *MintNft) SetSystemProgramAccount(systemProgram ag_solanago.PublicKey
 
 // GetSystemProgramAccount gets the "systemProgram" account.
 func (inst *MintNft) GetSystemProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -202,7 +202,7 @@ func (inst *MintNft) SetRentAccount(rent ag_solanago.PublicKey) *MintNft {
 
 // GetRentAccount gets the "rent" account.
 func (inst *MintNft) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetClockAccount sets the "clock" account.
@@ -213,7 +213,7 @@ func (inst *MintNft) SetClockAccount(clock ag_solanago.PublicKey) *MintNft {
 
 // GetClockAccount gets the "clock" account.
 func (inst *MintNft) GetClockAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetRecentBlockhashesAccount sets the "recentBlockhashes" account.
@@ -224,7 +224,7 @@ func (inst *MintNft) SetRecentBlockhashesAccount(recentBlockhashes ag_solanago.P
 
 // GetRecentBlockhashesAccount gets the "recentBlockhashes" account.
 func (inst *MintNft) GetRecentBlockhashesAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetInstructionSysvarAccountAccount sets the "instructionSysvarAccount" account.
@@ -235,7 +235,7 @@ func (inst *MintNft) SetInstructionSysvarAccountAccount(instructionSysvarAccount
 
 // GetInstructionSysvarAccountAccount gets the "instructionSysvarAccount" account.
 func (inst *MintNft) GetInstructionSysvarAccountAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 func (inst MintNft) Build() *Instruction {
@@ -332,22 +332,22 @@ func (inst *MintNft) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=16]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("        candyMachine", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta(" candyMachineCreator", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              wallet", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("            metadata", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                mint", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("       mintAuthority", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("     updateAuthority", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("       masterEdition", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("       systemProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("                rent", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("               clock", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("   recentBlockhashes", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("   instructionSysvar", inst.AccountMetaSlice[15]))
+						accountsBranch.Child(ag_format.Meta("        candyMachine", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta(" candyMachineCreator", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("              wallet", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("            metadata", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                mint", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("       mintAuthority", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("     updateAuthority", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("       masterEdition", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("       systemProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("                rent", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("               clock", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("   recentBlockhashes", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("   instructionSysvar", inst.AccountMetaSlice.Get(15)))
 					})
 				})
 		})

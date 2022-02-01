@@ -64,7 +64,7 @@ func (inst *InitVault) SetInitializedFractionalShareMintAccount(initializedFract
 // GetInitializedFractionalShareMintAccount gets the "initializedFractionalShareMint" account.
 // Initialized fractional share mint with 0 tokens in supply, authority on mint must be pda of program with seed [prefix, programid]
 func (inst *InitVault) GetInitializedFractionalShareMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetInitializedRedeemTreasuryTokenAccount sets the "initializedRedeemTreasuryTokenAccount" account.
@@ -77,7 +77,7 @@ func (inst *InitVault) SetInitializedRedeemTreasuryTokenAccount(initializedRedee
 // GetInitializedRedeemTreasuryTokenAccount gets the "initializedRedeemTreasuryTokenAccount" account.
 // Initialized redeem treasury token account with 0 tokens in supply, owner of account must be pda of program like above
 func (inst *InitVault) GetInitializedRedeemTreasuryTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetInitializedFractionTreasuryTokenAccount sets the "initializedFractionTreasuryTokenAccount" account.
@@ -90,7 +90,7 @@ func (inst *InitVault) SetInitializedFractionTreasuryTokenAccount(initializedFra
 // GetInitializedFractionTreasuryTokenAccount gets the "initializedFractionTreasuryTokenAccount" account.
 // Initialized fraction treasury token account with 0 tokens in supply, owner of account must be pda of program like above
 func (inst *InitVault) GetInitializedFractionTreasuryTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetUninitializedVaultAccount sets the "uninitializedVault" account.
@@ -103,7 +103,7 @@ func (inst *InitVault) SetUninitializedVaultAccount(uninitializedVault ag_solana
 // GetUninitializedVaultAccount gets the "uninitializedVault" account.
 // Uninitialized vault account
 func (inst *InitVault) GetUninitializedVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -116,7 +116,7 @@ func (inst *InitVault) SetVaultAuthorityAccount(vaultAuthority ag_solanago.Publi
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority on the vault
 func (inst *InitVault) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetPricingLookupAddressAccount sets the "pricingLookupAddress" account.
@@ -129,7 +129,7 @@ func (inst *InitVault) SetPricingLookupAddressAccount(pricingLookupAddress ag_so
 // GetPricingLookupAddressAccount gets the "pricingLookupAddress" account.
 // Pricing Lookup Address
 func (inst *InitVault) GetPricingLookupAddressAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -142,7 +142,7 @@ func (inst *InitVault) SetTokenProgramAccount(tokenProgram ag_solanago.PublicKey
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *InitVault) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -155,7 +155,7 @@ func (inst *InitVault) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey) *I
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *InitVault) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 func (inst InitVault) Build() *Instruction {
@@ -228,14 +228,14 @@ func (inst *InitVault) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=8]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("  initializedFractionalShareMint", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("  initializedRedeemTreasuryToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("initializedFractionTreasuryToken", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              uninitializedVault", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                  vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("            pricingLookupAddress", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                    tokenProgram", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                      rentSysvar", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("  initializedFractionalShareMint", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("  initializedRedeemTreasuryToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("initializedFractionTreasuryToken", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("              uninitializedVault", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                  vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("            pricingLookupAddress", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                    tokenProgram", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                      rentSysvar", inst.AccountMetaSlice.Get(7)))
 					})
 				})
 		})

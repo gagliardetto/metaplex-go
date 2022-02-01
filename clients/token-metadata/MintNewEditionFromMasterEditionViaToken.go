@@ -84,7 +84,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetNewMetadataKeyAccount(ne
 // GetNewMetadataKeyAccount gets the "newMetadataKey" account.
 // New Metadata key (pda of ['metadata', program id, mint id])
 func (inst *MintNewEditionFromMasterEditionViaToken) GetNewMetadataKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetNewEditionPDAAccount sets the "newEditionPDA" account.
@@ -97,7 +97,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetNewEditionPDAAccount(new
 // GetNewEditionPDAAccount gets the "newEditionPDA" account.
 // New Edition (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *MintNewEditionFromMasterEditionViaToken) GetNewEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetMasterRecordEditionV2Account sets the "masterRecordEditionV2" account.
@@ -110,7 +110,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetMasterRecordEditionV2Acc
 // GetMasterRecordEditionV2Account gets the "masterRecordEditionV2" account.
 // Master Record Edition V2 (pda of ['metadata', program id, master metadata mint id, 'edition'])
 func (inst *MintNewEditionFromMasterEditionViaToken) GetMasterRecordEditionV2Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMintOfNewTokenAccount sets the "mintOfNewToken" account.
@@ -123,7 +123,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetMintOfNewTokenAccount(mi
 // GetMintOfNewTokenAccount gets the "mintOfNewToken" account.
 // Mint of new token - THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY
 func (inst *MintNewEditionFromMasterEditionViaToken) GetMintOfNewTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetEditionPDAAccount sets the "editionPDA" account.
@@ -138,7 +138,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetEditionPDAAccount(editio
 // Edition pda to mark creation - will be checked for pre-existence. (pda of ['metadata', program id, master metadata mint id, 'edition', edition_number])
 // where edition_number is NOT the edition number you pass in args but actually edition_number = floor(edition/EDITION_MARKER_BIT_SIZE).
 func (inst *MintNewEditionFromMasterEditionViaToken) GetEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMintAuthorityAccount sets the "mintAuthority" account.
@@ -151,7 +151,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetMintAuthorityAccount(min
 // GetMintAuthorityAccount gets the "mintAuthority" account.
 // Mint authority of new mint
 func (inst *MintNewEditionFromMasterEditionViaToken) GetMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -164,7 +164,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetPayerAccount(payer ag_so
 // GetPayerAccount gets the "payer" account.
 // payer
 func (inst *MintNewEditionFromMasterEditionViaToken) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetOwnerOfTokenAccount sets the "ownerOfToken" account.
@@ -177,7 +177,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetOwnerOfTokenAccount(owne
 // GetOwnerOfTokenAccount gets the "ownerOfToken" account.
 // owner of token account containing master token (#8)
 func (inst *MintNewEditionFromMasterEditionViaToken) GetOwnerOfTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetTokenAccount sets the "tokenAccount" account.
@@ -190,7 +190,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetTokenAccount(tokenAccoun
 // GetTokenAccount gets the "tokenAccount" account.
 // token account containing token from master metadata mint
 func (inst *MintNewEditionFromMasterEditionViaToken) GetTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetUpdateAuthorityInfoAccount sets the "updateAuthorityInfo" account.
@@ -203,7 +203,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetUpdateAuthorityInfoAccou
 // GetUpdateAuthorityInfoAccount gets the "updateAuthorityInfo" account.
 // Update authority info for new metadata
 func (inst *MintNewEditionFromMasterEditionViaToken) GetUpdateAuthorityInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetMasterRecordMetadataAccount sets the "masterRecordMetadata" account.
@@ -216,7 +216,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetMasterRecordMetadataAcco
 // GetMasterRecordMetadataAccount gets the "masterRecordMetadata" account.
 // Master record metadata account
 func (inst *MintNewEditionFromMasterEditionViaToken) GetMasterRecordMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -229,7 +229,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetTokenProgramAccount(toke
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *MintNewEditionFromMasterEditionViaToken) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -242,7 +242,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetSystemAccount(system ag_
 // GetSystemAccount gets the "system" account.
 // System program
 func (inst *MintNewEditionFromMasterEditionViaToken) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -255,7 +255,7 @@ func (inst *MintNewEditionFromMasterEditionViaToken) SetRentAccount(rent ag_sola
 // GetRentAccount gets the "rent" account.
 // Rent info
 func (inst *MintNewEditionFromMasterEditionViaToken) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 func (inst MintNewEditionFromMasterEditionViaToken) Build() *Instruction {
@@ -346,20 +346,20 @@ func (inst *MintNewEditionFromMasterEditionViaToken) EncodeToTree(parent ag_tree
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=14]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("       newMetadataKey", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("        newEditionPDA", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("masterRecordEditionV2", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("       mintOfNewToken", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("           editionPDA", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("        mintAuthority", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                payer", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("         ownerOfToken", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                token", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("  updateAuthorityInfo", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta(" masterRecordMetadata", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("         tokenProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice[13]))
+						accountsBranch.Child(ag_format.Meta("       newMetadataKey", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("        newEditionPDA", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("masterRecordEditionV2", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("       mintOfNewToken", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("           editionPDA", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("        mintAuthority", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                payer", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("         ownerOfToken", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                token", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("  updateAuthorityInfo", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta(" masterRecordMetadata", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("         tokenProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice.Get(13)))
 					})
 				})
 		})

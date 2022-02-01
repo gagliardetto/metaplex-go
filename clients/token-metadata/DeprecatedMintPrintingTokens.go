@@ -61,7 +61,7 @@ func (inst *DeprecatedMintPrintingTokens) SetDestinationAccount(destinationAccou
 // GetDestinationAccount gets the "destinationAccount" account.
 // Destination account
 func (inst *DeprecatedMintPrintingTokens) GetDestinationAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetPrintingMintAccount sets the "printingMint" account.
@@ -74,7 +74,7 @@ func (inst *DeprecatedMintPrintingTokens) SetPrintingMintAccount(printingMint ag
 // GetPrintingMintAccount gets the "printingMint" account.
 // Printing mint
 func (inst *DeprecatedMintPrintingTokens) GetPrintingMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetUpdateAuthorityAccount sets the "updateAuthority" account.
@@ -87,7 +87,7 @@ func (inst *DeprecatedMintPrintingTokens) SetUpdateAuthorityAccount(updateAuthor
 // GetUpdateAuthorityAccount gets the "updateAuthority" account.
 // Update authority
 func (inst *DeprecatedMintPrintingTokens) GetUpdateAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMetadataKeyPDAAccount sets the "metadataKeyPDA" account.
@@ -100,7 +100,7 @@ func (inst *DeprecatedMintPrintingTokens) SetMetadataKeyPDAAccount(metadataKeyPD
 // GetMetadataKeyPDAAccount gets the "metadataKeyPDA" account.
 // Metadata key (pda of ['metadata', program id, mint id])
 func (inst *DeprecatedMintPrintingTokens) GetMetadataKeyPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetMasterEditionV1Account sets the "masterEditionV1" account.
@@ -113,7 +113,7 @@ func (inst *DeprecatedMintPrintingTokens) SetMasterEditionV1Account(masterEditio
 // GetMasterEditionV1Account gets the "masterEditionV1" account.
 // Master Edition V1 key (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *DeprecatedMintPrintingTokens) GetMasterEditionV1Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -126,7 +126,7 @@ func (inst *DeprecatedMintPrintingTokens) SetTokenProgramAccount(tokenProgram ag
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *DeprecatedMintPrintingTokens) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -139,7 +139,7 @@ func (inst *DeprecatedMintPrintingTokens) SetRentAccount(rent ag_solanago.Public
 // GetRentAccount gets the "rent" account.
 // Rent
 func (inst *DeprecatedMintPrintingTokens) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 func (inst DeprecatedMintPrintingTokens) Build() *Instruction {
@@ -209,13 +209,13 @@ func (inst *DeprecatedMintPrintingTokens) EncodeToTree(parent ag_treeout.Branche
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=7]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("    destination", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("   printingMint", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("updateAuthority", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta(" metadataKeyPDA", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("masterEditionV1", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("   tokenProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("           rent", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("    destination", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("   printingMint", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("updateAuthority", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta(" metadataKeyPDA", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("masterEditionV1", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("   tokenProgram", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("           rent", inst.AccountMetaSlice.Get(6)))
 					})
 				})
 		})

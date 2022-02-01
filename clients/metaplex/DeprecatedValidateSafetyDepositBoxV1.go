@@ -96,7 +96,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetUninitializedSafetyDepositV
 // GetUninitializedSafetyDepositValidationTicketAccount gets the "uninitializedSafetyDepositValidationTicket" account.
 // Uninitialized Safety deposit validation ticket, pda of seed ['metaplex', program id, auction manager key, safety deposit key]
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetUninitializedSafetyDepositValidationTicketAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAuctionManagerAccount sets the "auctionManager" account.
@@ -109,7 +109,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetAuctionManagerAccount(aucti
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetMetadataAccount sets the "metadataAccount" account.
@@ -122,7 +122,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetMetadataAccount(metadataAcc
 // GetMetadataAccount gets the "metadataAccount" account.
 // Metadata account
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetOriginalAuthorityLookupAccount sets the "originalAuthorityLookup" account.
@@ -137,7 +137,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetOriginalAuthorityLookupAcco
 // Original authority lookup - unallocated uninitialized pda account with seed ['metaplex', auction key, metadata key]
 // We will store original authority here to return it later.
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetOriginalAuthorityLookupAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetWhitelistedCreatorEntryAccount sets the "whitelistedCreatorEntry" account.
@@ -152,7 +152,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetWhitelistedCreatorEntryAcco
 // A whitelisted creator entry for the store of this auction manager pda of ['metaplex', store key, creator key]
 // where creator key comes from creator list of metadata, any will do
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetWhitelistedCreatorEntryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetAuctionManagerStoreKeyAccount sets the "auctionManagerStoreKey" account.
@@ -165,7 +165,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetAuctionManagerStoreKeyAccou
 // GetAuctionManagerStoreKeyAccount gets the "auctionManagerStoreKey" account.
 // The auction manager's store key
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetAuctionManagerStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -178,7 +178,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetSafetyDepositBoxAccount(saf
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSafetyDepositBoxStorageAccount sets the "safetyDepositBoxStorage" account.
@@ -191,7 +191,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetSafetyDepositBoxStorageAcco
 // GetSafetyDepositBoxStorageAccount gets the "safetyDepositBoxStorage" account.
 // Safety deposit box storage account where the actual nft token is stored
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetSafetyDepositBoxStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetMintAccount sets the "mintAccount" account.
@@ -204,7 +204,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetMintAccount(mintAccount ag_
 // GetMintAccount gets the "mintAccount" account.
 // Mint account of the token in the safety deposit box
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetEditionOrMasterEditionRecordKeyAccount sets the "editionOrMasterEditionRecordKey" account.
@@ -221,7 +221,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetEditionOrMasterEditionRecor
 // Remember this does not need to be an existing account (may not be depending on token), just is a pda with seed
 // of ['metadata', program id, Printing mint id, 'edition']. - remember PDA is relative to token metadata program.
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetEditionOrMasterEditionRecordKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetVaultAccount sets the "vaultAccount" account.
@@ -234,7 +234,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetVaultAccount(vaultAccount a
 // GetVaultAccount gets the "vaultAccount" account.
 // Vault account
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetAuthorityAccount sets the "authority" account.
@@ -247,7 +247,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetAuthorityAccount(authority 
 // GetAuthorityAccount gets the "authority" account.
 // Authority
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetMetadataAuthorityAccount sets the "metadataAuthority" account.
@@ -257,10 +257,10 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetMetadataAuthorityAccount(me
 	return inst
 }
 
-// GetMetadataAuthorityAccount gets the "metadataAuthority" account.
+// GetMetadataAuthorityAccount gets the "metadataAuthority" account (optional).
 // [optional] Metadata Authority - Signer only required if doing a full ownership txfer
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetMetadataAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -273,7 +273,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetPayerAccount(payer ag_solan
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -286,7 +286,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetTokenMetadataProgramAccount
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -299,7 +299,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetSystemAccount(system ag_sol
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -312,7 +312,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetRentSysvarAccount(rentSysva
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[16]
+	return inst.AccountMetaSlice.Get(16)
 }
 
 // SetLimitedEditionPrintingMintAccount sets the "limitedEditionPrintingMint" account.
@@ -322,10 +322,10 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetLimitedEditionPrintingMintA
 	return inst
 }
 
-// GetLimitedEditionPrintingMintAccount gets the "limitedEditionPrintingMint" account.
+// GetLimitedEditionPrintingMintAccount gets the "limitedEditionPrintingMint" account (optional).
 // Limited edition Printing mint account (optional - only if using sending Limited Edition)
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetLimitedEditionPrintingMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[17]
+	return inst.AccountMetaSlice.Get(17)
 }
 
 // SetLimitedEditionPrintingMintAuthorityAccount sets the "limitedEditionPrintingMintAuthority" account.
@@ -340,7 +340,7 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) SetLimitedEditionPrintingMintA
 // Limited edition Printing mint Authority account, this will TEMPORARILY TRANSFER MINTING AUTHORITY to the auction manager
 // until all limited editions have been redeemed for authority tokens.
 func (inst *DeprecatedValidateSafetyDepositBoxV1) GetLimitedEditionPrintingMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[18]
+	return inst.AccountMetaSlice.Get(18)
 }
 
 func (inst DeprecatedValidateSafetyDepositBoxV1) Build() *Instruction {
@@ -437,25 +437,25 @@ func (inst *DeprecatedValidateSafetyDepositBoxV1) EncodeToTree(parent ag_treeout
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=19]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("uninitializedSafetyDepositValidationTicket", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                            auctionManager", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                                  metadata", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                   originalAuthorityLookup", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                   whitelistedCreatorEntry", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                    auctionManagerStoreKey", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                          safetyDepositBox", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                   safetyDepositBoxStorage", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                                      mint", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("           editionOrMasterEditionRecordKey", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                                     vault", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("                                 authority", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("                         metadataAuthority", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("                                     payer", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("                      tokenMetadataProgram", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("                                    system", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("                                rentSysvar", inst.AccountMetaSlice[16]))
-						accountsBranch.Child(ag_format.Meta("                limitedEditionPrintingMint", inst.AccountMetaSlice[17]))
-						accountsBranch.Child(ag_format.Meta("       limitedEditionPrintingMintAuthority", inst.AccountMetaSlice[18]))
+						accountsBranch.Child(ag_format.Meta("uninitializedSafetyDepositValidationTicket", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                            auctionManager", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                                  metadata", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                   originalAuthorityLookup", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                   whitelistedCreatorEntry", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                    auctionManagerStoreKey", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                          safetyDepositBox", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                   safetyDepositBoxStorage", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                                      mint", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("           editionOrMasterEditionRecordKey", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                                     vault", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("                                 authority", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("                         metadataAuthority", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("                                     payer", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("                      tokenMetadataProgram", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("                                    system", inst.AccountMetaSlice.Get(15)))
+						accountsBranch.Child(ag_format.Meta("                                rentSysvar", inst.AccountMetaSlice.Get(16)))
+						accountsBranch.Child(ag_format.Meta("                limitedEditionPrintingMint", inst.AccountMetaSlice.Get(17)))
+						accountsBranch.Child(ag_format.Meta("       limitedEditionPrintingMintAuthority", inst.AccountMetaSlice.Get(18)))
 					})
 				})
 		})

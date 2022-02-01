@@ -138,7 +138,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetAuctionManagerAccount(auction
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *DeprecatedRedeemParticipationBidV2) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetSafetyDepositTokenStorageAccount sets the "safetyDepositTokenStorage" account.
@@ -151,7 +151,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetSafetyDepositTokenStorageAcco
 // GetSafetyDepositTokenStorageAccount gets the "safetyDepositTokenStorage" account.
 // Safety deposit token storage account
 func (inst *DeprecatedRedeemParticipationBidV2) GetSafetyDepositTokenStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetSingleItemAccount sets the "singleItemAccount" account.
@@ -166,7 +166,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetSingleItemAccount(singleItemA
 // Account containing 1 token of your new mint type.
 // MUST be an associated token account of pda [wallet, token program, mint] relative to ata program.
 func (inst *DeprecatedRedeemParticipationBidV2) GetSingleItemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetBidRedemptionKeyAccount sets the "bidRedemptionKey" account.
@@ -181,7 +181,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetBidRedemptionKeyAccount(bidRe
 // Bid redemption key -
 // Just a PDA with seed ['metaplex', auction_key, bidder_metadata_key] that we will allocate to mark that you redeemed your bid
 func (inst *DeprecatedRedeemParticipationBidV2) GetBidRedemptionKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -194,7 +194,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetSafetyDepositBoxAccount(safet
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *DeprecatedRedeemParticipationBidV2) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetVaultAccount sets the "vaultAccount" account.
@@ -207,7 +207,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetVaultAccount(vaultAccount ag_
 // GetVaultAccount gets the "vaultAccount" account.
 // Vault account
 func (inst *DeprecatedRedeemParticipationBidV2) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetSafetyDepositConfigAccount sets the "safetyDepositConfig" account.
@@ -222,7 +222,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetSafetyDepositConfigAccount(sa
 // Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 // This account will only get used in the event this is an AuctionManagerV2
 func (inst *DeprecatedRedeemParticipationBidV2) GetSafetyDepositConfigAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -235,7 +235,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetAuctionAccount(auction ag_sol
 // GetAuctionAccount gets the "auction" account.
 // Auction
 func (inst *DeprecatedRedeemParticipationBidV2) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetBidderMetadataAccount sets the "bidderMetadata" account.
@@ -248,7 +248,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetBidderMetadataAccount(bidderM
 // GetBidderMetadataAccount gets the "bidderMetadata" account.
 // Your BidderMetadata account
 func (inst *DeprecatedRedeemParticipationBidV2) GetBidderMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetBidderAccount sets the "bidder" account.
@@ -261,7 +261,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetBidderAccount(bidder ag_solan
 // GetBidderAccount gets the "bidder" account.
 // Your Bidder account
 func (inst *DeprecatedRedeemParticipationBidV2) GetBidderAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -274,7 +274,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetPayerAccount(payer ag_solanag
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *DeprecatedRedeemParticipationBidV2) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -287,7 +287,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetTokenProgramAccount(tokenProg
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *DeprecatedRedeemParticipationBidV2) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -300,7 +300,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetTokenVaultProgramAccount(toke
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token Vault program
 func (inst *DeprecatedRedeemParticipationBidV2) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -313,7 +313,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetTokenMetadataProgramAccount(t
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *DeprecatedRedeemParticipationBidV2) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -326,7 +326,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetStoreAccount(store ag_solanag
 // GetStoreAccount gets the "store" account.
 // Store
 func (inst *DeprecatedRedeemParticipationBidV2) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -339,7 +339,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetSystemAccount(system ag_solan
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *DeprecatedRedeemParticipationBidV2) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -352,7 +352,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetRentSysvarAccount(rentSysvar 
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *DeprecatedRedeemParticipationBidV2) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[16]
+	return inst.AccountMetaSlice.Get(16)
 }
 
 // SetTransferAuthorityAccount sets the "transferAuthority" account.
@@ -367,7 +367,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetTransferAuthorityAccount(tran
 // Transfer authority to move the payment in the auction's token_mint coin from the bidder account for the participation_fixed_price
 // on the auction manager to the auction manager account itself.
 func (inst *DeprecatedRedeemParticipationBidV2) GetTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[17]
+	return inst.AccountMetaSlice.Get(17)
 }
 
 // SetAcceptPaymentAccount sets the "acceptPayment" account.
@@ -380,7 +380,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetAcceptPaymentAccount(acceptPa
 // GetAcceptPaymentAccount gets the "acceptPayment" account.
 // The accept payment account for the auction manager
 func (inst *DeprecatedRedeemParticipationBidV2) GetAcceptPaymentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[18]
+	return inst.AccountMetaSlice.Get(18)
 }
 
 // SetTokenAccount sets the "tokenAccount" account.
@@ -393,7 +393,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetTokenAccount(tokenAccount ag_
 // GetTokenAccount gets the "tokenAccount" account.
 // The token account you will potentially pay for the open edition bid with if necessary.
 func (inst *DeprecatedRedeemParticipationBidV2) GetTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[19]
+	return inst.AccountMetaSlice.Get(19)
 }
 
 // SetPrizeTrackingTicketAccount sets the "prizeTrackingTicket" account.
@@ -406,7 +406,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetPrizeTrackingTicketAccount(pr
 // GetPrizeTrackingTicketAccount gets the "prizeTrackingTicket" account.
 // Prize tracking ticket (pda of ['metaplex', program id, auction manager key, metadata mint id])
 func (inst *DeprecatedRedeemParticipationBidV2) GetPrizeTrackingTicketAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[20]
+	return inst.AccountMetaSlice.Get(20)
 }
 
 // SetNewMetadataKeyAccount sets the "newMetadataKey" account.
@@ -419,7 +419,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetNewMetadataKeyAccount(newMeta
 // GetNewMetadataKeyAccount gets the "newMetadataKey" account.
 // New Metadata key (pda of ['metadata', program id, mint id])
 func (inst *DeprecatedRedeemParticipationBidV2) GetNewMetadataKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[21]
+	return inst.AccountMetaSlice.Get(21)
 }
 
 // SetNewEditionPDAAccount sets the "newEditionPDA" account.
@@ -432,7 +432,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetNewEditionPDAAccount(newEditi
 // GetNewEditionPDAAccount gets the "newEditionPDA" account.
 // New Edition (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *DeprecatedRedeemParticipationBidV2) GetNewEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[22]
+	return inst.AccountMetaSlice.Get(22)
 }
 
 // SetMasterEditionAccount sets the "masterEdition" account.
@@ -445,7 +445,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetMasterEditionAccount(masterEd
 // GetMasterEditionAccount gets the "masterEdition" account.
 // Master Edition of token in vault V2 (pda of ['metadata', program id, master metadata mint id, 'edition']) PDA is relative to token metadata.
 func (inst *DeprecatedRedeemParticipationBidV2) GetMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[23]
+	return inst.AccountMetaSlice.Get(23)
 }
 
 // SetNewTokenMintAccount sets the "newTokenMint" account.
@@ -458,7 +458,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetNewTokenMintAccount(newTokenM
 // GetNewTokenMintAccount gets the "newTokenMint" account.
 // Mint of new token
 func (inst *DeprecatedRedeemParticipationBidV2) GetNewTokenMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[24]
+	return inst.AccountMetaSlice.Get(24)
 }
 
 // SetEditionPDAAccount sets the "editionPDA" account.
@@ -473,7 +473,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetEditionPDAAccount(editionPDA 
 // Edition pda to mark creation - will be checked for pre-existence. (pda of ['metadata', program id, master metadata mint id, 'edition', edition_number])
 // where edition_number is NOT the edition number you pass in args but actually edition_number = floor(edition/EDITION_MARKER_BIT_SIZE). PDA is relative to token metadata.
 func (inst *DeprecatedRedeemParticipationBidV2) GetEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[25]
+	return inst.AccountMetaSlice.Get(25)
 }
 
 // SetMintAuthorityAccount sets the "mintAuthority" account.
@@ -486,7 +486,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetMintAuthorityAccount(mintAuth
 // GetMintAuthorityAccount gets the "mintAuthority" account.
 // Mint authority of new mint - THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY
 func (inst *DeprecatedRedeemParticipationBidV2) GetMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[26]
+	return inst.AccountMetaSlice.Get(26)
 }
 
 // SetMetadataAccount sets the "metadataAccount" account.
@@ -499,7 +499,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetMetadataAccount(metadataAccou
 // GetMetadataAccount gets the "metadataAccount" account.
 // Metadata account of token in vault
 func (inst *DeprecatedRedeemParticipationBidV2) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[27]
+	return inst.AccountMetaSlice.Get(27)
 }
 
 // SetAuctionDataExtendedAccount sets the "auctionDataExtended" account.
@@ -512,7 +512,7 @@ func (inst *DeprecatedRedeemParticipationBidV2) SetAuctionDataExtendedAccount(au
 // GetAuctionDataExtendedAccount gets the "auctionDataExtended" account.
 // Auction data extended - pda of ['auction', auction program id, vault key, 'extended'] relative to auction program
 func (inst *DeprecatedRedeemParticipationBidV2) GetAuctionDataExtendedAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[28]
+	return inst.AccountMetaSlice.Get(28)
 }
 
 func (inst DeprecatedRedeemParticipationBidV2) Build() *Instruction {
@@ -639,35 +639,35 @@ func (inst *DeprecatedRedeemParticipationBidV2) EncodeToTree(parent ag_treeout.B
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=29]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               singleItem", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("         bidRedemptionKey", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("         safetyDepositBox", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                    vault", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("      safetyDepositConfig", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                  auction", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("           bidderMetadata", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                   bidder", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                    payer", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("             tokenProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("        tokenVaultProgram", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("     tokenMetadataProgram", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("                    store", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("                   system", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("               rentSysvar", inst.AccountMetaSlice[16]))
-						accountsBranch.Child(ag_format.Meta("        transferAuthority", inst.AccountMetaSlice[17]))
-						accountsBranch.Child(ag_format.Meta("            acceptPayment", inst.AccountMetaSlice[18]))
-						accountsBranch.Child(ag_format.Meta("                    token", inst.AccountMetaSlice[19]))
-						accountsBranch.Child(ag_format.Meta("      prizeTrackingTicket", inst.AccountMetaSlice[20]))
-						accountsBranch.Child(ag_format.Meta("           newMetadataKey", inst.AccountMetaSlice[21]))
-						accountsBranch.Child(ag_format.Meta("            newEditionPDA", inst.AccountMetaSlice[22]))
-						accountsBranch.Child(ag_format.Meta("            masterEdition", inst.AccountMetaSlice[23]))
-						accountsBranch.Child(ag_format.Meta("             newTokenMint", inst.AccountMetaSlice[24]))
-						accountsBranch.Child(ag_format.Meta("               editionPDA", inst.AccountMetaSlice[25]))
-						accountsBranch.Child(ag_format.Meta("            mintAuthority", inst.AccountMetaSlice[26]))
-						accountsBranch.Child(ag_format.Meta("                 metadata", inst.AccountMetaSlice[27]))
-						accountsBranch.Child(ag_format.Meta("      auctionDataExtended", inst.AccountMetaSlice[28]))
+						accountsBranch.Child(ag_format.Meta("           auctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStorage", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               singleItem", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("         bidRedemptionKey", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("         safetyDepositBox", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                    vault", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("      safetyDepositConfig", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                  auction", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("           bidderMetadata", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                   bidder", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                    payer", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("             tokenProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("        tokenVaultProgram", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("     tokenMetadataProgram", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("                    store", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("                   system", inst.AccountMetaSlice.Get(15)))
+						accountsBranch.Child(ag_format.Meta("               rentSysvar", inst.AccountMetaSlice.Get(16)))
+						accountsBranch.Child(ag_format.Meta("        transferAuthority", inst.AccountMetaSlice.Get(17)))
+						accountsBranch.Child(ag_format.Meta("            acceptPayment", inst.AccountMetaSlice.Get(18)))
+						accountsBranch.Child(ag_format.Meta("                    token", inst.AccountMetaSlice.Get(19)))
+						accountsBranch.Child(ag_format.Meta("      prizeTrackingTicket", inst.AccountMetaSlice.Get(20)))
+						accountsBranch.Child(ag_format.Meta("           newMetadataKey", inst.AccountMetaSlice.Get(21)))
+						accountsBranch.Child(ag_format.Meta("            newEditionPDA", inst.AccountMetaSlice.Get(22)))
+						accountsBranch.Child(ag_format.Meta("            masterEdition", inst.AccountMetaSlice.Get(23)))
+						accountsBranch.Child(ag_format.Meta("             newTokenMint", inst.AccountMetaSlice.Get(24)))
+						accountsBranch.Child(ag_format.Meta("               editionPDA", inst.AccountMetaSlice.Get(25)))
+						accountsBranch.Child(ag_format.Meta("            mintAuthority", inst.AccountMetaSlice.Get(26)))
+						accountsBranch.Child(ag_format.Meta("                 metadata", inst.AccountMetaSlice.Get(27)))
+						accountsBranch.Child(ag_format.Meta("      auctionDataExtended", inst.AccountMetaSlice.Get(28)))
 					})
 				})
 		})

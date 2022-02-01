@@ -60,7 +60,7 @@ func (inst *SetAuctionCache) SetAuctionCachePDAAccount(auctionCachePDA ag_solana
 // GetAuctionCachePDAAccount gets the "auctionCachePDA" account.
 // Auction cache (pda of ['metaplex', program id, store key, auction key, 'cache'])
 func (inst *SetAuctionCache) GetAuctionCachePDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -73,7 +73,7 @@ func (inst *SetAuctionCache) SetPayerAccount(payer ag_solanago.PublicKey) *SetAu
 // GetPayerAccount gets the "payer" account.
 // Payer info
 func (inst *SetAuctionCache) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -86,7 +86,7 @@ func (inst *SetAuctionCache) SetAuctionAccount(auction ag_solanago.PublicKey) *S
 // GetAuctionAccount gets the "auction" account.
 // Auction
 func (inst *SetAuctionCache) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -99,7 +99,7 @@ func (inst *SetAuctionCache) SetSafetyDepositBoxAccount(safetyDepositBox ag_sola
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *SetAuctionCache) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetAuctionManagerAccount sets the "auctionManager" account.
@@ -112,7 +112,7 @@ func (inst *SetAuctionCache) SetAuctionManagerAccount(auctionManager ag_solanago
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *SetAuctionCache) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -125,7 +125,7 @@ func (inst *SetAuctionCache) SetStoreAccount(store ag_solanago.PublicKey) *SetAu
 // GetStoreAccount gets the "store" account.
 // Store key
 func (inst *SetAuctionCache) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -138,7 +138,7 @@ func (inst *SetAuctionCache) SetSystemAccount(system ag_solanago.PublicKey) *Set
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *SetAuctionCache) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -151,7 +151,7 @@ func (inst *SetAuctionCache) SetRentSysvarAccount(rentSysvar ag_solanago.PublicK
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *SetAuctionCache) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetClockSysvarAccount sets the "clockSysvar" account.
@@ -164,7 +164,7 @@ func (inst *SetAuctionCache) SetClockSysvarAccount(clockSysvar ag_solanago.Publi
 // GetClockSysvarAccount gets the "clockSysvar" account.
 // Clock sysvar
 func (inst *SetAuctionCache) GetClockSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 func (inst SetAuctionCache) Build() *Instruction {
@@ -231,15 +231,15 @@ func (inst *SetAuctionCache) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta(" auctionCachePDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("           payer", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("         auction", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("safetyDepositBox", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("  auctionManager", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("           store", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("          system", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("      rentSysvar", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("     clockSysvar", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta(" auctionCachePDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("           payer", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("         auction", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("safetyDepositBox", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("  auctionManager", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("           store", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("          system", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("      rentSysvar", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("     clockSysvar", inst.AccountMetaSlice.Get(8)))
 					})
 				})
 		})

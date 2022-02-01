@@ -81,7 +81,7 @@ func (inst *WithdrawMasterEdition) SetAuctionManagerAccount(auctionManager ag_so
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *WithdrawMasterEdition) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetSafetyDepositTokenStorageAccount sets the "safetyDepositTokenStorage" account.
@@ -94,7 +94,7 @@ func (inst *WithdrawMasterEdition) SetSafetyDepositTokenStorageAccount(safetyDep
 // GetSafetyDepositTokenStorageAccount gets the "safetyDepositTokenStorage" account.
 // Safety deposit token storage account
 func (inst *WithdrawMasterEdition) GetSafetyDepositTokenStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAssociatedTokenAccount sets the "associatedTokenAccount" account.
@@ -107,7 +107,7 @@ func (inst *WithdrawMasterEdition) SetAssociatedTokenAccount(associatedTokenAcco
 // GetAssociatedTokenAccount gets the "associatedTokenAccount" account.
 // Associated token account owned by auction manager authority of same mint as token storage account
 func (inst *WithdrawMasterEdition) GetAssociatedTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -120,7 +120,7 @@ func (inst *WithdrawMasterEdition) SetSafetyDepositBoxAccount(safetyDepositBox a
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *WithdrawMasterEdition) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAccount sets the "vaultAccount" account.
@@ -133,7 +133,7 @@ func (inst *WithdrawMasterEdition) SetVaultAccount(vaultAccount ag_solanago.Publ
 // GetVaultAccount gets the "vaultAccount" account.
 // Vault account
 func (inst *WithdrawMasterEdition) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -146,7 +146,7 @@ func (inst *WithdrawMasterEdition) SetFractionMintAccount(fractionMint ag_solana
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint of the vault
 func (inst *WithdrawMasterEdition) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetPrizeTrackingTicketAccount sets the "prizeTrackingTicket" account.
@@ -159,7 +159,7 @@ func (inst *WithdrawMasterEdition) SetPrizeTrackingTicketAccount(prizeTrackingTi
 // GetPrizeTrackingTicketAccount gets the "prizeTrackingTicket" account.
 // Prize tracking ticket (pda of ['metaplex', program id, auction manager key, metadata mint id])
 func (inst *WithdrawMasterEdition) GetPrizeTrackingTicketAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetPdaBasedVaultTransferAuthorityAccount sets the "pdaBasedVaultTransferAuthority" account.
@@ -174,7 +174,7 @@ func (inst *WithdrawMasterEdition) SetPdaBasedVaultTransferAuthorityAccount(pdaB
 // PDA-based Vault transfer authority ['vault', program_id, vault key]
 // but please note that this is a PDA relative to the Token Vault program, with the 'vault' prefix
 func (inst *WithdrawMasterEdition) GetPdaBasedVaultTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -187,7 +187,7 @@ func (inst *WithdrawMasterEdition) SetAuctionAccount(auction ag_solanago.PublicK
 // GetAuctionAccount gets the "auction" account.
 // Auction
 func (inst *WithdrawMasterEdition) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetAuctionDataExtendedAccount sets the "auctionDataExtended" account.
@@ -200,7 +200,7 @@ func (inst *WithdrawMasterEdition) SetAuctionDataExtendedAccount(auctionDataExte
 // GetAuctionDataExtendedAccount gets the "auctionDataExtended" account.
 // Auction data extended (pda relative to auction of ['auction', program id, vault key, 'extended'])
 func (inst *WithdrawMasterEdition) GetAuctionDataExtendedAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -213,7 +213,7 @@ func (inst *WithdrawMasterEdition) SetTokenProgramAccount(tokenProgram ag_solana
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *WithdrawMasterEdition) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -226,7 +226,7 @@ func (inst *WithdrawMasterEdition) SetTokenVaultProgramAccount(tokenVaultProgram
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token Vault program
 func (inst *WithdrawMasterEdition) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -239,7 +239,7 @@ func (inst *WithdrawMasterEdition) SetStoreAccount(store ag_solanago.PublicKey) 
 // GetStoreAccount gets the "store" account.
 // Store
 func (inst *WithdrawMasterEdition) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -252,7 +252,7 @@ func (inst *WithdrawMasterEdition) SetRentSysvarAccount(rentSysvar ag_solanago.P
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *WithdrawMasterEdition) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetSafetyDepositConfigAccount sets the "safetyDepositConfig" account.
@@ -267,7 +267,7 @@ func (inst *WithdrawMasterEdition) SetSafetyDepositConfigAccount(safetyDepositCo
 // Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 // This account will only get used in the event this is an AuctionManagerV2
 func (inst *WithdrawMasterEdition) GetSafetyDepositConfigAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 func (inst WithdrawMasterEdition) Build() *Instruction {
@@ -352,21 +352,21 @@ func (inst *WithdrawMasterEdition) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=15]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("                auctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("     safetyDepositTokenStorage", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               associatedToken", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              safetyDepositBox", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                         vault", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                  fractionMint", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("           prizeTrackingTicket", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("pdaBasedVaultTransferAuthority", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                       auction", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("           auctionDataExtended", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                  tokenProgram", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("             tokenVaultProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("                         store", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("                    rentSysvar", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("           safetyDepositConfig", inst.AccountMetaSlice[14]))
+						accountsBranch.Child(ag_format.Meta("                auctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("     safetyDepositTokenStorage", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               associatedToken", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("              safetyDepositBox", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                         vault", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                  fractionMint", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("           prizeTrackingTicket", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("pdaBasedVaultTransferAuthority", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                       auction", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("           auctionDataExtended", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                  tokenProgram", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("             tokenVaultProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("                         store", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("                    rentSysvar", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("           safetyDepositConfig", inst.AccountMetaSlice.Get(14)))
 					})
 				})
 		})

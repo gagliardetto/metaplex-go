@@ -101,7 +101,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetUninitializedSafetyDepositAccount(uni
 // GetUninitializedSafetyDepositAccount gets the "uninitializedSafetyDeposit" account.
 // Uninitialized Safety deposit config, pda of seed ['metaplex', program id, auction manager key, safety deposit key]
 func (inst *ValidateSafetyDepositBoxV2) GetUninitializedSafetyDepositAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAuctionWinnerTokenTypeTrackerAccount sets the "auctionWinnerTokenTypeTracker" account.
@@ -114,7 +114,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetAuctionWinnerTokenTypeTrackerAccount(
 // GetAuctionWinnerTokenTypeTrackerAccount gets the "auctionWinnerTokenTypeTracker" account.
 // AuctionWinnerTokenTypeTracker, pda of seed ['metaplex', program id, auction manager key, 'totals']
 func (inst *ValidateSafetyDepositBoxV2) GetAuctionWinnerTokenTypeTrackerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionManagerAccount sets the "auctionManager" account.
@@ -127,7 +127,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetAuctionManagerAccount(auctionManager 
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *ValidateSafetyDepositBoxV2) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMetadataAccount sets the "metadataAccount" account.
@@ -140,7 +140,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetMetadataAccount(metadataAccount ag_so
 // GetMetadataAccount gets the "metadataAccount" account.
 // Metadata account
 func (inst *ValidateSafetyDepositBoxV2) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetOriginalAuthorityLookupAccount sets the "originalAuthorityLookup" account.
@@ -155,7 +155,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetOriginalAuthorityLookupAccount(origin
 // Original authority lookup - unallocated uninitialized pda account with seed ['metaplex', auction key, metadata key]
 // We will store original authority here to return it later.
 func (inst *ValidateSafetyDepositBoxV2) GetOriginalAuthorityLookupAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetWhitelistedCreatorEntryAccount sets the "whitelistedCreatorEntry" account.
@@ -170,7 +170,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetWhitelistedCreatorEntryAccount(whitel
 // A whitelisted creator entry for the store of this auction manager pda of ['metaplex', store key, creator key]
 // where creator key comes from creator list of metadata, any will do
 func (inst *ValidateSafetyDepositBoxV2) GetWhitelistedCreatorEntryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetAuctionManagerStoreAccount sets the "auctionManagerStore" account.
@@ -183,7 +183,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetAuctionManagerStoreAccount(auctionMan
 // GetAuctionManagerStoreAccount gets the "auctionManagerStore" account.
 // The auction manager's store key
 func (inst *ValidateSafetyDepositBoxV2) GetAuctionManagerStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -196,7 +196,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetSafetyDepositBoxAccount(safetyDeposit
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *ValidateSafetyDepositBoxV2) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetSafetyDepositBoxStorageAccount sets the "safetyDepositBoxStorage" account.
@@ -209,7 +209,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetSafetyDepositBoxStorageAccount(safety
 // GetSafetyDepositBoxStorageAccount gets the "safetyDepositBoxStorage" account.
 // Safety deposit box storage account where the actual nft token is stored
 func (inst *ValidateSafetyDepositBoxV2) GetSafetyDepositBoxStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetMintAccount sets the "mintAccount" account.
@@ -222,7 +222,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetMintAccount(mintAccount ag_solanago.P
 // GetMintAccount gets the "mintAccount" account.
 // Mint account of the token in the safety deposit box
 func (inst *ValidateSafetyDepositBoxV2) GetMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetEditionOrMasterEditionAccount sets the "editionOrMasterEdition" account.
@@ -239,7 +239,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetEditionOrMasterEditionAccount(edition
 // Remember this does not need to be an existing account (may not be depending on token), just is a pda with seed
 // of ['metadata', program id, Printing mint id, 'edition']. - remember PDA is relative to token metadata program.
 func (inst *ValidateSafetyDepositBoxV2) GetEditionOrMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetVaultAccount sets the "vaultAccount" account.
@@ -252,7 +252,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetVaultAccount(vaultAccount ag_solanago
 // GetVaultAccount gets the "vaultAccount" account.
 // Vault account
 func (inst *ValidateSafetyDepositBoxV2) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetAuthorityAccount sets the "authority" account.
@@ -265,7 +265,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetAuthorityAccount(authority ag_solanag
 // GetAuthorityAccount gets the "authority" account.
 // Authority
 func (inst *ValidateSafetyDepositBoxV2) GetAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetMetadataAuthorityAccount sets the "metadataAuthority" account.
@@ -275,10 +275,10 @@ func (inst *ValidateSafetyDepositBoxV2) SetMetadataAuthorityAccount(metadataAuth
 	return inst
 }
 
-// GetMetadataAuthorityAccount gets the "metadataAuthority" account.
+// GetMetadataAuthorityAccount gets the "metadataAuthority" account (optional).
 // Metadata Authority - Signer only required if doing a full ownership txfer
 func (inst *ValidateSafetyDepositBoxV2) GetMetadataAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -291,7 +291,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetPayerAccount(payer ag_solanago.Public
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *ValidateSafetyDepositBoxV2) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -304,7 +304,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetTokenMetadataProgramAccount(tokenMeta
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *ValidateSafetyDepositBoxV2) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -317,7 +317,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetSystemAccount(system ag_solanago.Publ
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *ValidateSafetyDepositBoxV2) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[16]
+	return inst.AccountMetaSlice.Get(16)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -330,7 +330,7 @@ func (inst *ValidateSafetyDepositBoxV2) SetRentSysvarAccount(rentSysvar ag_solan
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *ValidateSafetyDepositBoxV2) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[17]
+	return inst.AccountMetaSlice.Get(17)
 }
 
 func (inst ValidateSafetyDepositBoxV2) Build() *Instruction {
@@ -433,24 +433,24 @@ func (inst *ValidateSafetyDepositBoxV2) EncodeToTree(parent ag_treeout.Branches)
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=18]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("   uninitializedSafetyDeposit", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("auctionWinnerTokenTypeTracker", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               auctionManager", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                     metadata", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("      originalAuthorityLookup", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("      whitelistedCreatorEntry", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("          auctionManagerStore", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("      safetyDepositBoxStorage", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                         mint", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("       editionOrMasterEdition", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("                        vault", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("                    authority", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("            metadataAuthority", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("                        payer", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("         tokenMetadataProgram", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("                       system", inst.AccountMetaSlice[16]))
-						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice[17]))
+						accountsBranch.Child(ag_format.Meta("   uninitializedSafetyDeposit", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("auctionWinnerTokenTypeTracker", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               auctionManager", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                     metadata", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("      originalAuthorityLookup", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("      whitelistedCreatorEntry", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("          auctionManagerStore", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("      safetyDepositBoxStorage", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                         mint", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("       editionOrMasterEdition", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("                        vault", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("                    authority", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("            metadataAuthority", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("                        payer", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("         tokenMetadataProgram", inst.AccountMetaSlice.Get(15)))
+						accountsBranch.Child(ag_format.Meta("                       system", inst.AccountMetaSlice.Get(16)))
+						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice.Get(17)))
 					})
 				})
 		})

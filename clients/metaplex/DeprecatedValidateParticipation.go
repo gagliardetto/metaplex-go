@@ -71,7 +71,7 @@ func (inst *DeprecatedValidateParticipation) SetAuctionManagerAccount(auctionMan
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *DeprecatedValidateParticipation) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetOpenEditionMetadataAccount sets the "openEditionMetadata" account.
@@ -84,7 +84,7 @@ func (inst *DeprecatedValidateParticipation) SetOpenEditionMetadataAccount(openE
 // GetOpenEditionMetadataAccount gets the "openEditionMetadata" account.
 // Open edition metadata
 func (inst *DeprecatedValidateParticipation) GetOpenEditionMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetOpenEditionMasterEditionAccount sets the "openEditionMasterEdition" account.
@@ -97,7 +97,7 @@ func (inst *DeprecatedValidateParticipation) SetOpenEditionMasterEditionAccount(
 // GetOpenEditionMasterEditionAccount gets the "openEditionMasterEdition" account.
 // Open edition MasterEdition account
 func (inst *DeprecatedValidateParticipation) GetOpenEditionMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPrintingAuthorizationTokenHoldingAccount sets the "printingAuthorizationTokenHoldingAccount" account.
@@ -114,7 +114,7 @@ func (inst *DeprecatedValidateParticipation) SetPrintingAuthorizationTokenHoldin
 // the auction manager to hold printing authorization tokens for all eligible winners of the participation nft when auction ends. Must
 // be owned by auction manager account.
 func (inst *DeprecatedValidateParticipation) GetPrintingAuthorizationTokenHoldingAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetAuctionManagerAuthorityAccount sets the "auctionManagerAuthority" account.
@@ -127,7 +127,7 @@ func (inst *DeprecatedValidateParticipation) SetAuctionManagerAuthorityAccount(a
 // GetAuctionManagerAuthorityAccount gets the "auctionManagerAuthority" account.
 // Authority for the Auction Manager
 func (inst *DeprecatedValidateParticipation) GetAuctionManagerAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetWhitelistedCreatorEntryAccount sets the "whitelistedCreatorEntry" account.
@@ -142,7 +142,7 @@ func (inst *DeprecatedValidateParticipation) SetWhitelistedCreatorEntryAccount(w
 // A whitelisted creator entry for this store for the open edition
 // pda of ['metaplex', store key, creator key] where creator key comes from creator list of metadata
 func (inst *DeprecatedValidateParticipation) GetWhitelistedCreatorEntryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetAuctionManagerStoreAccount sets the "auctionManagerStore" account.
@@ -155,7 +155,7 @@ func (inst *DeprecatedValidateParticipation) SetAuctionManagerStoreAccount(aucti
 // GetAuctionManagerStoreAccount gets the "auctionManagerStore" account.
 // The auction manager's store
 func (inst *DeprecatedValidateParticipation) GetAuctionManagerStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -168,7 +168,7 @@ func (inst *DeprecatedValidateParticipation) SetSafetyDepositBoxAccount(safetyDe
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box
 func (inst *DeprecatedValidateParticipation) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetSafetyDepositTokenStorageAccount sets the "safetyDepositTokenStorage" account.
@@ -181,7 +181,7 @@ func (inst *DeprecatedValidateParticipation) SetSafetyDepositTokenStorageAccount
 // GetSafetyDepositTokenStorageAccount gets the "safetyDepositTokenStorage" account.
 // Safety deposit token store
 func (inst *DeprecatedValidateParticipation) GetSafetyDepositTokenStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetVaultAccount sets the "vault" account.
@@ -194,7 +194,7 @@ func (inst *DeprecatedValidateParticipation) SetVaultAccount(vault ag_solanago.P
 // GetVaultAccount gets the "vault" account.
 // Vault
 func (inst *DeprecatedValidateParticipation) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -207,7 +207,7 @@ func (inst *DeprecatedValidateParticipation) SetRentSysvarAccount(rentSysvar ag_
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *DeprecatedValidateParticipation) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 func (inst DeprecatedValidateParticipation) Build() *Instruction {
@@ -280,17 +280,17 @@ func (inst *DeprecatedValidateParticipation) EncodeToTree(parent ag_treeout.Bran
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=11]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("                   auctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("              openEditionMetadata", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("         openEditionMasterEdition", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("printingAuthorizationTokenHolding", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("          auctionManagerAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("          whitelistedCreatorEntry", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("              auctionManagerStore", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                 safetyDepositBox", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("        safetyDepositTokenStorage", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                            vault", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                       rentSysvar", inst.AccountMetaSlice[10]))
+						accountsBranch.Child(ag_format.Meta("                   auctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("              openEditionMetadata", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("         openEditionMasterEdition", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("printingAuthorizationTokenHolding", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("          auctionManagerAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("          whitelistedCreatorEntry", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("              auctionManagerStore", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                 safetyDepositBox", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("        safetyDepositTokenStorage", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                            vault", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                       rentSysvar", inst.AccountMetaSlice.Get(10)))
 					})
 				})
 		})

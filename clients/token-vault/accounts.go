@@ -10,21 +10,21 @@ import (
 type Key ag_binary.BorshEnum
 
 const (
-	Uninitialized_Key Key = iota
-	SafetyDepositBoxV1_Key
-	ExternalAccountKeyV1_Key
-	VaultV1_Key
+	KeyUninitialized Key = iota
+	KeySafetyDepositBoxV1
+	KeyExternalAccountKeyV1
+	KeyVaultV1
 )
 
 func (value Key) String() string {
 	switch value {
-	case Uninitialized_Key:
+	case KeyUninitialized:
 		return "Uninitialized"
-	case SafetyDepositBoxV1_Key:
+	case KeySafetyDepositBoxV1:
 		return "SafetyDepositBoxV1"
-	case ExternalAccountKeyV1_Key:
+	case KeyExternalAccountKeyV1:
 		return "ExternalAccountKeyV1"
-	case VaultV1_Key:
+	case KeyVaultV1:
 		return "VaultV1"
 	default:
 		return ""
@@ -34,21 +34,21 @@ func (value Key) String() string {
 type VaultState ag_binary.BorshEnum
 
 const (
-	Inactive_VaultState VaultState = iota
-	Active_VaultState
-	Combined_VaultState
-	Deactivated_VaultState
+	VaultStateInactive VaultState = iota
+	VaultStateActive
+	VaultStateCombined
+	VaultStateDeactivated
 )
 
 func (value VaultState) String() string {
 	switch value {
-	case Inactive_VaultState:
+	case VaultStateInactive:
 		return "Inactive"
-	case Active_VaultState:
+	case VaultStateActive:
 		return "Active"
-	case Combined_VaultState:
+	case VaultStateCombined:
 		return "Combined"
-	case Deactivated_VaultState:
+	case VaultStateDeactivated:
 		return "Deactivated"
 	default:
 		return ""

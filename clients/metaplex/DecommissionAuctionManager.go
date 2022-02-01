@@ -70,7 +70,7 @@ func (inst *DecommissionAuctionManager) SetAuctionManagerAccount(auctionManager 
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction Manager
 func (inst *DecommissionAuctionManager) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -83,7 +83,7 @@ func (inst *DecommissionAuctionManager) SetAuctionAccount(auction ag_solanago.Pu
 // GetAuctionAccount gets the "auction" account.
 // Auction
 func (inst *DecommissionAuctionManager) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionManagerAuthorityAccount sets the "auctionManagerAuthority" account.
@@ -96,7 +96,7 @@ func (inst *DecommissionAuctionManager) SetAuctionManagerAuthorityAccount(auctio
 // GetAuctionManagerAuthorityAccount gets the "auctionManagerAuthority" account.
 // Authority of the Auction Manager
 func (inst *DecommissionAuctionManager) GetAuctionManagerAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetVaultAccount sets the "vault" account.
@@ -109,7 +109,7 @@ func (inst *DecommissionAuctionManager) SetVaultAccount(vault ag_solanago.Public
 // GetVaultAccount gets the "vault" account.
 // Vault
 func (inst *DecommissionAuctionManager) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -122,7 +122,7 @@ func (inst *DecommissionAuctionManager) SetStoreAccount(store ag_solanago.Public
 // GetStoreAccount gets the "store" account.
 // Store
 func (inst *DecommissionAuctionManager) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetAuctionProgramAccount sets the "auctionProgram" account.
@@ -135,7 +135,7 @@ func (inst *DecommissionAuctionManager) SetAuctionProgramAccount(auctionProgram 
 // GetAuctionProgramAccount gets the "auctionProgram" account.
 // Auction program
 func (inst *DecommissionAuctionManager) GetAuctionProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetClockSysvarAccount sets the "clockSysvar" account.
@@ -148,7 +148,7 @@ func (inst *DecommissionAuctionManager) SetClockSysvarAccount(clockSysvar ag_sol
 // GetClockSysvarAccount gets the "clockSysvar" account.
 // Clock sysvar
 func (inst *DecommissionAuctionManager) GetClockSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetVaultProgramAccount sets the "vaultProgram" account.
@@ -158,10 +158,10 @@ func (inst *DecommissionAuctionManager) SetVaultProgramAccount(vaultProgram ag_s
 	return inst
 }
 
-// GetVaultProgramAccount gets the "vaultProgram" account.
+// GetVaultProgramAccount gets the "vaultProgram" account (optional).
 // Vault program (Optional)
 func (inst *DecommissionAuctionManager) GetVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 func (inst DecommissionAuctionManager) Build() *Instruction {
@@ -225,14 +225,14 @@ func (inst *DecommissionAuctionManager) EncodeToTree(parent ag_treeout.Branches)
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=8]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("         auctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                auction", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("auctionManagerAuthority", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                  vault", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                  store", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("         auctionProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("            clockSysvar", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("           vaultProgram", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("         auctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                auction", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("auctionManagerAuthority", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                  vault", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                  store", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("         auctionProgram", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("            clockSysvar", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("           vaultProgram", inst.AccountMetaSlice.Get(7)))
 					})
 				})
 		})

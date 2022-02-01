@@ -39,7 +39,7 @@ func (inst *SignMetadata) SetMetadataPDAAccount(metadataPDA ag_solanago.PublicKe
 // GetMetadataPDAAccount gets the "metadataPDA" account.
 // Metadata (pda of ['metadata', program id, mint id])
 func (inst *SignMetadata) GetMetadataPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetCreatorAccount sets the "creator" account.
@@ -52,7 +52,7 @@ func (inst *SignMetadata) SetCreatorAccount(creator ag_solanago.PublicKey) *Sign
 // GetCreatorAccount gets the "creator" account.
 // Creator
 func (inst *SignMetadata) GetCreatorAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 func (inst SignMetadata) Build() *Instruction {
@@ -98,8 +98,8 @@ func (inst *SignMetadata) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=2]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("metadataPDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("    creator", inst.AccountMetaSlice[1]))
+						accountsBranch.Child(ag_format.Meta("metadataPDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("    creator", inst.AccountMetaSlice.Get(1)))
 					})
 				})
 		})

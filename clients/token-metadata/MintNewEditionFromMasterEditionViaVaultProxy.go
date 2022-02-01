@@ -92,7 +92,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetNewMetadataKeyAccou
 // GetNewMetadataKeyAccount gets the "newMetadataKey" account.
 // New Metadata key (pda of ['metadata', program id, mint id])
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetNewMetadataKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetNewEditionPDAAccount sets the "newEditionPDA" account.
@@ -105,7 +105,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetNewEditionPDAAccoun
 // GetNewEditionPDAAccount gets the "newEditionPDA" account.
 // New Edition (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetNewEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetMasterRecordEditionV2Account sets the "masterRecordEditionV2" account.
@@ -118,7 +118,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetMasterRecordEdition
 // GetMasterRecordEditionV2Account gets the "masterRecordEditionV2" account.
 // Master Record Edition V2 (pda of ['metadata', program id, master metadata mint id, 'edition']
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetMasterRecordEditionV2Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMintOfNewTokenAccount sets the "mintOfNewToken" account.
@@ -131,7 +131,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetMintOfNewTokenAccou
 // GetMintOfNewTokenAccount gets the "mintOfNewToken" account.
 // Mint of new token - THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetMintOfNewTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetEditionPDAAccount sets the "editionPDA" account.
@@ -146,7 +146,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetEditionPDAAccount(e
 // Edition pda to mark creation - will be checked for pre-existence. (pda of ['metadata', program id, master metadata mint id, 'edition', edition_number])
 // where edition_number is NOT the edition number you pass in args but actually edition_number = floor(edition/EDITION_MARKER_BIT_SIZE).
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetEditionPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMintAuthorityAccount sets the "mintAuthority" account.
@@ -159,7 +159,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetMintAuthorityAccoun
 // GetMintAuthorityAccount gets the "mintAuthority" account.
 // Mint authority of new mint
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -172,7 +172,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetPayerAccount(payer 
 // GetPayerAccount gets the "payer" account.
 // payer
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -185,7 +185,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetVaultAuthorityAccou
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Vault authority
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetSafetyDepositTokenStoreAccount sets the "safetyDepositTokenStore" account.
@@ -198,7 +198,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetSafetyDepositTokenS
 // GetSafetyDepositTokenStoreAccount gets the "safetyDepositTokenStore" account.
 // Safety deposit token store account
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetSafetyDepositTokenStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -211,7 +211,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetSafetyDepositBoxAcc
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetVaultAccount sets the "vault" account.
@@ -224,7 +224,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetVaultAccount(vault 
 // GetVaultAccount gets the "vault" account.
 // Vault
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetUpdateAuthorityInfoAccount sets the "updateAuthorityInfo" account.
@@ -237,7 +237,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetUpdateAuthorityInfo
 // GetUpdateAuthorityInfoAccount gets the "updateAuthorityInfo" account.
 // Update authority info for new metadata
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetUpdateAuthorityInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetMasterRecordMetadataAccount sets the "masterRecordMetadata" account.
@@ -250,7 +250,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetMasterRecordMetadat
 // GetMasterRecordMetadataAccount gets the "masterRecordMetadata" account.
 // Master record metadata account
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetMasterRecordMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -263,7 +263,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetTokenProgramAccount
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -276,7 +276,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetTokenVaultProgramAc
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token vault program
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -289,7 +289,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetSystemAccount(syste
 // GetSystemAccount gets the "system" account.
 // System program
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -302,7 +302,7 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) SetRentAccount(rent ag
 // GetRentAccount gets the "rent" account.
 // Rent info
 func (inst *MintNewEditionFromMasterEditionViaVaultProxy) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[16]
+	return inst.AccountMetaSlice.Get(16)
 }
 
 func (inst MintNewEditionFromMasterEditionViaVaultProxy) Build() *Instruction {
@@ -402,23 +402,23 @@ func (inst *MintNewEditionFromMasterEditionViaVaultProxy) EncodeToTree(parent ag
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=17]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("         newMetadataKey", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("          newEditionPDA", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("  masterRecordEditionV2", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("         mintOfNewToken", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("             editionPDA", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("          mintAuthority", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                  payer", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("         vaultAuthority", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStore", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("       safetyDepositBox", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                  vault", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("    updateAuthorityInfo", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("   masterRecordMetadata", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("           tokenProgram", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("      tokenVaultProgram", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("                 system", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("                   rent", inst.AccountMetaSlice[16]))
+						accountsBranch.Child(ag_format.Meta("         newMetadataKey", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("          newEditionPDA", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("  masterRecordEditionV2", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("         mintOfNewToken", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("             editionPDA", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("          mintAuthority", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                  payer", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("         vaultAuthority", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("safetyDepositTokenStore", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("       safetyDepositBox", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                  vault", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("    updateAuthorityInfo", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("   masterRecordMetadata", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("           tokenProgram", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("      tokenVaultProgram", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("                 system", inst.AccountMetaSlice.Get(15)))
+						accountsBranch.Child(ag_format.Meta("                   rent", inst.AccountMetaSlice.Get(16)))
 					})
 				})
 		})

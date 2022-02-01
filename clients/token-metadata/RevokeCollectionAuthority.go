@@ -45,7 +45,7 @@ func (inst *RevokeCollectionAuthority) SetUseAuthorityRecordPDAAccount(useAuthor
 // GetUseAuthorityRecordPDAAccount gets the "useAuthorityRecordPDA" account.
 // Use Authority Record PDA
 func (inst *RevokeCollectionAuthority) GetUseAuthorityRecordPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetOwnedTokenAccount sets the "ownedToken" account.
@@ -58,7 +58,7 @@ func (inst *RevokeCollectionAuthority) SetOwnedTokenAccount(ownedToken ag_solana
 // GetOwnedTokenAccount gets the "ownedToken" account.
 // Owned Token Account Of Mint
 func (inst *RevokeCollectionAuthority) GetOwnedTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetMetadataAccount sets the "metadata" account.
@@ -71,7 +71,7 @@ func (inst *RevokeCollectionAuthority) SetMetadataAccount(metadata ag_solanago.P
 // GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *RevokeCollectionAuthority) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMetadataMintAccount sets the "metadataMint" account.
@@ -84,7 +84,7 @@ func (inst *RevokeCollectionAuthority) SetMetadataMintAccount(metadataMint ag_so
 // GetMetadataMintAccount gets the "metadataMint" account.
 // Mint of Metadata
 func (inst *RevokeCollectionAuthority) GetMetadataMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 func (inst RevokeCollectionAuthority) Build() *Instruction {
@@ -136,10 +136,10 @@ func (inst *RevokeCollectionAuthority) EncodeToTree(parent ag_treeout.Branches) 
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=4]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("useAuthorityRecordPDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("           ownedToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("             metadata", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("         metadataMint", inst.AccountMetaSlice[3]))
+						accountsBranch.Child(ag_format.Meta("useAuthorityRecordPDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("           ownedToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("             metadata", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("         metadataMint", inst.AccountMetaSlice.Get(3)))
 					})
 				})
 		})

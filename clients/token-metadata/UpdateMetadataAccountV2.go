@@ -46,7 +46,7 @@ func (inst *UpdateMetadataAccountV2) SetMetadataAccount(metadata ag_solanago.Pub
 // GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *UpdateMetadataAccountV2) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetUpdateAuthorityKeyAccount sets the "updateAuthorityKey" account.
@@ -59,7 +59,7 @@ func (inst *UpdateMetadataAccountV2) SetUpdateAuthorityKeyAccount(updateAuthorit
 // GetUpdateAuthorityKeyAccount gets the "updateAuthorityKey" account.
 // Update authority key
 func (inst *UpdateMetadataAccountV2) GetUpdateAuthorityKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 func (inst UpdateMetadataAccountV2) Build() *Instruction {
@@ -114,8 +114,8 @@ func (inst *UpdateMetadataAccountV2) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=2]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("          metadata", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("updateAuthorityKey", inst.AccountMetaSlice[1]))
+						accountsBranch.Child(ag_format.Meta("          metadata", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("updateAuthorityKey", inst.AccountMetaSlice.Get(1)))
 					})
 				})
 		})

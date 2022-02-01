@@ -71,7 +71,7 @@ func (inst *CombineVault) SetInitializedActivatedTokenVaultAccount(initializedAc
 // GetInitializedActivatedTokenVaultAccount gets the "initializedActivatedTokenVault" account.
 // Initialized activated token vault
 func (inst *CombineVault) GetInitializedActivatedTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetTokenAccount sets the "tokenAccount" account.
@@ -84,7 +84,7 @@ func (inst *CombineVault) SetTokenAccount(tokenAccount ag_solanago.PublicKey) *C
 // GetTokenAccount gets the "tokenAccount" account.
 // Token account containing your portion of the outstanding fraction shares
 func (inst *CombineVault) GetTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetRedeemTreasuryMintTypeTokenAccount sets the "redeemTreasuryMintTypeTokenAccount" account.
@@ -97,7 +97,7 @@ func (inst *CombineVault) SetRedeemTreasuryMintTypeTokenAccount(redeemTreasuryMi
 // GetRedeemTreasuryMintTypeTokenAccount gets the "redeemTreasuryMintTypeTokenAccount" account.
 // Token account of the redeem_treasury mint type that you will pay with
 func (inst *CombineVault) GetRedeemTreasuryMintTypeTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -110,7 +110,7 @@ func (inst *CombineVault) SetFractionMintAccount(fractionMint ag_solanago.Public
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *CombineVault) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetFractionTreasuryAccount sets the "fractionTreasury" account.
@@ -123,7 +123,7 @@ func (inst *CombineVault) SetFractionTreasuryAccount(fractionTreasury ag_solanag
 // GetFractionTreasuryAccount gets the "fractionTreasury" account.
 // Fraction treasury account
 func (inst *CombineVault) GetFractionTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetRedeemTreasuryAccount sets the "redeemTreasury" account.
@@ -136,7 +136,7 @@ func (inst *CombineVault) SetRedeemTreasuryAccount(redeemTreasury ag_solanago.Pu
 // GetRedeemTreasuryAccount gets the "redeemTreasury" account.
 // Redeem treasury account
 func (inst *CombineVault) GetRedeemTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetNewAuthorityOnTheVaultAccount sets the "newAuthorityOnTheVault" account.
@@ -149,7 +149,7 @@ func (inst *CombineVault) SetNewAuthorityOnTheVaultAccount(newAuthorityOnTheVaul
 // GetNewAuthorityOnTheVaultAccount gets the "newAuthorityOnTheVault" account.
 // New authority on the vault going forward - can be same authority if you want
 func (inst *CombineVault) GetNewAuthorityOnTheVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -162,7 +162,7 @@ func (inst *CombineVault) SetVaultAuthorityAccount(vaultAuthority ag_solanago.Pu
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority on the vault
 func (inst *CombineVault) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetTransferAuthorityAccount sets the "transferAuthority" account.
@@ -175,7 +175,7 @@ func (inst *CombineVault) SetTransferAuthorityAccount(transferAuthority ag_solan
 // GetTransferAuthorityAccount gets the "transferAuthority" account.
 // Transfer authority for the token account and outstanding fractional shares account you're transferring from
 func (inst *CombineVault) GetTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetPdaBasedBurnAuthorityAccount sets the "pdaBasedBurnAuthority" account.
@@ -188,7 +188,7 @@ func (inst *CombineVault) SetPdaBasedBurnAuthorityAccount(pdaBasedBurnAuthority 
 // GetPdaBasedBurnAuthorityAccount gets the "pdaBasedBurnAuthority" account.
 // PDA-based Burn authority for the fraction treasury account containing the uncirculated shares seed [PREFIX, program_id]
 func (inst *CombineVault) GetPdaBasedBurnAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetExternalPricingLookupAddressAccount sets the "externalPricingLookupAddress" account.
@@ -201,7 +201,7 @@ func (inst *CombineVault) SetExternalPricingLookupAddressAccount(externalPricing
 // GetExternalPricingLookupAddressAccount gets the "externalPricingLookupAddress" account.
 // External pricing lookup address
 func (inst *CombineVault) GetExternalPricingLookupAddressAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -214,7 +214,7 @@ func (inst *CombineVault) SetTokenProgramAccount(tokenProgram ag_solanago.Public
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *CombineVault) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 func (inst CombineVault) Build() *Instruction {
@@ -290,18 +290,18 @@ func (inst *CombineVault) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=12]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("initializedActivatedTokenVault", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                         token", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("   redeemTreasuryMintTypeToken", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                  fractionMint", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("              fractionTreasury", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                redeemTreasury", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("        newAuthorityOnTheVault", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                vaultAuthority", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("             transferAuthority", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("         pdaBasedBurnAuthority", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("  externalPricingLookupAddress", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("                  tokenProgram", inst.AccountMetaSlice[11]))
+						accountsBranch.Child(ag_format.Meta("initializedActivatedTokenVault", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                         token", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("   redeemTreasuryMintTypeToken", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                  fractionMint", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("              fractionTreasury", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                redeemTreasury", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("        newAuthorityOnTheVault", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                vaultAuthority", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("             transferAuthority", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("         pdaBasedBurnAuthority", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("  externalPricingLookupAddress", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("                  tokenProgram", inst.AccountMetaSlice.Get(11)))
 					})
 				})
 		})

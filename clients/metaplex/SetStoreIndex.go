@@ -65,7 +65,7 @@ func (inst *SetStoreIndex) SetStoreIndexPDAAccount(storeIndexPDA ag_solanago.Pub
 // GetStoreIndexPDAAccount gets the "storeIndexPDA" account.
 // Store index (pda of ['metaplex', program id, store key, 'index', page_number])
 func (inst *SetStoreIndex) GetStoreIndexPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetPayerInfoAccount sets the "payerInfo" account.
@@ -78,7 +78,7 @@ func (inst *SetStoreIndex) SetPayerInfoAccount(payerInfo ag_solanago.PublicKey) 
 // GetPayerInfoAccount gets the "payerInfo" account.
 // Payer info
 func (inst *SetStoreIndex) GetPayerInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionCachePDAAccount sets the "auctionCachePDA" account.
@@ -91,7 +91,7 @@ func (inst *SetStoreIndex) SetAuctionCachePDAAccount(auctionCachePDA ag_solanago
 // GetAuctionCachePDAAccount gets the "auctionCachePDA" account.
 // Auction cache (pda of ['metaplex', program id, store key, auction key, 'cache'])
 func (inst *SetStoreIndex) GetAuctionCachePDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetStoreKeyAccount sets the "storeKey" account.
@@ -104,7 +104,7 @@ func (inst *SetStoreIndex) SetStoreKeyAccount(storeKey ag_solanago.PublicKey) *S
 // GetStoreKeyAccount gets the "storeKey" account.
 // Store key
 func (inst *SetStoreIndex) GetStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -117,7 +117,7 @@ func (inst *SetStoreIndex) SetSystemAccount(system ag_solanago.PublicKey) *SetSt
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *SetStoreIndex) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -130,7 +130,7 @@ func (inst *SetStoreIndex) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *SetStoreIndex) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetAuctionCacheAboveAccount sets the "auctionCacheAbove" account.
@@ -141,11 +141,11 @@ func (inst *SetStoreIndex) SetAuctionCacheAboveAccount(auctionCacheAbove ag_sola
 	return inst
 }
 
-// GetAuctionCacheAboveAccount gets the "auctionCacheAbove" account.
+// GetAuctionCacheAboveAccount gets the "auctionCacheAbove" account (optional).
 // Auction cache above current (pda of ['metaplex', program id, store key, auction key, 'cache'])
 // Note: Can pass the below in this slot if there is no above
 func (inst *SetStoreIndex) GetAuctionCacheAboveAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetAuctionCacheBelowAccount sets the "auctionCacheBelow" account.
@@ -155,10 +155,10 @@ func (inst *SetStoreIndex) SetAuctionCacheBelowAccount(auctionCacheBelow ag_sola
 	return inst
 }
 
-// GetAuctionCacheBelowAccount gets the "auctionCacheBelow" account.
+// GetAuctionCacheBelowAccount gets the "auctionCacheBelow" account (optional).
 // Auction cache below current (pda of ['metaplex', program id, store key, auction key, 'cache'])
 func (inst *SetStoreIndex) GetAuctionCacheBelowAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 func (inst SetStoreIndex) Build() *Instruction {
@@ -230,14 +230,14 @@ func (inst *SetStoreIndex) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=8]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("    storeIndexPDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("        payerInfo", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("  auctionCachePDA", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("         storeKey", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("           system", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("       rentSysvar", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("auctionCacheAbove", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("auctionCacheBelow", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("    storeIndexPDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("        payerInfo", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("  auctionCachePDA", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("         storeKey", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("           system", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("       rentSysvar", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("auctionCacheAbove", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("auctionCacheBelow", inst.AccountMetaSlice.Get(7)))
 					})
 				})
 		})

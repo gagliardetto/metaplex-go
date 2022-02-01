@@ -62,7 +62,7 @@ func (inst *SetWhitelistedCreator) SetWhitelistedCreatorPDAKeyAccount(whiteliste
 // GetWhitelistedCreatorPDAKeyAccount gets the "whitelistedCreatorPDAKey" account.
 // The whitelisted creator pda key, seed of ['metaplex', store key, creator key]
 func (inst *SetWhitelistedCreator) GetWhitelistedCreatorPDAKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAdminWalletAccount sets the "adminWallet" account.
@@ -75,7 +75,7 @@ func (inst *SetWhitelistedCreator) SetAdminWalletAccount(adminWallet ag_solanago
 // GetAdminWalletAccount gets the "adminWallet" account.
 // The admin wallet
 func (inst *SetWhitelistedCreator) GetAdminWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -88,7 +88,7 @@ func (inst *SetWhitelistedCreator) SetPayerAccount(payer ag_solanago.PublicKey) 
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *SetWhitelistedCreator) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetCreatorKeyAccount sets the "creatorKey" account.
@@ -101,7 +101,7 @@ func (inst *SetWhitelistedCreator) SetCreatorKeyAccount(creatorKey ag_solanago.P
 // GetCreatorKeyAccount gets the "creatorKey" account.
 // The creator key
 func (inst *SetWhitelistedCreator) GetCreatorKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetStoreKeyAccount sets the "storeKey" account.
@@ -114,7 +114,7 @@ func (inst *SetWhitelistedCreator) SetStoreKeyAccount(storeKey ag_solanago.Publi
 // GetStoreKeyAccount gets the "storeKey" account.
 // The store key, seed of ['metaplex', admin wallet]
 func (inst *SetWhitelistedCreator) GetStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -127,7 +127,7 @@ func (inst *SetWhitelistedCreator) SetSystemAccount(system ag_solanago.PublicKey
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *SetWhitelistedCreator) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -140,7 +140,7 @@ func (inst *SetWhitelistedCreator) SetRentSysvarAccount(rentSysvar ag_solanago.P
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *SetWhitelistedCreator) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 func (inst SetWhitelistedCreator) Build() *Instruction {
@@ -210,13 +210,13 @@ func (inst *SetWhitelistedCreator) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=7]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("whitelistedCreatorPDAKey", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("             adminWallet", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                   payer", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              creatorKey", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                storeKey", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                  system", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("              rentSysvar", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("whitelistedCreatorPDAKey", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("             adminWallet", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                   payer", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("              creatorKey", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                storeKey", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                  system", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("              rentSysvar", inst.AccountMetaSlice.Get(6)))
 					})
 				})
 		})

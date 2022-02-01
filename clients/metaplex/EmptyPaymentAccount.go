@@ -106,7 +106,7 @@ func (inst *EmptyPaymentAccount) SetAcceptPaymentAccount(acceptPayment ag_solana
 // GetAcceptPaymentAccount gets the "acceptPayment" account.
 // The accept payment account on the auction manager
 func (inst *EmptyPaymentAccount) GetAcceptPaymentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetDestinationAccount sets the "destinationAccount" account.
@@ -119,7 +119,7 @@ func (inst *EmptyPaymentAccount) SetDestinationAccount(destinationAccount ag_sol
 // GetDestinationAccount gets the "destinationAccount" account.
 // The destination account of same mint type as the accept payment account. Must be an Associated Token Account.
 func (inst *EmptyPaymentAccount) GetDestinationAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionManagerAccount sets the "auctionManager" account.
@@ -132,7 +132,7 @@ func (inst *EmptyPaymentAccount) SetAuctionManagerAccount(auctionManager ag_sola
 // GetAuctionManagerAccount gets the "auctionManager" account.
 // Auction manager
 func (inst *EmptyPaymentAccount) GetAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPayoutTicketInfoAccount sets the "payoutTicketInfo" account.
@@ -145,7 +145,7 @@ func (inst *EmptyPaymentAccount) SetPayoutTicketInfoAccount(payoutTicketInfo ag_
 // GetPayoutTicketInfoAccount gets the "payoutTicketInfo" account.
 // Payout ticket info to keep track of this artist or auctioneer's payment, pda of [metaplex, auction manager, winning config index OR 'participation', safety deposit key]
 func (inst *EmptyPaymentAccount) GetPayoutTicketInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -158,7 +158,7 @@ func (inst *EmptyPaymentAccount) SetPayerAccount(payer ag_solanago.PublicKey) *E
 // GetPayerAccount gets the "payer" account.
 // payer
 func (inst *EmptyPaymentAccount) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMetadataAccount sets the "metadata" account.
@@ -171,7 +171,7 @@ func (inst *EmptyPaymentAccount) SetMetadataAccount(metadata ag_solanago.PublicK
 // GetMetadataAccount gets the "metadata" account.
 // The metadata
 func (inst *EmptyPaymentAccount) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetMasterEditionAccount sets the "masterEdition" account.
@@ -182,11 +182,11 @@ func (inst *EmptyPaymentAccount) SetMasterEditionAccount(masterEdition ag_solana
 	return inst
 }
 
-// GetMasterEditionAccount gets the "masterEdition" account.
+// GetMasterEditionAccount gets the "masterEdition" account (optional).
 // The master edition of the metadata (optional if exists)
 // (pda of ['metadata', program id, metadata mint id, 'edition']) - remember PDA is relative to token metadata program
 func (inst *EmptyPaymentAccount) GetMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -199,7 +199,7 @@ func (inst *EmptyPaymentAccount) SetSafetyDepositBoxAccount(safetyDepositBox ag_
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // Safety deposit box account
 func (inst *EmptyPaymentAccount) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetAuctionManagerStoreAccount sets the "auctionManagerStore" account.
@@ -212,7 +212,7 @@ func (inst *EmptyPaymentAccount) SetAuctionManagerStoreAccount(auctionManagerSto
 // GetAuctionManagerStoreAccount gets the "auctionManagerStore" account.
 // The store of the auction manager
 func (inst *EmptyPaymentAccount) GetAuctionManagerStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetVaultAccount sets the "vault" account.
@@ -225,7 +225,7 @@ func (inst *EmptyPaymentAccount) SetVaultAccount(vault ag_solanago.PublicKey) *E
 // GetVaultAccount gets the "vault" account.
 // The vault
 func (inst *EmptyPaymentAccount) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -238,7 +238,7 @@ func (inst *EmptyPaymentAccount) SetAuctionAccount(auction ag_solanago.PublicKey
 // GetAuctionAccount gets the "auction" account.
 // Auction
 func (inst *EmptyPaymentAccount) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -251,7 +251,7 @@ func (inst *EmptyPaymentAccount) SetTokenProgramAccount(tokenProgram ag_solanago
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *EmptyPaymentAccount) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetSystemProgramAccount sets the "systemProgram" account.
@@ -264,7 +264,7 @@ func (inst *EmptyPaymentAccount) SetSystemProgramAccount(systemProgram ag_solana
 // GetSystemProgramAccount gets the "systemProgram" account.
 // System program
 func (inst *EmptyPaymentAccount) GetSystemProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -277,7 +277,7 @@ func (inst *EmptyPaymentAccount) SetRentSysvarAccount(rentSysvar ag_solanago.Pub
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *EmptyPaymentAccount) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetAuctionWinnerTokenTypeTrackerAccount sets the "auctionWinnerTokenTypeTracker" account.
@@ -290,7 +290,7 @@ func (inst *EmptyPaymentAccount) SetAuctionWinnerTokenTypeTrackerAccount(auction
 // GetAuctionWinnerTokenTypeTrackerAccount gets the "auctionWinnerTokenTypeTracker" account.
 // AuctionWinnerTokenTypeTracker, pda of seed ['metaplex', program id, auction manager key, 'totals']
 func (inst *EmptyPaymentAccount) GetAuctionWinnerTokenTypeTrackerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetSafetyDepositConfigAccount sets the "safetyDepositConfig" account.
@@ -303,7 +303,7 @@ func (inst *EmptyPaymentAccount) SetSafetyDepositConfigAccount(safetyDepositConf
 // GetSafetyDepositConfigAccount gets the "safetyDepositConfig" account.
 // Safety deposit config pda of ['metaplex', program id, auction manager, safety deposit]
 func (inst *EmptyPaymentAccount) GetSafetyDepositConfigAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 func (inst EmptyPaymentAccount) Build() *Instruction {
@@ -400,22 +400,22 @@ func (inst *EmptyPaymentAccount) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=16]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("                acceptPayment", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                  destination", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               auctionManager", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("             payoutTicketInfo", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                        payer", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                     metadata", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                masterEdition", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("          auctionManagerStore", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                        vault", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                      auction", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("                 tokenProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("                systemProgram", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("auctionWinnerTokenTypeTracker", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("          safetyDepositConfig", inst.AccountMetaSlice[15]))
+						accountsBranch.Child(ag_format.Meta("                acceptPayment", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                  destination", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               auctionManager", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("             payoutTicketInfo", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                        payer", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                     metadata", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                masterEdition", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("          auctionManagerStore", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                        vault", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                      auction", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("                 tokenProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("                systemProgram", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("auctionWinnerTokenTypeTracker", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("          safetyDepositConfig", inst.AccountMetaSlice.Get(15)))
 					})
 				})
 		})

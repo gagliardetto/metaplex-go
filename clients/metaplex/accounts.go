@@ -10,57 +10,57 @@ import (
 type Key ag_binary.BorshEnum
 
 const (
-	Uninitialized_Key Key = iota
-	OriginalAuthorityLookupV1_Key
-	BidRedemptionTicketV1_Key
-	StoreV1_Key
-	WhitelistedCreatorV1_Key
-	PayoutTicketV1_Key
-	SafetyDepositValidationTicketV1_Key
-	AuctionManagerV1_Key
-	PrizeTrackingTicketV1_Key
-	SafetyDepositConfigV1_Key
-	AuctionManagerV2_Key
-	BidRedemptionTicketV2_Key
-	AuctionWinnerTokenTypeTrackerV1_Key
-	StoreIndexerV1_Key
-	AuctionCacheV1_Key
-	StoreConfigV1_Key
+	KeyUninitialized Key = iota
+	KeyOriginalAuthorityLookupV1
+	KeyBidRedemptionTicketV1
+	KeyStoreV1
+	KeyWhitelistedCreatorV1
+	KeyPayoutTicketV1
+	KeySafetyDepositValidationTicketV1
+	KeyAuctionManagerV1
+	KeyPrizeTrackingTicketV1
+	KeySafetyDepositConfigV1
+	KeyAuctionManagerV2
+	KeyBidRedemptionTicketV2
+	KeyAuctionWinnerTokenTypeTrackerV1
+	KeyStoreIndexerV1
+	KeyAuctionCacheV1
+	KeyStoreConfigV1
 )
 
 func (value Key) String() string {
 	switch value {
-	case Uninitialized_Key:
+	case KeyUninitialized:
 		return "Uninitialized"
-	case OriginalAuthorityLookupV1_Key:
+	case KeyOriginalAuthorityLookupV1:
 		return "OriginalAuthorityLookupV1"
-	case BidRedemptionTicketV1_Key:
+	case KeyBidRedemptionTicketV1:
 		return "BidRedemptionTicketV1"
-	case StoreV1_Key:
+	case KeyStoreV1:
 		return "StoreV1"
-	case WhitelistedCreatorV1_Key:
+	case KeyWhitelistedCreatorV1:
 		return "WhitelistedCreatorV1"
-	case PayoutTicketV1_Key:
+	case KeyPayoutTicketV1:
 		return "PayoutTicketV1"
-	case SafetyDepositValidationTicketV1_Key:
+	case KeySafetyDepositValidationTicketV1:
 		return "SafetyDepositValidationTicketV1"
-	case AuctionManagerV1_Key:
+	case KeyAuctionManagerV1:
 		return "AuctionManagerV1"
-	case PrizeTrackingTicketV1_Key:
+	case KeyPrizeTrackingTicketV1:
 		return "PrizeTrackingTicketV1"
-	case SafetyDepositConfigV1_Key:
+	case KeySafetyDepositConfigV1:
 		return "SafetyDepositConfigV1"
-	case AuctionManagerV2_Key:
+	case KeyAuctionManagerV2:
 		return "AuctionManagerV2"
-	case BidRedemptionTicketV2_Key:
+	case KeyBidRedemptionTicketV2:
 		return "BidRedemptionTicketV2"
-	case AuctionWinnerTokenTypeTrackerV1_Key:
+	case KeyAuctionWinnerTokenTypeTrackerV1:
 		return "AuctionWinnerTokenTypeTrackerV1"
-	case StoreIndexerV1_Key:
+	case KeyStoreIndexerV1:
 		return "StoreIndexerV1"
-	case AuctionCacheV1_Key:
+	case KeyAuctionCacheV1:
 		return "AuctionCacheV1"
-	case StoreConfigV1_Key:
+	case KeyStoreConfigV1:
 		return "StoreConfigV1"
 	default:
 		return ""
@@ -451,15 +451,15 @@ func (obj *ParticipationConfigV2) UnmarshalWithDecoder(decoder *ag_binary.Decode
 type WinningConstraint ag_binary.BorshEnum
 
 const (
-	NoParticipationPrize_WinningConstraint WinningConstraint = iota
-	ParticipationPrizeGiven_WinningConstraint
+	WinningConstraintNoParticipationPrize WinningConstraint = iota
+	WinningConstraintParticipationPrizeGiven
 )
 
 func (value WinningConstraint) String() string {
 	switch value {
-	case NoParticipationPrize_WinningConstraint:
+	case WinningConstraintNoParticipationPrize:
 		return "NoParticipationPrize"
-	case ParticipationPrizeGiven_WinningConstraint:
+	case WinningConstraintParticipationPrizeGiven:
 		return "ParticipationPrizeGiven"
 	default:
 		return ""
@@ -469,18 +469,18 @@ func (value WinningConstraint) String() string {
 type NonWinningConstraint ag_binary.BorshEnum
 
 const (
-	NoParticipationPrize_NonWinningConstraint NonWinningConstraint = iota
-	GivenForFixedPrice_NonWinningConstraint
-	GivenForBidPrice_NonWinningConstraint
+	NonWinningConstraintNoParticipationPrize NonWinningConstraint = iota
+	NonWinningConstraintGivenForFixedPrice
+	NonWinningConstraintGivenForBidPrice
 )
 
 func (value NonWinningConstraint) String() string {
 	switch value {
-	case NoParticipationPrize_NonWinningConstraint:
+	case NonWinningConstraintNoParticipationPrize:
 		return "NoParticipationPrize"
-	case GivenForFixedPrice_NonWinningConstraint:
+	case NonWinningConstraintGivenForFixedPrice:
 		return "GivenForFixedPrice"
-	case GivenForBidPrice_NonWinningConstraint:
+	case NonWinningConstraintGivenForBidPrice:
 		return "GivenForBidPrice"
 	default:
 		return ""
@@ -502,35 +502,35 @@ const (
 	// No metadata ownership is transferred in this instruction, which means while you may be transferring
 	// the token for a limited/open edition away, you would still be (nominally) the owner of the limited edition
 	// metadata, though it confers no rights or privileges of any kind.
-	TokenOnlyTransfer_WinningConfigType WinningConfigType = iota
+	WinningConfigTypeTokenOnlyTransfer WinningConfigType = iota
 
 	// Means you are auctioning off the master edition record and it's metadata ownership as well as the
 	// token itself. The other person will be able to mint authorization tokens and make changes to the
 	// artwork.
-	FullRightsTransfer_WinningConfigType
+	WinningConfigTypeFullRightsTransfer
 
 	// Means you are using authorization tokens to print off editions during the auction using
 	// from a MasterEditionV1
-	PrintingV1_WinningConfigType
+	WinningConfigTypePrintingV1
 
 	// Means you are using the MasterEditionV2 to print off editions
-	PrintingV2_WinningConfigType
+	WinningConfigTypePrintingV2
 
 	// Means you are using a MasterEditionV2 as a participation prize.
-	Participation_WinningConfigType
+	WinningConfigTypeParticipation
 )
 
 func (value WinningConfigType) String() string {
 	switch value {
-	case TokenOnlyTransfer_WinningConfigType:
+	case WinningConfigTypeTokenOnlyTransfer:
 		return "TokenOnlyTransfer"
-	case FullRightsTransfer_WinningConfigType:
+	case WinningConfigTypeFullRightsTransfer:
 		return "FullRightsTransfer"
-	case PrintingV1_WinningConfigType:
+	case WinningConfigTypePrintingV1:
 		return "PrintingV1"
-	case PrintingV2_WinningConfigType:
+	case WinningConfigTypePrintingV2:
 		return "PrintingV2"
-	case Participation_WinningConfigType:
+	case WinningConfigTypeParticipation:
 		return "Participation"
 	default:
 		return ""
@@ -540,24 +540,24 @@ func (value WinningConfigType) String() string {
 type AuctionManagerStatus ag_binary.BorshEnum
 
 const (
-	Initialized_AuctionManagerStatus AuctionManagerStatus = iota
-	Validated_AuctionManagerStatus
-	Running_AuctionManagerStatus
-	Disbursing_AuctionManagerStatus
-	Finished_AuctionManagerStatus
+	AuctionManagerStatusInitialized AuctionManagerStatus = iota
+	AuctionManagerStatusValidated
+	AuctionManagerStatusRunning
+	AuctionManagerStatusDisbursing
+	AuctionManagerStatusFinished
 )
 
 func (value AuctionManagerStatus) String() string {
 	switch value {
-	case Initialized_AuctionManagerStatus:
+	case AuctionManagerStatusInitialized:
 		return "Initialized"
-	case Validated_AuctionManagerStatus:
+	case AuctionManagerStatusValidated:
 		return "Validated"
-	case Running_AuctionManagerStatus:
+	case AuctionManagerStatusRunning:
 		return "Running"
-	case Disbursing_AuctionManagerStatus:
+	case AuctionManagerStatusDisbursing:
 		return "Disbursing"
-	case Finished_AuctionManagerStatus:
+	case AuctionManagerStatusFinished:
 		return "Finished"
 	default:
 		return ""
@@ -1035,36 +1035,36 @@ const (
 	// It simply ignores your manual assignment and goes purely off order in the enum.
 	// Because of how bad it is, we have to shove in these "padding" enums to make sure
 	// the values we set are the values it uses even though we dont use them for anything.
-	Padding0_TupleNumericType TupleNumericType = iota
-	U8_TupleNumericType
-	U16_TupleNumericType
-	Padding1_TupleNumericType
-	U32_TupleNumericType
-	Padding2_TupleNumericType
-	Padding3_TupleNumericType
-	Padding4_TupleNumericType
-	U64_TupleNumericType
+	TupleNumericTypePadding0 TupleNumericType = iota
+	TupleNumericTypeU8
+	TupleNumericTypeU16
+	TupleNumericTypePadding1
+	TupleNumericTypeU32
+	TupleNumericTypePadding2
+	TupleNumericTypePadding3
+	TupleNumericTypePadding4
+	TupleNumericTypeU64
 )
 
 func (value TupleNumericType) String() string {
 	switch value {
-	case Padding0_TupleNumericType:
+	case TupleNumericTypePadding0:
 		return "Padding0"
-	case U8_TupleNumericType:
+	case TupleNumericTypeU8:
 		return "U8"
-	case U16_TupleNumericType:
+	case TupleNumericTypeU16:
 		return "U16"
-	case Padding1_TupleNumericType:
+	case TupleNumericTypePadding1:
 		return "Padding1"
-	case U32_TupleNumericType:
+	case TupleNumericTypeU32:
 		return "U32"
-	case Padding2_TupleNumericType:
+	case TupleNumericTypePadding2:
 		return "Padding2"
-	case Padding3_TupleNumericType:
+	case TupleNumericTypePadding3:
 		return "Padding3"
-	case Padding4_TupleNumericType:
+	case TupleNumericTypePadding4:
 		return "Padding4"
-	case U64_TupleNumericType:
+	case TupleNumericTypeU64:
 		return "U64"
 	default:
 		return ""

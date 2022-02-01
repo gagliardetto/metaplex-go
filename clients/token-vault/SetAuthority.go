@@ -42,7 +42,7 @@ func (inst *SetAuthority) SetVaultAccount(vault ag_solanago.PublicKey) *SetAutho
 // GetVaultAccount gets the "vault" account.
 // Vault
 func (inst *SetAuthority) GetVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -55,7 +55,7 @@ func (inst *SetAuthority) SetVaultAuthorityAccount(vaultAuthority ag_solanago.Pu
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Vault authority
 func (inst *SetAuthority) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetNewAuthorityAccount sets the "newAuthority" account.
@@ -68,7 +68,7 @@ func (inst *SetAuthority) SetNewAuthorityAccount(newAuthority ag_solanago.Public
 // GetNewAuthorityAccount gets the "newAuthority" account.
 // New authority
 func (inst *SetAuthority) GetNewAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 func (inst SetAuthority) Build() *Instruction {
@@ -117,9 +117,9 @@ func (inst *SetAuthority) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("         vault", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("vaultAuthority", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("  newAuthority", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("         vault", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("vaultAuthority", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("  newAuthority", inst.AccountMetaSlice.Get(2)))
 					})
 				})
 		})

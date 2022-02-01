@@ -73,7 +73,7 @@ func (inst *AddTokenToInactiveVault) SetUninitializedSafetyDepositBoxAccount(uni
 // Uninitialized safety deposit box account address (will be created and allocated by this endpoint)
 // Address should be pda with seed of [PREFIX, vault_address, token_mint_address]
 func (inst *AddTokenToInactiveVault) GetUninitializedSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetInitializedTokenAccount sets the "initializedToken" account.
@@ -86,7 +86,7 @@ func (inst *AddTokenToInactiveVault) SetInitializedTokenAccount(initializedToken
 // GetInitializedTokenAccount gets the "initializedToken" account.
 // Initialized Token account
 func (inst *AddTokenToInactiveVault) GetInitializedTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetInitializedTokenStoreAccount sets the "initializedTokenStore" account.
@@ -99,7 +99,7 @@ func (inst *AddTokenToInactiveVault) SetInitializedTokenStoreAccount(initialized
 // GetInitializedTokenStoreAccount gets the "initializedTokenStore" account.
 // Initialized Token store account with authority of this program, this will get set on the safety deposit box
 func (inst *AddTokenToInactiveVault) GetInitializedTokenStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetInitializedInactiveFractionalizedTokenVaultAccount sets the "initializedInactiveFractionalizedTokenVault" account.
@@ -112,7 +112,7 @@ func (inst *AddTokenToInactiveVault) SetInitializedInactiveFractionalizedTokenVa
 // GetInitializedInactiveFractionalizedTokenVaultAccount gets the "initializedInactiveFractionalizedTokenVault" account.
 // Initialized inactive fractionalized token vault
 func (inst *AddTokenToInactiveVault) GetInitializedInactiveFractionalizedTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -125,7 +125,7 @@ func (inst *AddTokenToInactiveVault) SetVaultAuthorityAccount(vaultAuthority ag_
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority on the vault
 func (inst *AddTokenToInactiveVault) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -138,7 +138,7 @@ func (inst *AddTokenToInactiveVault) SetPayerAccount(payer ag_solanago.PublicKey
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *AddTokenToInactiveVault) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetTransferAuthorityAccount sets the "transferAuthority" account.
@@ -151,7 +151,7 @@ func (inst *AddTokenToInactiveVault) SetTransferAuthorityAccount(transferAuthori
 // GetTransferAuthorityAccount gets the "transferAuthority" account.
 // Transfer Authority to move desired token amount from token account to safety deposit
 func (inst *AddTokenToInactiveVault) GetTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -164,7 +164,7 @@ func (inst *AddTokenToInactiveVault) SetTokenProgramAccount(tokenProgram ag_sola
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *AddTokenToInactiveVault) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -177,7 +177,7 @@ func (inst *AddTokenToInactiveVault) SetRentSysvarAccount(rentSysvar ag_solanago
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *AddTokenToInactiveVault) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetSystemAccountSysvarAccount sets the "systemAccountSysvar" account.
@@ -190,7 +190,7 @@ func (inst *AddTokenToInactiveVault) SetSystemAccountSysvarAccount(systemAccount
 // GetSystemAccountSysvarAccount gets the "systemAccountSysvar" account.
 // System account sysvar
 func (inst *AddTokenToInactiveVault) GetSystemAccountSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 func (inst AddTokenToInactiveVault) Build() *Instruction {
@@ -269,16 +269,16 @@ func (inst *AddTokenToInactiveVault) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=10]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("              uninitializedSafetyDepositBox", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                           initializedToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                      initializedTokenStore", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("initializedInactiveFractionalizedTokenVault", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                             vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                                      payer", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                          transferAuthority", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                               tokenProgram", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                                 rentSysvar", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                        systemAccountSysvar", inst.AccountMetaSlice[9]))
+						accountsBranch.Child(ag_format.Meta("              uninitializedSafetyDepositBox", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                           initializedToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                      initializedTokenStore", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("initializedInactiveFractionalizedTokenVault", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                             vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                                      payer", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                          transferAuthority", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                               tokenProgram", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                                 rentSysvar", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                        systemAccountSysvar", inst.AccountMetaSlice.Get(9)))
 					})
 				})
 		})

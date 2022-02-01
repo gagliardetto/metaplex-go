@@ -543,15 +543,15 @@ func (obj *Creator) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error)
 type WhitelistMintMode ag_binary.BorshEnum
 
 const (
-	BurnEveryTime_WhitelistMintMode WhitelistMintMode = iota
-	NeverBurn_WhitelistMintMode
+	WhitelistMintModeBurnEveryTime WhitelistMintMode = iota
+	WhitelistMintModeNeverBurn
 )
 
 func (value WhitelistMintMode) String() string {
 	switch value {
-	case BurnEveryTime_WhitelistMintMode:
+	case WhitelistMintModeBurnEveryTime:
 		return "BurnEveryTime"
-	case NeverBurn_WhitelistMintMode:
+	case WhitelistMintModeNeverBurn:
 		return "NeverBurn"
 	default:
 		return ""
@@ -561,15 +561,15 @@ func (value WhitelistMintMode) String() string {
 type EndSettingType ag_binary.BorshEnum
 
 const (
-	Date_EndSettingType EndSettingType = iota
-	Amount_EndSettingType
+	EndSettingTypeDate EndSettingType = iota
+	EndSettingTypeAmount
 )
 
 func (value EndSettingType) String() string {
 	switch value {
-	case Date_EndSettingType:
+	case EndSettingTypeDate:
 		return "Date"
-	case Amount_EndSettingType:
+	case EndSettingTypeAmount:
 		return "Amount"
 	default:
 		return ""

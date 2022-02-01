@@ -44,7 +44,7 @@ func (inst *UpdateAuthority) SetCandyMachineAccount(candyMachine ag_solanago.Pub
 
 // GetCandyMachineAccount gets the "candyMachine" account.
 func (inst *UpdateAuthority) GetCandyMachineAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAuthorityAccount sets the "authority" account.
@@ -55,7 +55,7 @@ func (inst *UpdateAuthority) SetAuthorityAccount(authority ag_solanago.PublicKey
 
 // GetAuthorityAccount gets the "authority" account.
 func (inst *UpdateAuthority) GetAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetWalletAccount sets the "wallet" account.
@@ -66,7 +66,7 @@ func (inst *UpdateAuthority) SetWalletAccount(wallet ag_solanago.PublicKey) *Upd
 
 // GetWalletAccount gets the "wallet" account.
 func (inst *UpdateAuthority) GetWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 func (inst UpdateAuthority) Build() *Instruction {
@@ -121,9 +121,9 @@ func (inst *UpdateAuthority) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("candyMachine", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("   authority", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("      wallet", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("candyMachine", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("   authority", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("      wallet", inst.AccountMetaSlice.Get(2)))
 					})
 				})
 		})

@@ -45,7 +45,7 @@ func (inst *UpdateExternalPriceAccount) SetExternalPriceAccount(externalPrice ag
 // GetExternalPriceAccount gets the "externalPrice" account.
 // External price account
 func (inst *UpdateExternalPriceAccount) GetExternalPriceAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 func (inst UpdateExternalPriceAccount) Build() *Instruction {
@@ -97,7 +97,7 @@ func (inst *UpdateExternalPriceAccount) EncodeToTree(parent ag_treeout.Branches)
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=1]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("externalPrice", inst.AccountMetaSlice[0]))
+						accountsBranch.Child(ag_format.Meta("externalPrice", inst.AccountMetaSlice.Get(0)))
 					})
 				})
 		})

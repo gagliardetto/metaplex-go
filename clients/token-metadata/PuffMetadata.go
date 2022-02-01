@@ -37,7 +37,7 @@ func (inst *PuffMetadata) SetMetadataAccount(metadata ag_solanago.PublicKey) *Pu
 // GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *PuffMetadata) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 func (inst PuffMetadata) Build() *Instruction {
@@ -80,7 +80,7 @@ func (inst *PuffMetadata) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=1]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("metadata", inst.AccountMetaSlice[0]))
+						accountsBranch.Child(ag_format.Meta("metadata", inst.AccountMetaSlice.Get(0)))
 					})
 				})
 		})

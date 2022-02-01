@@ -58,7 +58,7 @@ func (inst *MintFractionalShares) SetFractionTreasuryAccount(fractionTreasury ag
 // GetFractionTreasuryAccount gets the "fractionTreasury" account.
 // Fraction treasury
 func (inst *MintFractionalShares) GetFractionTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -71,7 +71,7 @@ func (inst *MintFractionalShares) SetFractionMintAccount(fractionMint ag_solanag
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *MintFractionalShares) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetInitializedActiveTokenVaultAccount sets the "initializedActiveTokenVault" account.
@@ -84,7 +84,7 @@ func (inst *MintFractionalShares) SetInitializedActiveTokenVaultAccount(initiali
 // GetInitializedActiveTokenVaultAccount gets the "initializedActiveTokenVault" account.
 // The initialized active token vault
 func (inst *MintFractionalShares) GetInitializedActiveTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPdaBasedMintAuthorityAccount sets the "pdaBasedMintAuthority" account.
@@ -97,7 +97,7 @@ func (inst *MintFractionalShares) SetPdaBasedMintAuthorityAccount(pdaBasedMintAu
 // GetPdaBasedMintAuthorityAccount gets the "pdaBasedMintAuthority" account.
 // PDA-based Mint authority to mint tokens to treasury[PREFIX, program_id]
 func (inst *MintFractionalShares) GetPdaBasedMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -110,7 +110,7 @@ func (inst *MintFractionalShares) SetVaultAuthorityAccount(vaultAuthority ag_sol
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority of vault
 func (inst *MintFractionalShares) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -123,7 +123,7 @@ func (inst *MintFractionalShares) SetTokenProgramAccount(tokenProgram ag_solanag
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *MintFractionalShares) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 func (inst MintFractionalShares) Build() *Instruction {
@@ -190,12 +190,12 @@ func (inst *MintFractionalShares) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=6]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("               fractionMint", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("      pdaBasedMintAuthority", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("               fractionMint", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("      pdaBasedMintAuthority", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice.Get(5)))
 					})
 				})
 		})

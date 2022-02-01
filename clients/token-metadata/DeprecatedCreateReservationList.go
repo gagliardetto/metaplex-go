@@ -59,7 +59,7 @@ func (inst *DeprecatedCreateReservationList) SetPdaForReservationlistAccount(pda
 // GetPdaForReservationlistAccount gets the "pdaForReservationlist" account.
 // PDA for ReservationList of ['metadata', program id, master edition key, 'reservation', resource-key]
 func (inst *DeprecatedCreateReservationList) GetPdaForReservationlistAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -72,7 +72,7 @@ func (inst *DeprecatedCreateReservationList) SetPayerAccount(payer ag_solanago.P
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *DeprecatedCreateReservationList) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetUpdateAuthorityAccount sets the "updateAuthority" account.
@@ -85,7 +85,7 @@ func (inst *DeprecatedCreateReservationList) SetUpdateAuthorityAccount(updateAut
 // GetUpdateAuthorityAccount gets the "updateAuthority" account.
 // Update authority
 func (inst *DeprecatedCreateReservationList) GetUpdateAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetMasterEditionV1Account sets the "masterEditionV1" account.
@@ -98,7 +98,7 @@ func (inst *DeprecatedCreateReservationList) SetMasterEditionV1Account(masterEdi
 // GetMasterEditionV1Account gets the "masterEditionV1" account.
 // Master Edition V1 key (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *DeprecatedCreateReservationList) GetMasterEditionV1Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetResourceAccount sets the "resource" account.
@@ -113,7 +113,7 @@ func (inst *DeprecatedCreateReservationList) SetResourceAccount(resource ag_sola
 // A resource you wish to tie the reservation list to. This is so your later visitors who come to
 // redeem can derive your reservation list PDA with something they can easily get at. You choose what this should be.
 func (inst *DeprecatedCreateReservationList) GetResourceAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMetadataKeyPDAAccount sets the "metadataKeyPDA" account.
@@ -126,7 +126,7 @@ func (inst *DeprecatedCreateReservationList) SetMetadataKeyPDAAccount(metadataKe
 // GetMetadataKeyPDAAccount gets the "metadataKeyPDA" account.
 // Metadata key (pda of ['metadata', program id, mint id])
 func (inst *DeprecatedCreateReservationList) GetMetadataKeyPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -139,7 +139,7 @@ func (inst *DeprecatedCreateReservationList) SetSystemAccount(system ag_solanago
 // GetSystemAccount gets the "system" account.
 // System program
 func (inst *DeprecatedCreateReservationList) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -152,7 +152,7 @@ func (inst *DeprecatedCreateReservationList) SetRentAccount(rent ag_solanago.Pub
 // GetRentAccount gets the "rent" account.
 // Rent info
 func (inst *DeprecatedCreateReservationList) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 func (inst DeprecatedCreateReservationList) Build() *Instruction {
@@ -216,14 +216,14 @@ func (inst *DeprecatedCreateReservationList) EncodeToTree(parent ag_treeout.Bran
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=8]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("pdaForReservationlist", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                payer", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("      updateAuthority", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("      masterEditionV1", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("             resource", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("       metadataKeyPDA", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice[7]))
+						accountsBranch.Child(ag_format.Meta("pdaForReservationlist", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                payer", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("      updateAuthority", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("      masterEditionV1", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("             resource", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("       metadataKeyPDA", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("               system", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                 rent", inst.AccountMetaSlice.Get(7)))
 					})
 				})
 		})

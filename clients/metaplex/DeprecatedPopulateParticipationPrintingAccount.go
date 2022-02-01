@@ -90,7 +90,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetSafetyDepositToke
 // GetSafetyDepositTokenStorageAccount gets the "safetyDepositTokenStorage" account.
 // Safety deposit token store
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetSafetyDepositTokenStorageAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetTransientAccount sets the "transientAccount" account.
@@ -103,7 +103,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetTransientAccount(
 // GetTransientAccount gets the "transientAccount" account.
 // Transient account with mint of one time authorization account on master edition - you can delete after this txn
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetTransientAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPrintingTokenAccount sets the "printingToken" account.
@@ -116,7 +116,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetPrintingTokenAcco
 // GetPrintingTokenAccount gets the "printingToken" account.
 // The printing token account on the participation state of the auction manager
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetPrintingTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetOneTimePrintingAuthorizationMintAccount sets the "oneTimePrintingAuthorizationMint" account.
@@ -129,7 +129,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetOneTimePrintingAu
 // GetOneTimePrintingAuthorizationMintAccount gets the "oneTimePrintingAuthorizationMint" account.
 // One time printing authorization mint
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetOneTimePrintingAuthorizationMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetPrintingMintAccount sets the "printingMint" account.
@@ -142,7 +142,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetPrintingMintAccou
 // GetPrintingMintAccount gets the "printingMint" account.
 // Printing mint
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetPrintingMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetParticipationPrizeSafetyDepositAccount sets the "participationPrizeSafetyDeposit" account.
@@ -155,7 +155,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetParticipationPriz
 // GetParticipationPrizeSafetyDepositAccount gets the "participationPrizeSafetyDeposit" account.
 // Safety deposit of the participation prize
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetParticipationPrizeSafetyDepositAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetVaultInfoAccount sets the "vaultInfo" account.
@@ -168,7 +168,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetVaultInfoAccount(
 // GetVaultInfoAccount gets the "vaultInfo" account.
 // Vault info
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetVaultInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -181,7 +181,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetFractionMintAccou
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetAuctionInfoAccount sets the "auctionInfo" account.
@@ -194,7 +194,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetAuctionInfoAccoun
 // GetAuctionInfoAccount gets the "auctionInfo" account.
 // Auction info
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetAuctionInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetAuctionManagerInfoAccount sets the "auctionManagerInfo" account.
@@ -207,7 +207,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetAuctionManagerInf
 // GetAuctionManagerInfoAccount gets the "auctionManagerInfo" account.
 // Auction manager info
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetAuctionManagerInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -220,7 +220,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetTokenProgramAccou
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[10]
+	return inst.AccountMetaSlice.Get(10)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -233,7 +233,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetTokenVaultProgram
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token vault program
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[11]
+	return inst.AccountMetaSlice.Get(11)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -246,7 +246,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetTokenMetadataProg
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[12]
+	return inst.AccountMetaSlice.Get(12)
 }
 
 // SetAuctionManagerStoreAccount sets the "auctionManagerStore" account.
@@ -259,7 +259,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetAuctionManagerSto
 // GetAuctionManagerStoreAccount gets the "auctionManagerStore" account.
 // Auction manager store
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetAuctionManagerStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[13]
+	return inst.AccountMetaSlice.Get(13)
 }
 
 // SetMasterEditionAccount sets the "masterEdition" account.
@@ -272,7 +272,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetMasterEditionAcco
 // GetMasterEditionAccount gets the "masterEdition" account.
 // Master edition
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetMasterEditionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[14]
+	return inst.AccountMetaSlice.Get(14)
 }
 
 // SetPdaBasedTransferAuthorityAccount sets the "pdaBasedTransferAuthority" account.
@@ -287,7 +287,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetPdaBasedTransferA
 // PDA-based Transfer authority to move the tokens from the store to the destination seed ['vault', program_id]
 // but please note that this is a PDA relative to the Token Vault program, with the 'vault' prefix
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetPdaBasedTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[15]
+	return inst.AccountMetaSlice.Get(15)
 }
 
 // SetPayerWithRefundAccount sets the "payerWithRefund" account.
@@ -300,7 +300,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetPayerWithRefundAc
 // GetPayerWithRefundAccount gets the "payerWithRefund" account.
 // Payer who wishes to receive refund for closing of one time transient account once we're done here
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetPayerWithRefundAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[16]
+	return inst.AccountMetaSlice.Get(16)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -313,7 +313,7 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) SetRentAccount(rent 
 // GetRentAccount gets the "rent" account.
 // Rent
 func (inst *DeprecatedPopulateParticipationPrintingAccount) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[17]
+	return inst.AccountMetaSlice.Get(17)
 }
 
 func (inst DeprecatedPopulateParticipationPrintingAccount) Build() *Instruction {
@@ -407,24 +407,24 @@ func (inst *DeprecatedPopulateParticipationPrintingAccount) EncodeToTree(parent 
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=18]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("       safetyDepositTokenStorage", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                       transient", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                   printingToken", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("oneTimePrintingAuthorizationMint", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                    printingMint", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta(" participationPrizeSafetyDeposit", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                       vaultInfo", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                    fractionMint", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                     auctionInfo", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("              auctionManagerInfo", inst.AccountMetaSlice[9]))
-						accountsBranch.Child(ag_format.Meta("                    tokenProgram", inst.AccountMetaSlice[10]))
-						accountsBranch.Child(ag_format.Meta("               tokenVaultProgram", inst.AccountMetaSlice[11]))
-						accountsBranch.Child(ag_format.Meta("            tokenMetadataProgram", inst.AccountMetaSlice[12]))
-						accountsBranch.Child(ag_format.Meta("             auctionManagerStore", inst.AccountMetaSlice[13]))
-						accountsBranch.Child(ag_format.Meta("                   masterEdition", inst.AccountMetaSlice[14]))
-						accountsBranch.Child(ag_format.Meta("       pdaBasedTransferAuthority", inst.AccountMetaSlice[15]))
-						accountsBranch.Child(ag_format.Meta("                 payerWithRefund", inst.AccountMetaSlice[16]))
-						accountsBranch.Child(ag_format.Meta("                            rent", inst.AccountMetaSlice[17]))
+						accountsBranch.Child(ag_format.Meta("       safetyDepositTokenStorage", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                       transient", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                   printingToken", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("oneTimePrintingAuthorizationMint", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                    printingMint", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta(" participationPrizeSafetyDeposit", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                       vaultInfo", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                    fractionMint", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                     auctionInfo", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("              auctionManagerInfo", inst.AccountMetaSlice.Get(9)))
+						accountsBranch.Child(ag_format.Meta("                    tokenProgram", inst.AccountMetaSlice.Get(10)))
+						accountsBranch.Child(ag_format.Meta("               tokenVaultProgram", inst.AccountMetaSlice.Get(11)))
+						accountsBranch.Child(ag_format.Meta("            tokenMetadataProgram", inst.AccountMetaSlice.Get(12)))
+						accountsBranch.Child(ag_format.Meta("             auctionManagerStore", inst.AccountMetaSlice.Get(13)))
+						accountsBranch.Child(ag_format.Meta("                   masterEdition", inst.AccountMetaSlice.Get(14)))
+						accountsBranch.Child(ag_format.Meta("       pdaBasedTransferAuthority", inst.AccountMetaSlice.Get(15)))
+						accountsBranch.Child(ag_format.Meta("                 payerWithRefund", inst.AccountMetaSlice.Get(16)))
+						accountsBranch.Child(ag_format.Meta("                            rent", inst.AccountMetaSlice.Get(17)))
 					})
 				})
 		})

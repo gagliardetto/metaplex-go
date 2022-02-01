@@ -45,7 +45,7 @@ func (inst *UpdatePrimarySaleHappenedViaToken) SetMetadataKeyPDAAccount(metadata
 // GetMetadataKeyPDAAccount gets the "metadataKeyPDA" account.
 // Metadata key (pda of ['metadata', program id, mint id])
 func (inst *UpdatePrimarySaleHappenedViaToken) GetMetadataKeyPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetOwnerAccount sets the "owner" account.
@@ -58,7 +58,7 @@ func (inst *UpdatePrimarySaleHappenedViaToken) SetOwnerAccount(owner ag_solanago
 // GetOwnerAccount gets the "owner" account.
 // Owner on the token account
 func (inst *UpdatePrimarySaleHappenedViaToken) GetOwnerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetContainerAccount sets the "container" account.
@@ -71,7 +71,7 @@ func (inst *UpdatePrimarySaleHappenedViaToken) SetContainerAccount(container ag_
 // GetContainerAccount gets the "container" account.
 // Account containing tokens from the metadata's mint
 func (inst *UpdatePrimarySaleHappenedViaToken) GetContainerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 func (inst UpdatePrimarySaleHappenedViaToken) Build() *Instruction {
@@ -120,9 +120,9 @@ func (inst *UpdatePrimarySaleHappenedViaToken) EncodeToTree(parent ag_treeout.Br
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("metadataKeyPDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("         owner", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("     container", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("metadataKeyPDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("         owner", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("     container", inst.AccountMetaSlice.Get(2)))
 					})
 				})
 		})

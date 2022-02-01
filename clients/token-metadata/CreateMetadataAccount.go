@@ -61,7 +61,7 @@ func (inst *CreateMetadataAccount) SetMetadataKeyPDAAccount(metadataKeyPDA ag_so
 // GetMetadataKeyPDAAccount gets the "metadataKeyPDA" account.
 // Metadata key (pda of ['metadata', program id, mint id])
 func (inst *CreateMetadataAccount) GetMetadataKeyPDAAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetMintOfTokenAccount sets the "mintOfToken" account.
@@ -74,7 +74,7 @@ func (inst *CreateMetadataAccount) SetMintOfTokenAccount(mintOfToken ag_solanago
 // GetMintOfTokenAccount gets the "mintOfToken" account.
 // Mint of token asset
 func (inst *CreateMetadataAccount) GetMintOfTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetMintAuthorityAccount sets the "mintAuthority" account.
@@ -87,7 +87,7 @@ func (inst *CreateMetadataAccount) SetMintAuthorityAccount(mintAuthority ag_sola
 // GetMintAuthorityAccount gets the "mintAuthority" account.
 // Mint authority
 func (inst *CreateMetadataAccount) GetMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -100,7 +100,7 @@ func (inst *CreateMetadataAccount) SetPayerAccount(payer ag_solanago.PublicKey) 
 // GetPayerAccount gets the "payer" account.
 // payer
 func (inst *CreateMetadataAccount) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetUpdateAuthorityInfoAccount sets the "updateAuthorityInfo" account.
@@ -113,7 +113,7 @@ func (inst *CreateMetadataAccount) SetUpdateAuthorityInfoAccount(updateAuthority
 // GetUpdateAuthorityInfoAccount gets the "updateAuthorityInfo" account.
 // update authority info
 func (inst *CreateMetadataAccount) GetUpdateAuthorityInfoAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -126,7 +126,7 @@ func (inst *CreateMetadataAccount) SetSystemAccount(system ag_solanago.PublicKey
 // GetSystemAccount gets the "system" account.
 // System program
 func (inst *CreateMetadataAccount) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -139,7 +139,7 @@ func (inst *CreateMetadataAccount) SetRentAccount(rent ag_solanago.PublicKey) *C
 // GetRentAccount gets the "rent" account.
 // Rent info
 func (inst *CreateMetadataAccount) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 func (inst CreateMetadataAccount) Build() *Instruction {
@@ -209,13 +209,13 @@ func (inst *CreateMetadataAccount) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=7]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("     metadataKeyPDA", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("        mintOfToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("      mintAuthority", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("              payer", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("updateAuthorityInfo", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("             system", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("               rent", inst.AccountMetaSlice[6]))
+						accountsBranch.Child(ag_format.Meta("     metadataKeyPDA", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("        mintOfToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("      mintAuthority", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("              payer", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("updateAuthorityInfo", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("             system", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("               rent", inst.AccountMetaSlice.Get(6)))
 					})
 				})
 		})

@@ -73,7 +73,7 @@ func (inst *InitAuctionManagerV2) SetUninitializedUnallocatedAuctionManagerAccou
 // GetUninitializedUnallocatedAuctionManagerAccount gets the "uninitializedUnallocatedAuctionManager" account.
 // Uninitialized, unallocated auction manager account with pda of ['metaplex', auction_key from auction referenced below]
 func (inst *InitAuctionManagerV2) GetUninitializedUnallocatedAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAuctionWinnerTokenTypeTrackerAccount sets the "auctionWinnerTokenTypeTracker" account.
@@ -86,7 +86,7 @@ func (inst *InitAuctionManagerV2) SetAuctionWinnerTokenTypeTrackerAccount(auctio
 // GetAuctionWinnerTokenTypeTrackerAccount gets the "auctionWinnerTokenTypeTracker" account.
 // AuctionWinnerTokenTypeTracker, pda of seed ['metaplex', program id, auction manager key, 'totals']
 func (inst *InitAuctionManagerV2) GetAuctionWinnerTokenTypeTrackerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetCombinedVaultAccount sets the "combinedVault" account.
@@ -101,7 +101,7 @@ func (inst *InitAuctionManagerV2) SetCombinedVaultAccount(combinedVault ag_solan
 // Combined vault account with authority set to auction manager account (this will be checked)
 // Note in addition that this vault account should have authority set to this program's pda of ['metaplex', auction_key]
 func (inst *InitAuctionManagerV2) GetCombinedVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -114,7 +114,7 @@ func (inst *InitAuctionManagerV2) SetAuctionAccount(auction ag_solanago.PublicKe
 // GetAuctionAccount gets the "auction" account.
 // Auction with auctioned item being set to the vault given and authority set to this program's pda of ['metaplex', auction_key]
 func (inst *InitAuctionManagerV2) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetAuctionManagerAuthorityAccount sets the "auctionManagerAuthority" account.
@@ -127,7 +127,7 @@ func (inst *InitAuctionManagerV2) SetAuctionManagerAuthorityAccount(auctionManag
 // GetAuctionManagerAuthorityAccount gets the "auctionManagerAuthority" account.
 // Authority for the Auction Manager
 func (inst *InitAuctionManagerV2) GetAuctionManagerAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -140,7 +140,7 @@ func (inst *InitAuctionManagerV2) SetPayerAccount(payer ag_solanago.PublicKey) *
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *InitAuctionManagerV2) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetAcceptPaymentAccount sets the "acceptPayment" account.
@@ -153,7 +153,7 @@ func (inst *InitAuctionManagerV2) SetAcceptPaymentAccount(acceptPayment ag_solan
 // GetAcceptPaymentAccount gets the "acceptPayment" account.
 // Accept payment account of same token mint as the auction for taking payment for open editions, owner should be auction manager key
 func (inst *InitAuctionManagerV2) GetAcceptPaymentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -166,7 +166,7 @@ func (inst *InitAuctionManagerV2) SetStoreAccount(store ag_solanago.PublicKey) *
 // GetStoreAccount gets the "store" account.
 // Store that this auction manager will belong to
 func (inst *InitAuctionManagerV2) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetSystemSysvarAccount sets the "systemSysvar" account.
@@ -179,7 +179,7 @@ func (inst *InitAuctionManagerV2) SetSystemSysvarAccount(systemSysvar ag_solanag
 // GetSystemSysvarAccount gets the "systemSysvar" account.
 // System sysvar
 func (inst *InitAuctionManagerV2) GetSystemSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -192,7 +192,7 @@ func (inst *InitAuctionManagerV2) SetRentSysvarAccount(rentSysvar ag_solanago.Pu
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *InitAuctionManagerV2) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 func (inst InitAuctionManagerV2) Build() *Instruction {
@@ -271,16 +271,16 @@ func (inst *InitAuctionManagerV2) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=10]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("uninitializedUnallocatedAuctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("         auctionWinnerTokenTypeTracker", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                         combinedVault", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                               auction", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("               auctionManagerAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                                 payer", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                         acceptPayment", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                                 store", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                          systemSysvar", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("                            rentSysvar", inst.AccountMetaSlice[9]))
+						accountsBranch.Child(ag_format.Meta("uninitializedUnallocatedAuctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("         auctionWinnerTokenTypeTracker", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                         combinedVault", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                               auction", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("               auctionManagerAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                                 payer", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                         acceptPayment", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                                 store", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                          systemSysvar", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("                            rentSysvar", inst.AccountMetaSlice.Get(9)))
 					})
 				})
 		})

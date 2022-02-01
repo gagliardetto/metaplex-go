@@ -58,7 +58,7 @@ func (inst *AddSharesToTreasury) SetInitializedSourceAccount(initializedSourceAc
 // GetInitializedSourceAccount gets the "initializedSourceAccount" account.
 // Initialized account from which shares will be withdrawn
 func (inst *AddSharesToTreasury) GetInitializedSourceAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetFractionTreasuryAccount sets the "fractionTreasury" account.
@@ -71,7 +71,7 @@ func (inst *AddSharesToTreasury) SetFractionTreasuryAccount(fractionTreasury ag_
 // GetFractionTreasuryAccount gets the "fractionTreasury" account.
 // Fraction treasury
 func (inst *AddSharesToTreasury) GetFractionTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetInitializedActiveTokenVaultAccount sets the "initializedActiveTokenVault" account.
@@ -84,7 +84,7 @@ func (inst *AddSharesToTreasury) SetInitializedActiveTokenVaultAccount(initializ
 // GetInitializedActiveTokenVaultAccount gets the "initializedActiveTokenVault" account.
 // The initialized active token vault
 func (inst *AddSharesToTreasury) GetInitializedActiveTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetTransferAuthorityAccount sets the "transferAuthority" account.
@@ -97,7 +97,7 @@ func (inst *AddSharesToTreasury) SetTransferAuthorityAccount(transferAuthority a
 // GetTransferAuthorityAccount gets the "transferAuthority" account.
 // Transfer authority to move tokens from your account to treasury
 func (inst *AddSharesToTreasury) GetTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -110,7 +110,7 @@ func (inst *AddSharesToTreasury) SetVaultAuthorityAccount(vaultAuthority ag_sola
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority of vault
 func (inst *AddSharesToTreasury) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -123,7 +123,7 @@ func (inst *AddSharesToTreasury) SetTokenProgramAccount(tokenProgram ag_solanago
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *AddSharesToTreasury) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 func (inst AddSharesToTreasury) Build() *Instruction {
@@ -190,12 +190,12 @@ func (inst *AddSharesToTreasury) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=6]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("          initializedSource", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("          transferAuthority", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta("          initializedSource", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("           fractionTreasury", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("initializedActiveTokenVault", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("          transferAuthority", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("             vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice.Get(5)))
 					})
 				})
 		})

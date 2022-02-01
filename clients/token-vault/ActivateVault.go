@@ -59,7 +59,7 @@ func (inst *ActivateVault) SetInitializedInactivatedFractionalizedTokenVaultAcco
 // GetInitializedInactivatedFractionalizedTokenVaultAccount gets the "initializedInactivatedFractionalizedTokenVault" account.
 // Initialized inactivated fractionalized token vault
 func (inst *ActivateVault) GetInitializedInactivatedFractionalizedTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -72,7 +72,7 @@ func (inst *ActivateVault) SetFractionMintAccount(fractionMint ag_solanago.Publi
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *ActivateVault) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetFractionTreasuryAccount sets the "fractionTreasury" account.
@@ -85,7 +85,7 @@ func (inst *ActivateVault) SetFractionTreasuryAccount(fractionTreasury ag_solana
 // GetFractionTreasuryAccount gets the "fractionTreasury" account.
 // Fraction treasury
 func (inst *ActivateVault) GetFractionTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetFractionMintAuthorityAccount sets the "fractionMintAuthority" account.
@@ -98,7 +98,7 @@ func (inst *ActivateVault) SetFractionMintAuthorityAccount(fractionMintAuthority
 // GetFractionMintAuthorityAccount gets the "fractionMintAuthority" account.
 // Fraction mint authority for the program - seed of [PREFIX, program_id]
 func (inst *ActivateVault) GetFractionMintAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -111,7 +111,7 @@ func (inst *ActivateVault) SetVaultAuthorityAccount(vaultAuthority ag_solanago.P
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority on the vault
 func (inst *ActivateVault) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -124,7 +124,7 @@ func (inst *ActivateVault) SetTokenProgramAccount(tokenProgram ag_solanago.Publi
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *ActivateVault) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 func (inst ActivateVault) Build() *Instruction {
@@ -191,12 +191,12 @@ func (inst *ActivateVault) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=6]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("initializedInactivatedFractionalizedTokenVault", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                                  fractionMint", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                              fractionTreasury", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                         fractionMintAuthority", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                                vaultAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                                  tokenProgram", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta("initializedInactivatedFractionalizedTokenVault", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                                  fractionMint", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                              fractionTreasury", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                         fractionMintAuthority", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                                vaultAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                                  tokenProgram", inst.AccountMetaSlice.Get(5)))
 					})
 				})
 		})

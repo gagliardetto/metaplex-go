@@ -61,7 +61,7 @@ func (inst *RedeemShares) SetInitializedTokenAccount(initializedToken ag_solanag
 // GetInitializedTokenAccount gets the "initializedToken" account.
 // Initialized Token account containing your fractional shares
 func (inst *RedeemShares) GetInitializedTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetInitializedDestinationTokenAccount sets the "initializedDestinationToken" account.
@@ -74,7 +74,7 @@ func (inst *RedeemShares) SetInitializedDestinationTokenAccount(initializedDesti
 // GetInitializedDestinationTokenAccount gets the "initializedDestinationToken" account.
 // Initialized Destination token account where you wish your proceeds to arrive
 func (inst *RedeemShares) GetInitializedDestinationTokenAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -87,7 +87,7 @@ func (inst *RedeemShares) SetFractionMintAccount(fractionMint ag_solanago.Public
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *RedeemShares) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetRedeemTreasuryAccount sets the "redeemTreasury" account.
@@ -100,7 +100,7 @@ func (inst *RedeemShares) SetRedeemTreasuryAccount(redeemTreasury ag_solanago.Pu
 // GetRedeemTreasuryAccount gets the "redeemTreasury" account.
 // Redeem treasury account
 func (inst *RedeemShares) GetRedeemTreasuryAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetPdaBasedTransferAuthorityAccount sets the "pdaBasedTransferAuthority" account.
@@ -113,7 +113,7 @@ func (inst *RedeemShares) SetPdaBasedTransferAuthorityAccount(pdaBasedTransferAu
 // GetPdaBasedTransferAuthorityAccount gets the "pdaBasedTransferAuthority" account.
 // PDA-based Transfer authority for the transfer of proceeds from redeem treasury to destination seed [PREFIX, program_id]
 func (inst *RedeemShares) GetPdaBasedTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetBurnAuthorityAccount sets the "burnAuthority" account.
@@ -126,7 +126,7 @@ func (inst *RedeemShares) SetBurnAuthorityAccount(burnAuthority ag_solanago.Publ
 // GetBurnAuthorityAccount gets the "burnAuthority" account.
 // Burn authority for the burning of your shares
 func (inst *RedeemShares) GetBurnAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetCombinedTokenVaultAccount sets the "combinedTokenVault" account.
@@ -139,7 +139,7 @@ func (inst *RedeemShares) SetCombinedTokenVaultAccount(combinedTokenVault ag_sol
 // GetCombinedTokenVaultAccount gets the "combinedTokenVault" account.
 // Combined token vault
 func (inst *RedeemShares) GetCombinedTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -152,7 +152,7 @@ func (inst *RedeemShares) SetTokenProgramAccount(tokenProgram ag_solanago.Public
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *RedeemShares) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -165,7 +165,7 @@ func (inst *RedeemShares) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey)
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *RedeemShares) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 func (inst RedeemShares) Build() *Instruction {
@@ -232,15 +232,15 @@ func (inst *RedeemShares) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("           initializedToken", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("initializedDestinationToken", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               fractionMint", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("             redeemTreasury", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("  pdaBasedTransferAuthority", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("              burnAuthority", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("         combinedTokenVault", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                 rentSysvar", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("           initializedToken", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("initializedDestinationToken", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               fractionMint", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("             redeemTreasury", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("  pdaBasedTransferAuthority", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("              burnAuthority", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("         combinedTokenVault", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("               tokenProgram", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                 rentSysvar", inst.AccountMetaSlice.Get(8)))
 					})
 				})
 		})

@@ -68,7 +68,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetUninitializedUnallocatedAuctionMa
 // GetUninitializedUnallocatedAuctionManagerAccount gets the "uninitializedUnallocatedAuctionManager" account.
 // Uninitialized, unallocated auction manager account with pda of ['metaplex', auction_key from auction referenced below]
 func (inst *DeprecatedInitAuctionManagerV1) GetUninitializedUnallocatedAuctionManagerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetCombinedVaultAccount sets the "combinedVault" account.
@@ -83,7 +83,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetCombinedVaultAccount(combinedVaul
 // Combined vault account with authority set to auction manager account (this will be checked)
 // Note in addition that this vault account should have authority set to this program's pda of ['metaplex', auction_key]
 func (inst *DeprecatedInitAuctionManagerV1) GetCombinedVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuctionAccount sets the "auction" account.
@@ -96,7 +96,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetAuctionAccount(auction ag_solanag
 // GetAuctionAccount gets the "auction" account.
 // Auction with auctioned item being set to the vault given and authority set to this program's pda of ['metaplex', auction_key]
 func (inst *DeprecatedInitAuctionManagerV1) GetAuctionAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetAuthorityAccount sets the "authority" account.
@@ -109,7 +109,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetAuthorityAccount(authority ag_sol
 // GetAuthorityAccount gets the "authority" account.
 // Authority for the Auction Manager
 func (inst *DeprecatedInitAuctionManagerV1) GetAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -122,7 +122,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetPayerAccount(payer ag_solanago.Pu
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *DeprecatedInitAuctionManagerV1) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetAcceptPaymentAccount sets the "acceptPayment" account.
@@ -135,7 +135,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetAcceptPaymentAccount(acceptPaymen
 // GetAcceptPaymentAccount gets the "acceptPayment" account.
 // Accept payment account of same token mint as the auction for taking payment for open editions, owner should be auction manager key
 func (inst *DeprecatedInitAuctionManagerV1) GetAcceptPaymentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetStoreAccount sets the "store" account.
@@ -148,7 +148,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetStoreAccount(store ag_solanago.Pu
 // GetStoreAccount gets the "store" account.
 // Store that this auction manager will belong to
 func (inst *DeprecatedInitAuctionManagerV1) GetStoreAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSystemSysvarAccount sets the "systemSysvar" account.
@@ -161,7 +161,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetSystemSysvarAccount(systemSysvar 
 // GetSystemSysvarAccount gets the "systemSysvar" account.
 // System sysvar
 func (inst *DeprecatedInitAuctionManagerV1) GetSystemSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -174,7 +174,7 @@ func (inst *DeprecatedInitAuctionManagerV1) SetRentSysvarAccount(rentSysvar ag_s
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *DeprecatedInitAuctionManagerV1) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 func (inst DeprecatedInitAuctionManagerV1) Build() *Instruction {
@@ -250,15 +250,15 @@ func (inst *DeprecatedInitAuctionManagerV1) EncodeToTree(parent ag_treeout.Branc
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("uninitializedUnallocatedAuctionManager", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("                         combinedVault", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                               auction", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("                             authority", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                                 payer", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("                         acceptPayment", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("                                 store", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                          systemSysvar", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                            rentSysvar", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("uninitializedUnallocatedAuctionManager", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("                         combinedVault", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                               auction", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("                             authority", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                                 payer", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("                         acceptPayment", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("                                 store", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                          systemSysvar", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                            rentSysvar", inst.AccountMetaSlice.Get(8)))
 					})
 				})
 		})

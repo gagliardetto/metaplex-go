@@ -51,7 +51,7 @@ func (inst *UnverifyCollection) SetMetadataAccount(metadata ag_solanago.PublicKe
 // GetMetadataAccount gets the "metadata" account.
 // Metadata account
 func (inst *UnverifyCollection) GetMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetCollectionAuthorityAccount sets the "collectionAuthority" account.
@@ -64,7 +64,7 @@ func (inst *UnverifyCollection) SetCollectionAuthorityAccount(collectionAuthorit
 // GetCollectionAuthorityAccount gets the "collectionAuthority" account.
 // Collection Authority
 func (inst *UnverifyCollection) GetCollectionAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -77,7 +77,7 @@ func (inst *UnverifyCollection) SetPayerAccount(payer ag_solanago.PublicKey) *Un
 // GetPayerAccount gets the "payer" account.
 // payer
 func (inst *UnverifyCollection) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetCollectionMintAccount sets the "collectionMint" account.
@@ -90,7 +90,7 @@ func (inst *UnverifyCollection) SetCollectionMintAccount(collectionMint ag_solan
 // GetCollectionMintAccount gets the "collectionMint" account.
 // Mint of the Collection
 func (inst *UnverifyCollection) GetCollectionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetCollectionMetadataAccount sets the "collectionMetadata" account.
@@ -103,7 +103,7 @@ func (inst *UnverifyCollection) SetCollectionMetadataAccount(collectionMetadata 
 // GetCollectionMetadataAccount gets the "collectionMetadata" account.
 // Metadata Account of the Collection
 func (inst *UnverifyCollection) GetCollectionMetadataAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetMasterEditionV2Account sets the "masterEditionV2" account.
@@ -116,7 +116,7 @@ func (inst *UnverifyCollection) SetMasterEditionV2Account(masterEditionV2 ag_sol
 // GetMasterEditionV2Account gets the "masterEditionV2" account.
 // MasterEdition2 Account of the Collection Token
 func (inst *UnverifyCollection) GetMasterEditionV2Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 func (inst UnverifyCollection) Build() *Instruction {
@@ -174,12 +174,12 @@ func (inst *UnverifyCollection) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=6]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("           metadata", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("collectionAuthority", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("              payer", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("     collectionMint", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta(" collectionMetadata", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("    masterEditionV2", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta("           metadata", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("collectionAuthority", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("              payer", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("     collectionMint", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta(" collectionMetadata", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("    masterEditionV2", inst.AccountMetaSlice.Get(5)))
 					})
 				})
 		})

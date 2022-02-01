@@ -50,7 +50,7 @@ func (inst *InitializeCandyMachine) SetCandyMachineAccount(candyMachine ag_solan
 
 // GetCandyMachineAccount gets the "candyMachine" account.
 func (inst *InitializeCandyMachine) GetCandyMachineAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetWalletAccount sets the "wallet" account.
@@ -61,7 +61,7 @@ func (inst *InitializeCandyMachine) SetWalletAccount(wallet ag_solanago.PublicKe
 
 // GetWalletAccount gets the "wallet" account.
 func (inst *InitializeCandyMachine) GetWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAuthorityAccount sets the "authority" account.
@@ -72,7 +72,7 @@ func (inst *InitializeCandyMachine) SetAuthorityAccount(authority ag_solanago.Pu
 
 // GetAuthorityAccount gets the "authority" account.
 func (inst *InitializeCandyMachine) GetAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -83,7 +83,7 @@ func (inst *InitializeCandyMachine) SetPayerAccount(payer ag_solanago.PublicKey)
 
 // GetPayerAccount gets the "payer" account.
 func (inst *InitializeCandyMachine) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetSystemProgramAccount sets the "systemProgram" account.
@@ -94,7 +94,7 @@ func (inst *InitializeCandyMachine) SetSystemProgramAccount(systemProgram ag_sol
 
 // GetSystemProgramAccount gets the "systemProgram" account.
 func (inst *InitializeCandyMachine) GetSystemProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetRentAccount sets the "rent" account.
@@ -105,7 +105,7 @@ func (inst *InitializeCandyMachine) SetRentAccount(rent ag_solanago.PublicKey) *
 
 // GetRentAccount gets the "rent" account.
 func (inst *InitializeCandyMachine) GetRentAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 func (inst InitializeCandyMachine) Build() *Instruction {
@@ -172,12 +172,12 @@ func (inst *InitializeCandyMachine) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=6]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta(" candyMachine", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("       wallet", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("    authority", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("        payer", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("systemProgram", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("         rent", inst.AccountMetaSlice[5]))
+						accountsBranch.Child(ag_format.Meta(" candyMachine", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("       wallet", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("    authority", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("        payer", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("systemProgram", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("         rent", inst.AccountMetaSlice.Get(5)))
 					})
 				})
 		})

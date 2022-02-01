@@ -68,7 +68,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetInitializedDestinationAccount(
 // GetInitializedDestinationAccount gets the "initializedDestination" account.
 // Initialized Destination account for the tokens being withdrawn
 func (inst *WithdrawTokenFromSafetyDepositBox) GetInitializedDestinationAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetSafetyDepositBoxAccount sets the "safetyDepositBox" account.
@@ -81,7 +81,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetSafetyDepositBoxAccount(safety
 // GetSafetyDepositBoxAccount gets the "safetyDepositBox" account.
 // The safety deposit box account key for the tokens
 func (inst *WithdrawTokenFromSafetyDepositBox) GetSafetyDepositBoxAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetStoreKeyAccount sets the "storeKey" account.
@@ -94,7 +94,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetStoreKeyAccount(storeKey ag_so
 // GetStoreKeyAccount gets the "storeKey" account.
 // The store key on the safety deposit box account
 func (inst *WithdrawTokenFromSafetyDepositBox) GetStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetInitializedCombinedTokenVaultAccount sets the "initializedCombinedTokenVault" account.
@@ -107,7 +107,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetInitializedCombinedTokenVaultA
 // GetInitializedCombinedTokenVaultAccount gets the "initializedCombinedTokenVault" account.
 // The initialized combined token vault
 func (inst *WithdrawTokenFromSafetyDepositBox) GetInitializedCombinedTokenVaultAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetFractionMintAccount sets the "fractionMint" account.
@@ -120,7 +120,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetFractionMintAccount(fractionMi
 // GetFractionMintAccount gets the "fractionMint" account.
 // Fraction mint
 func (inst *WithdrawTokenFromSafetyDepositBox) GetFractionMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetVaultAuthorityAccount sets the "vaultAuthority" account.
@@ -133,7 +133,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetVaultAuthorityAccount(vaultAut
 // GetVaultAuthorityAccount gets the "vaultAuthority" account.
 // Authority of vault
 func (inst *WithdrawTokenFromSafetyDepositBox) GetVaultAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetPdaBasedTransferAuthorityAccount sets the "pdaBasedTransferAuthority" account.
@@ -146,7 +146,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetPdaBasedTransferAuthorityAccou
 // GetPdaBasedTransferAuthorityAccount gets the "pdaBasedTransferAuthority" account.
 // PDA-based Transfer authority to move the tokens from the store to the destination seed [PREFIX, program_id]
 func (inst *WithdrawTokenFromSafetyDepositBox) GetPdaBasedTransferAuthorityAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -159,7 +159,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetTokenProgramAccount(tokenProgr
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *WithdrawTokenFromSafetyDepositBox) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -172,7 +172,7 @@ func (inst *WithdrawTokenFromSafetyDepositBox) SetRentSysvarAccount(rentSysvar a
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *WithdrawTokenFromSafetyDepositBox) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 func (inst WithdrawTokenFromSafetyDepositBox) Build() *Instruction {
@@ -248,15 +248,15 @@ func (inst *WithdrawTokenFromSafetyDepositBox) EncodeToTree(parent ag_treeout.Br
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("       initializedDestination", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("                     storeKey", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("initializedCombinedTokenVault", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("                 fractionMint", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("               vaultAuthority", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("    pdaBasedTransferAuthority", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("                 tokenProgram", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("       initializedDestination", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("             safetyDepositBox", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("                     storeKey", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("initializedCombinedTokenVault", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("                 fractionMint", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("               vaultAuthority", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("    pdaBasedTransferAuthority", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("                 tokenProgram", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("                   rentSysvar", inst.AccountMetaSlice.Get(8)))
 					})
 				})
 		})

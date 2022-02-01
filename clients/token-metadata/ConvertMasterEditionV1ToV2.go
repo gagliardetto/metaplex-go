@@ -44,7 +44,7 @@ func (inst *ConvertMasterEditionV1ToV2) SetMasterRecordEditionV1Account(masterRe
 // GetMasterRecordEditionV1Account gets the "masterRecordEditionV1" account.
 // Master Record Edition V1 (pda of ['metadata', program id, master metadata mint id, 'edition'])
 func (inst *ConvertMasterEditionV1ToV2) GetMasterRecordEditionV1Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetOneTimeAuthorizationMintAccount sets the "oneTimeAuthorizationMint" account.
@@ -57,7 +57,7 @@ func (inst *ConvertMasterEditionV1ToV2) SetOneTimeAuthorizationMintAccount(oneTi
 // GetOneTimeAuthorizationMintAccount gets the "oneTimeAuthorizationMint" account.
 // One time authorization mint
 func (inst *ConvertMasterEditionV1ToV2) GetOneTimeAuthorizationMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPrintingMintAccount sets the "printingMint" account.
@@ -70,7 +70,7 @@ func (inst *ConvertMasterEditionV1ToV2) SetPrintingMintAccount(printingMint ag_s
 // GetPrintingMintAccount gets the "printingMint" account.
 // Printing mint
 func (inst *ConvertMasterEditionV1ToV2) GetPrintingMintAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 func (inst ConvertMasterEditionV1ToV2) Build() *Instruction {
@@ -119,9 +119,9 @@ func (inst *ConvertMasterEditionV1ToV2) EncodeToTree(parent ag_treeout.Branches)
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("   masterRecordEditionV1", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("oneTimeAuthorizationMint", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("            printingMint", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("   masterRecordEditionV1", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("oneTimeAuthorizationMint", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("            printingMint", inst.AccountMetaSlice.Get(2)))
 					})
 				})
 		})

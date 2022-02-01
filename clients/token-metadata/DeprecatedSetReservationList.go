@@ -60,7 +60,7 @@ func (inst *DeprecatedSetReservationList) SetMasterEditionV1Account(masterEditio
 // GetMasterEditionV1Account gets the "masterEditionV1" account.
 // Master Edition V1 key (pda of ['metadata', program id, mint id, 'edition'])
 func (inst *DeprecatedSetReservationList) GetMasterEditionV1Account() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetPdaForReservationlistAccount sets the "pdaForReservationlist" account.
@@ -73,7 +73,7 @@ func (inst *DeprecatedSetReservationList) SetPdaForReservationlistAccount(pdaFor
 // GetPdaForReservationlistAccount gets the "pdaForReservationlist" account.
 // PDA for ReservationList of ['metadata', program id, master edition key, 'reservation', resource-key]
 func (inst *DeprecatedSetReservationList) GetPdaForReservationlistAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetResourceAccount sets the "resource" account.
@@ -86,7 +86,7 @@ func (inst *DeprecatedSetReservationList) SetResourceAccount(resource ag_solanag
 // GetResourceAccount gets the "resource" account.
 // The resource you tied the reservation list too
 func (inst *DeprecatedSetReservationList) GetResourceAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 func (inst DeprecatedSetReservationList) Build() *Instruction {
@@ -144,9 +144,9 @@ func (inst *DeprecatedSetReservationList) EncodeToTree(parent ag_treeout.Branche
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=3]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("      masterEditionV1", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("pdaForReservationlist", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("             resource", inst.AccountMetaSlice[2]))
+						accountsBranch.Child(ag_format.Meta("      masterEditionV1", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("pdaForReservationlist", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("             resource", inst.AccountMetaSlice.Get(2)))
 					})
 				})
 		})

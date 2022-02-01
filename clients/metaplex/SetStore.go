@@ -68,7 +68,7 @@ func (inst *SetStore) SetStoreKeyAccount(storeKey ag_solanago.PublicKey) *SetSto
 // GetStoreKeyAccount gets the "storeKey" account.
 // The store key, seed of ['metaplex', admin wallet]
 func (inst *SetStore) GetStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetAdminWalletAccount sets the "adminWallet" account.
@@ -81,7 +81,7 @@ func (inst *SetStore) SetAdminWalletAccount(adminWallet ag_solanago.PublicKey) *
 // GetAdminWalletAccount gets the "adminWallet" account.
 // The admin wallet
 func (inst *SetStore) GetAdminWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -94,7 +94,7 @@ func (inst *SetStore) SetPayerAccount(payer ag_solanago.PublicKey) *SetStore {
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *SetStore) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -107,7 +107,7 @@ func (inst *SetStore) SetTokenProgramAccount(tokenProgram ag_solanago.PublicKey)
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *SetStore) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -120,7 +120,7 @@ func (inst *SetStore) SetTokenVaultProgramAccount(tokenVaultProgram ag_solanago.
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token vault program
 func (inst *SetStore) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -133,7 +133,7 @@ func (inst *SetStore) SetTokenMetadataProgramAccount(tokenMetadataProgram ag_sol
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *SetStore) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetAuctionProgramAccount sets the "auctionProgram" account.
@@ -146,7 +146,7 @@ func (inst *SetStore) SetAuctionProgramAccount(auctionProgram ag_solanago.Public
 // GetAuctionProgramAccount gets the "auctionProgram" account.
 // Auction program
 func (inst *SetStore) GetAuctionProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -159,7 +159,7 @@ func (inst *SetStore) SetSystemAccount(system ag_solanago.PublicKey) *SetStore {
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *SetStore) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -172,7 +172,7 @@ func (inst *SetStore) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey) *Se
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *SetStore) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 func (inst SetStore) Build() *Instruction {
@@ -248,15 +248,15 @@ func (inst *SetStore) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=9]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("            storeKey", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("         adminWallet", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("   tokenVaultProgram", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("      auctionProgram", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice[8]))
+						accountsBranch.Child(ag_format.Meta("            storeKey", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("         adminWallet", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("   tokenVaultProgram", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("      auctionProgram", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice.Get(8)))
 					})
 				})
 		})

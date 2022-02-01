@@ -10,39 +10,39 @@ import (
 type Key ag_binary.BorshEnum
 
 const (
-	Uninitialized_Key Key = iota
-	EditionV1_Key
-	MasterEditionV1_Key
-	ReservationListV1_Key
-	MetadataV1_Key
-	ReservationListV2_Key
-	MasterEditionV2_Key
-	EditionMarker_Key
-	UseAuthorityRecord_Key
-	CollectionAuthorityRecord_Key
+	KeyUninitialized Key = iota
+	KeyEditionV1
+	KeyMasterEditionV1
+	KeyReservationListV1
+	KeyMetadataV1
+	KeyReservationListV2
+	KeyMasterEditionV2
+	KeyEditionMarker
+	KeyUseAuthorityRecord
+	KeyCollectionAuthorityRecord
 )
 
 func (value Key) String() string {
 	switch value {
-	case Uninitialized_Key:
+	case KeyUninitialized:
 		return "Uninitialized"
-	case EditionV1_Key:
+	case KeyEditionV1:
 		return "EditionV1"
-	case MasterEditionV1_Key:
+	case KeyMasterEditionV1:
 		return "MasterEditionV1"
-	case ReservationListV1_Key:
+	case KeyReservationListV1:
 		return "ReservationListV1"
-	case MetadataV1_Key:
+	case KeyMetadataV1:
 		return "MetadataV1"
-	case ReservationListV2_Key:
+	case KeyReservationListV2:
 		return "ReservationListV2"
-	case MasterEditionV2_Key:
+	case KeyMasterEditionV2:
 		return "MasterEditionV2"
-	case EditionMarker_Key:
+	case KeyEditionMarker:
 		return "EditionMarker"
-	case UseAuthorityRecord_Key:
+	case KeyUseAuthorityRecord:
 		return "UseAuthorityRecord"
-	case CollectionAuthorityRecord_Key:
+	case KeyCollectionAuthorityRecord:
 		return "CollectionAuthorityRecord"
 	default:
 		return ""
@@ -358,18 +358,18 @@ func (obj *Creator) UnmarshalWithDecoder(decoder *ag_binary.Decoder) (err error)
 type UseMethod ag_binary.BorshEnum
 
 const (
-	Burn_UseMethod UseMethod = iota
-	Multiple_UseMethod
-	Single_UseMethod
+	UseMethodBurn UseMethod = iota
+	UseMethodMultiple
+	UseMethodSingle
 )
 
 func (value UseMethod) String() string {
 	switch value {
-	case Burn_UseMethod:
+	case UseMethodBurn:
 		return "Burn"
-	case Multiple_UseMethod:
+	case UseMethodMultiple:
 		return "Multiple"
-	case Single_UseMethod:
+	case UseMethodSingle:
 		return "Single"
 	default:
 		return ""
@@ -424,27 +424,27 @@ type TokenStandard ag_binary.BorshEnum
 
 const (
 	// This is a master edition
-	NonFungible_TokenStandard TokenStandard = iota
+	TokenStandardNonFungible TokenStandard = iota
 
 	// A token with metadata that can also have attrributes
-	FungibleAsset_TokenStandard
+	TokenStandardFungibleAsset
 
 	// A token with simple metadata
-	Fungible_TokenStandard
+	TokenStandardFungible
 
 	// This is a limited edition
-	NonFungibleEdition_TokenStandard
+	TokenStandardNonFungibleEdition
 )
 
 func (value TokenStandard) String() string {
 	switch value {
-	case NonFungible_TokenStandard:
+	case TokenStandardNonFungible:
 		return "NonFungible"
-	case FungibleAsset_TokenStandard:
+	case TokenStandardFungibleAsset:
 		return "FungibleAsset"
-	case Fungible_TokenStandard:
+	case TokenStandardFungible:
 		return "Fungible"
-	case NonFungibleEdition_TokenStandard:
+	case TokenStandardNonFungibleEdition:
 		return "NonFungibleEdition"
 	default:
 		return ""

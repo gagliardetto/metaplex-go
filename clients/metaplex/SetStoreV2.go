@@ -71,7 +71,7 @@ func (inst *SetStoreV2) SetStoreKeyAccount(storeKey ag_solanago.PublicKey) *SetS
 // GetStoreKeyAccount gets the "storeKey" account.
 // The store key, seed of ['metaplex', admin wallet]
 func (inst *SetStoreV2) GetStoreKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[0]
+	return inst.AccountMetaSlice.Get(0)
 }
 
 // SetStoreConfigKeyAccount sets the "storeConfigKey" account.
@@ -84,7 +84,7 @@ func (inst *SetStoreV2) SetStoreConfigKeyAccount(storeConfigKey ag_solanago.Publ
 // GetStoreConfigKeyAccount gets the "storeConfigKey" account.
 // The store config key, seed of ['metaplex', store key]
 func (inst *SetStoreV2) GetStoreConfigKeyAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[1]
+	return inst.AccountMetaSlice.Get(1)
 }
 
 // SetAdminWalletAccount sets the "adminWallet" account.
@@ -97,7 +97,7 @@ func (inst *SetStoreV2) SetAdminWalletAccount(adminWallet ag_solanago.PublicKey)
 // GetAdminWalletAccount gets the "adminWallet" account.
 // The admin wallet
 func (inst *SetStoreV2) GetAdminWalletAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[2]
+	return inst.AccountMetaSlice.Get(2)
 }
 
 // SetPayerAccount sets the "payer" account.
@@ -110,7 +110,7 @@ func (inst *SetStoreV2) SetPayerAccount(payer ag_solanago.PublicKey) *SetStoreV2
 // GetPayerAccount gets the "payer" account.
 // Payer
 func (inst *SetStoreV2) GetPayerAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[3]
+	return inst.AccountMetaSlice.Get(3)
 }
 
 // SetTokenProgramAccount sets the "tokenProgram" account.
@@ -123,7 +123,7 @@ func (inst *SetStoreV2) SetTokenProgramAccount(tokenProgram ag_solanago.PublicKe
 // GetTokenProgramAccount gets the "tokenProgram" account.
 // Token program
 func (inst *SetStoreV2) GetTokenProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[4]
+	return inst.AccountMetaSlice.Get(4)
 }
 
 // SetTokenVaultProgramAccount sets the "tokenVaultProgram" account.
@@ -136,7 +136,7 @@ func (inst *SetStoreV2) SetTokenVaultProgramAccount(tokenVaultProgram ag_solanag
 // GetTokenVaultProgramAccount gets the "tokenVaultProgram" account.
 // Token vault program
 func (inst *SetStoreV2) GetTokenVaultProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[5]
+	return inst.AccountMetaSlice.Get(5)
 }
 
 // SetTokenMetadataProgramAccount sets the "tokenMetadataProgram" account.
@@ -149,7 +149,7 @@ func (inst *SetStoreV2) SetTokenMetadataProgramAccount(tokenMetadataProgram ag_s
 // GetTokenMetadataProgramAccount gets the "tokenMetadataProgram" account.
 // Token metadata program
 func (inst *SetStoreV2) GetTokenMetadataProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[6]
+	return inst.AccountMetaSlice.Get(6)
 }
 
 // SetAuctionProgramAccount sets the "auctionProgram" account.
@@ -162,7 +162,7 @@ func (inst *SetStoreV2) SetAuctionProgramAccount(auctionProgram ag_solanago.Publ
 // GetAuctionProgramAccount gets the "auctionProgram" account.
 // Auction program
 func (inst *SetStoreV2) GetAuctionProgramAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[7]
+	return inst.AccountMetaSlice.Get(7)
 }
 
 // SetSystemAccount sets the "system" account.
@@ -175,7 +175,7 @@ func (inst *SetStoreV2) SetSystemAccount(system ag_solanago.PublicKey) *SetStore
 // GetSystemAccount gets the "system" account.
 // System
 func (inst *SetStoreV2) GetSystemAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[8]
+	return inst.AccountMetaSlice.Get(8)
 }
 
 // SetRentSysvarAccount sets the "rentSysvar" account.
@@ -188,7 +188,7 @@ func (inst *SetStoreV2) SetRentSysvarAccount(rentSysvar ag_solanago.PublicKey) *
 // GetRentSysvarAccount gets the "rentSysvar" account.
 // Rent sysvar
 func (inst *SetStoreV2) GetRentSysvarAccount() *ag_solanago.AccountMeta {
-	return inst.AccountMetaSlice[9]
+	return inst.AccountMetaSlice.Get(9)
 }
 
 func (inst SetStoreV2) Build() *Instruction {
@@ -267,16 +267,16 @@ func (inst *SetStoreV2) EncodeToTree(parent ag_treeout.Branches) {
 
 					// Accounts of the instruction:
 					instructionBranch.Child("Accounts[len=10]").ParentFunc(func(accountsBranch ag_treeout.Branches) {
-						accountsBranch.Child(ag_format.Meta("            storeKey", inst.AccountMetaSlice[0]))
-						accountsBranch.Child(ag_format.Meta("      storeConfigKey", inst.AccountMetaSlice[1]))
-						accountsBranch.Child(ag_format.Meta("         adminWallet", inst.AccountMetaSlice[2]))
-						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice[3]))
-						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice[4]))
-						accountsBranch.Child(ag_format.Meta("   tokenVaultProgram", inst.AccountMetaSlice[5]))
-						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice[6]))
-						accountsBranch.Child(ag_format.Meta("      auctionProgram", inst.AccountMetaSlice[7]))
-						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice[8]))
-						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice[9]))
+						accountsBranch.Child(ag_format.Meta("            storeKey", inst.AccountMetaSlice.Get(0)))
+						accountsBranch.Child(ag_format.Meta("      storeConfigKey", inst.AccountMetaSlice.Get(1)))
+						accountsBranch.Child(ag_format.Meta("         adminWallet", inst.AccountMetaSlice.Get(2)))
+						accountsBranch.Child(ag_format.Meta("               payer", inst.AccountMetaSlice.Get(3)))
+						accountsBranch.Child(ag_format.Meta("        tokenProgram", inst.AccountMetaSlice.Get(4)))
+						accountsBranch.Child(ag_format.Meta("   tokenVaultProgram", inst.AccountMetaSlice.Get(5)))
+						accountsBranch.Child(ag_format.Meta("tokenMetadataProgram", inst.AccountMetaSlice.Get(6)))
+						accountsBranch.Child(ag_format.Meta("      auctionProgram", inst.AccountMetaSlice.Get(7)))
+						accountsBranch.Child(ag_format.Meta("              system", inst.AccountMetaSlice.Get(8)))
+						accountsBranch.Child(ag_format.Meta("          rentSysvar", inst.AccountMetaSlice.Get(9)))
 					})
 				})
 		})
