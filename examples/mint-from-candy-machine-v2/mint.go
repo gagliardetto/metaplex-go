@@ -17,6 +17,8 @@ import (
 	"github.com/gagliardetto/solana-go/rpc/ws"
 )
 
+var candyMachineV2ProgramID = solana.MustPublicKeyFromBase58("cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ")
+
 func main() {
 	user, err := solana.PrivateKeyFromSolanaKeygenFile("/path/to/.config/solana/id.json")
 	if err != nil {
@@ -41,7 +43,7 @@ func mint(
 	userKeyPair solana.PrivateKey,
 	cluster rpc.Cluster,
 ) (solana.Signature, error) {
-	nftcandymachinev2.SetProgramID(solana.MustPublicKeyFromBase58("cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ"))
+	nftcandymachinev2.SetProgramID(candyMachineV2ProgramID)
 
 	mint := solana.NewWallet()
 
@@ -207,7 +209,7 @@ func getCandyMachineCreator(candyMachineAddress solana.PublicKey) (solana.Public
 			[]byte("candy_machine"),
 			candyMachineAddress.Bytes(),
 		},
-		solana.MustPublicKeyFromBase58("cndy3Z4yapfJBmL3ShUp5exZKqR3z33thTzeNMm2gRZ"),
+		candyMachineV2ProgramID,
 	)
 }
 
