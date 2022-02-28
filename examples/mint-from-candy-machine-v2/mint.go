@@ -60,7 +60,7 @@ func mint(
 
 	signers := []solana.PrivateKey{mint.PrivateKey, userKeyPair}
 
-	min, err := client.GetMinimumBalanceForRentExemption(context.TODO(), uint64(1024*9), rpc.CommitmentFinalized)
+	min, err := client.GetMinimumBalanceForRentExemption(context.TODO(), token.MINT_SIZE, rpc.CommitmentFinalized)
 	if err != nil {
 		return solana.Signature{}, err
 	}
@@ -78,6 +78,7 @@ func mint(
 			SetOwner(token.ProgramID).
 			SetNewAccount(mint.PublicKey()).
 			SetSpace(token.MINT_SIZE).
+			SetFundingAccount(userKeyPair.PublicKey()).
 			SetLamports(min).
 			Build(),
 
