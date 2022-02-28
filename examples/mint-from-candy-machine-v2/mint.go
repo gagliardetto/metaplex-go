@@ -77,7 +77,7 @@ func mint(
 		system.NewCreateAccountInstructionBuilder().
 			SetOwner(token.ProgramID).
 			SetNewAccount(mint.PublicKey()).
-			SetSpace(candyMachineRaw.Value.Lamports).
+			SetSpace(uint64(1024*9)).
 			SetLamports(min).
 			Build(),
 
