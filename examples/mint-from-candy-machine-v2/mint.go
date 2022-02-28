@@ -77,7 +77,7 @@ func mint(
 		system.NewCreateAccountInstructionBuilder().
 			SetOwner(token.ProgramID).
 			SetNewAccount(mint.PublicKey()).
-			SetSpace(uint64(1024*9)).
+			SetSpace(token.MINT_SIZE).
 			SetLamports(min).
 			Build(),
 
